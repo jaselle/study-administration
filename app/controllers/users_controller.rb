@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   #cancancan authorizingController
-  load_and_authorize_resource
+
   
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 

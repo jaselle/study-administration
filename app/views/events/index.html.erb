@@ -13,7 +13,7 @@
       <th>Zyklus</th>
       <th>Prüfungsart</th>
       <th>Bedingung</th>
-      <th width="300"></th>
+      <th ></th>
     </tr>
   </thead>
 
@@ -28,16 +28,14 @@
         <td><%= event.cycle %></td>
         <td><%= event.exam_type %></td>
         <td><%= event.condition %></td>
-        <td>
-        <div class="btn-group btn-group-justified show_edit_del">
-          <%= link_to 'Anzeigen', event , class: 'btn btn-default'%>
-          <%= link_to 'Bearbeiten', edit_event_path(event) , class: 'btn btn-default'%>
-          <%= link_to 'Löschen', event, method: :delete, data: { confirm: 'Sicher?' } , class: 'btn btn-default'%> 
+        <div class="btn-group btn-group-justified">
+          <td class="col-sm-1"><%= link_to 'Anzeigen', event , class: 'btn btn-default'%></td>
+          <td class="col-sm-1"><%= link_to 'Bearbeiten', edit_event_path(event) , class: 'btn btn-default'%></td>
+          <td class="col-sm-2"><%= link_to 'Löschen', event, method: :delete, data: { confirm: 'Sicher?' } , class: 'btn btn-default'%> </td>
         </div>
-        </td>
       </tr>
       <tr>
-        <td colspan="9">
+        <td colspan="11">
         <div class="overflow_to_scroll">
           <%= event.description %>
         </div>

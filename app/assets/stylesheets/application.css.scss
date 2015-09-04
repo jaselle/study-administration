@@ -231,6 +231,7 @@ body {
 .my_button1 {
   width: 50% !important;
   display: block !important;
+  overflow: hidden !important;
 }
 
 /* configure width of a wider button group*/
@@ -247,11 +248,6 @@ body {
 .overflow_to_scroll {
   overflow-y: scroll;
   height: 55px;
-}
-
-/* make 3-tuple of buttons prettier */
-.show_edit_del {
-  width: 100% !important;
 }
 
 /* change width here for width of whole email,pw,button group*/
