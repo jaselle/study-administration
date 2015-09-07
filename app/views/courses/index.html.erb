@@ -1,72 +1,52 @@
-<%= stylesheet_link_tag "courseOverview.css" %>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Abschluss</th>
-      <th>Studiengang</th>
-      <th>Blöcke</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.degree %></td>
-        <td><%= course.name %></td>
-        <td><%= course.blocks.map { |a| a.name }.join("<br>").html_safe %></td>
-        <div class="btn-group btn-group-justified">
-          <td class="col-sm-1"><%= link_to 'Anzeigen', course , class: 'btn btn-default'%></td>
-          <td class="col-sm-1"><%= link_to 'Bearbeiten', edit_course_path(course) , class: 'btn btn-default'%></td>
-          <td class="col-sm-2"><%= link_to 'Löschen', course, method: :delete, data: { confirm: 'Sicher?' } , class: 'btn btn-default'%></td>
-          </div>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<%= stylesheet_link_tag "course_overview.css" %>
 
 <ol class = "tree">
+  
   <li class = "course">
-    <!-- Ebene 1: Courses -->
+    <!-- Layer 1: heading -->
+    <span class="glyphicon glyphicon-folder-close"></span>
     <label for="Studiengaenge">Studiengaenge</label>
     <input type="checkbox" id="Studiengaenge" />
-      <ol>
-      <% @courses.order("name").each do |course| %>
-        <li class = "course">
-          <label for="course"><%=    link_to course.name,  course %> <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %> </label>
-          <input type="checkbox"  id="course" />
-        
-            <ol>
-              <!-- Ebene 2: Blocks -->
 
-              <% e = course.blocks.order("name").map %>
-              
-                
+      <!-- Layer 2: study programs -->
+      <ol>
+      <% @courses.order("name").each do |c| %>
+        <li class = "course">
+          <span class="glyphicon glyphicon-folder-close"></span>
+                    <label for="c"><%= link_to c.name %></label>
+          <input type="checkbox"  id="c" />
+
+          
+            <!-- Layer 3: Blocks -->
+            <ol>
+              <% e = c.blocks.order("name").map %>               
               <% e.each do |blocks| %>
                 <li class = "course">
+                    <span class="glyphicon glyphicon-folder-close"></span>
                     <label for="blocks"><%= link_to blocks.name, blocks %></label>
-                    <input type="checkbox"  id="blocks" />
+                    <input type="checkbox"  id="blocks"/>
 
+                    <!-- Layer 4: Events -->
                     <ol>
                         <% f = blocks.events.order("title").map %>
                         <% f.each do |events| %>
                           <li class="file">
-                                <%= link_to events.title, events %>
-                                <input type="checkbox"  id="Events" />
+                          <span class="glyphicon glyphicon-file"></span>
+                          <%= link_to events.title, events %>
+                          <!-- <input type="checkbox"  id="Events" /> -->
                           </li>
                         <% end %>
 
                     </ol>
-              
-              </li>
+                </li>
               <% end %>
             </ol>
+
+
         </li>
-      
-      <% end %>
+        <% end %>
     </ol>
+
   </li>
 </ol>
 

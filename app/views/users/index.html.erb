@@ -7,8 +7,8 @@
   <thead>
     <tr>
       <th>Email</th>
-      <th>Status</th>
-      <th>Actions</th>
+      <th style="width:40%">Status</th>
+      <th style="width:20%"></th>
     </tr>
 
   </thead>
@@ -19,14 +19,22 @@
       <tr> 
         <td><%= user.email %></td>
         <td><%= user.role %></td>
-         <div class="btn-group btn-group-justified">
-          <td class="col-sm-1"><%= link_to 'Anzeigen', user , class: 'btn btn-default'%></td>
-          
-          <td class="col-sm-1"><%= link_to 'Bearbeiten', edit_user_path(user) , class: 'btn btn-default'%></td>
-      
-          <td class="col-sm-2"><%= link_to 'Löschen', user, method: :delete, data: { confirm: 'Sicher?' } , class: 'btn btn-default'%></td>   
-
-         </div>
+        <td><div class="btn-group btn-group-justified btn_group_wide1">
+          <%= link_to user, class: "btn btn-default" do %>
+              <i class="glyphicon glyphicon-eye-open middle_icon"></i>
+          <% end %>
+          <% if can? :edit, @user %>
+          <%= link_to edit_user_path(user), class: "btn btn-default" do %>
+              <i class="glyphicon glyphicon-pencil middle_icon"></i>
+          <% end %>
+          <% end %>
+          <% if can? :destroy, @user %>
+          <%= link_to user, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
+              <i class="glyphicon glyphicon-trash middle_icon"></i>
+          <% end %>
+          <% end %>
+        </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
