@@ -4,13 +4,15 @@
 html { font-size: 100%; /* IE hack */ }
 body { font-size: 1em; /* Sets base font size to 16px */ }
 table { font-size: 100%; /* IE hack */ }
-input, select, textarea, th, td { font-size: 1em; }
+input, select, textarea, th, td, ol, li { font-size: 1.04em; }
     
 /* CSS Tree menu styles */
 ol.tree
-{
+{   
+
+
     padding: 0 0 0 30px;
-    width: 300px;
+    width: 780px;
 }
     li.course 
     { 
@@ -29,10 +31,9 @@ ol.tree
             text-decoration: none;
             display: block;
         }
-        li.file a[href *= '.pdf']   { background: url(/assets/document.png) 0 0 no-repeat; }
+  
         li.file a[href *= '.html']  { background: url(/assets/document.png) 0 0 no-repeat; }
-        li.file a[href $= '.css']   { background: url(/assets/document.png) 0 0 no-repeat; }
-        li.file a[href $= '.js']        { background: url(/assets/document.png) 0 0 no-repeat; }
+
     
     li.course input
     {

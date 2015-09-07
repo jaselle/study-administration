@@ -1,10 +1,24 @@
 <%= stylesheet_link_tag "courseOverview.css" %>
 
+<form method="POST" action="/courses">
+   <select name="semesters" id = "42" >
+      <option>Alle</option> 
+      <option>Sommersemester</option>
+      <option>Wintersemester</option>
+      <option>Unregelmäßig</option> 
+      
+   </select>
+
+  </form>
+
+
+<br>
 
 <ol class = "tree">
   <li class = "course">
     <!-- Ebene 1: Courses -->
-    <label for="Studiengaenge">Studiengaenge</label>
+    <!-- get_current_semester calculates and displays the current Semester.-->
+    <label for="Studiengaenge">Meine Studiengänge im <%= get_current_semester_and_year %></label>
     <input type="checkbox" id="Studiengaenge" />
       <ol>
       <% @courses.order("name").each do |course| %>
@@ -26,7 +40,8 @@
                     <ol>
                         <% f = blocks.events.order("title").map %>
                         <% f.each do |events| %>
-                          <li class="file">
+
+                          <li class="file <%= events.cycle %>">
                                 <%= link_to events.title, events %>
                                 <input type="checkbox"  id="Events" />
                           </li>
@@ -44,4 +59,10 @@
   </li>
 </ol>
 
+
+
+
 <%= link_to 'New Course', new_course_path %>
+
+<%= params[:semesters] %>
+<label> <%= :semesters %> </label>
