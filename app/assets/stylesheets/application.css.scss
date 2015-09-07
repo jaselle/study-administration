@@ -23,13 +23,6 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
-@font-face {
-   font-family: 'Glyphicons Halflings'!important;
-   src: asset-data-url('glyphicons-halflings-regular.eot') !important;
-   src: asset-data-url('glyphicons-halflings-regular.woff') format('woff') !important,
-      asset-data-url('glyphicons-halflings-regular.ttf') format('truetype') !important;
-}
-
 /*Spawned content should be below navigation bars, change margin here*/
 .content {
   margin-top: 80px;
