@@ -37,8 +37,15 @@ def avg_rating
 end
 
 
-
-
-
+# Vtecker,pklein
+# The method import imports the CSV-Data, parses the headers
+# and creates an event per row.
+def self.import(file)
+  infile = File.read(file)
+  csv = CSV.parse(infile, :headers => true)
+  csv.each do |row|
+    Event.create! row.to_hash
+  end
+end
 
 end

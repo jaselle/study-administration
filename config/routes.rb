@@ -19,9 +19,10 @@ Rails.application.routes.draw do
   root :to => 'home#home'
 
 
-  get 'login' => 'user_sessions#new', :as => :login
-  post 'logout' => 'user_sessions#destroy', :as => :logout
 
+get 'login' => 'user_sessions#new', :as => :login
+post 'logout' => 'user_sessions#destroy', :as => :logout
+post "csv_reader/import" # access to post for CSV-Reader.
 
 
 #get 'user_sessions/new'
