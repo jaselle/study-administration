@@ -31,8 +31,8 @@ body {
   height: 100%;
   background: rgba(230, 230, 230, 0.75);
   border-radius: 15px;
-  padding-right: 7%;
-  padding-left: 7%;
+  padding-right: 5%;
+  padding-left: 5%;
   padding-top: 2%;
   padding-bottom: 2%;
 }
@@ -280,4 +280,21 @@ border-collapse: separate;
   width: 40% !important;
 }
 
+.btn_group_wide1 {
+  width: 100% !important;  
+}
+
+.middle_icon {
+  vertical-align: middle;
+  margin: auto !important;
+}
+
+.col-xs-mini{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: left;
+  width: 5.66666666%;
+}
 

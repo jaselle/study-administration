@@ -5,20 +5,19 @@
 <table class = "table table-striped" style=" table-layout: fixed; width: 100%;">
   <thead>
     <tr>
-      <th>Kürzel</th>
+      <th class="col-xs-1">Kürzel</th>
       <th>Titel</th>
       <th>Professor</th>
-      <th>Credits</th>
-      <th>SWS</th>
+      <th class="col-xs-mini">ECTS</th>
+      <th class="col-xs-mini">SWS</th>
       <th>Zyklus</th>
-      <th>Prüfungsart</th>
       <th>Bedingung</th>
       <th ></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+    <% @events.each_with_index do |event, index| %>
       <tr>
         <td><%= event.identifier %></td>
         <td><%= event.title %></td>
@@ -26,26 +25,39 @@
         <td><%= event.credits %></td>
         <td><%= event.sws %></td>
         <td><%= event.cycle %></td>
-        <td><%= event.exam_type %></td>
         <td><%= event.condition %></td>
-        <div class="btn-group btn-group-justified">
-          <td><%= link_to event, class: "btn btn-default" do %>
-              <i class="glyphicon glyphicon-eye-open"></i>
-          <% end %></td>
-          <td><%= link_to edit_event_path(event), class: "btn btn-default" do %>
-              <i class="glyphicon glyphicon-pencil"></i>
-          <% end %></td>
-          <td><%= link_to event, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
-              <i class="glyphicon glyphicon-trash"></i>
-          <% end %></td>
+        <td><div class="btn-group btn-group-justified btn_group_wide1">
+          <%= link_to event, class: "btn btn-default" do %>
+              <i class="glyphicon glyphicon-eye-open middle_icon"></i>
+          <% end %>
+          <%= link_to edit_event_path(event), class: "btn btn-default" do %>
+              <i class="glyphicon glyphicon-pencil middle_icon"></i>
+          <% end %>
+          <%= link_to event, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
+              <i class="glyphicon glyphicon-trash middle_icon"></i>
+          <% end %>
         </div>
+        </td>
       </tr>
-      <tr>
-        <td colspan="11">
+      <% if (index % 2 == 0) %>
+      <tr style="background-color: #f9f9f9">
+        <td colspan="8">
         <div class="overflow_to_scroll">
           <%= event.description %>
         </div>
         </td>
+      </tr>
+      <% else %>
+      <tr style="background-color: rgba(1,0,0,0)">
+        <td colspan="8">
+        <div class="overflow_to_scroll">
+          <%= event.description %>
+        </div>
+        </td>
+      </tr>
+      <% end %>
+      <tr>
+        <td colspan="8">Prüfungsart: <%=event.exam_type %></td>
       </tr>
     <% end %>
   </tbody>
