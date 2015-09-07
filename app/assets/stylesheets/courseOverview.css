@@ -1,18 +1,5 @@
 /* Just some base styles not needed for example to function */
-*, html { font-family: Verdana, Arial, Helvetica, sans-serif; }
 
-body, form, ul, li, p, h1, h2, h3, h4, h5
-{
-    margin: 0;
-    padding: 0;
-}
-
-img { border: none; }
-p
-{
-    font-size: 1em;
-    margin: 0 0 1em 0;
-}
 
 html { font-size: 100%; /* IE hack */ }
 body { font-size: 1em; /* Sets base font size to 16px */ }
@@ -25,7 +12,7 @@ ol.tree
     padding: 0 0 0 30px;
     width: 300px;
 }
-    li 
+    li.course 
     { 
         position: relative; 
         margin-left: -15px;
@@ -47,7 +34,7 @@ ol.tree
         li.file a[href $= '.css']   { background: url(/assets/document.png) 0 0 no-repeat; }
         li.file a[href $= '.js']        { background: url(/assets/document.png) 0 0 no-repeat; }
     
-    li input
+    li.course input
     {
         position: absolute;
         left: 0;
@@ -59,14 +46,14 @@ ol.tree
         width: 1em;
         top: 0;
     }
-        li input + ol
+        li.course input + ol
         {
             background: url(/assets/toggle-small-expand.png) 40px 0 no-repeat;
             margin: -0.938em 0 0 -44px; /* 15px */
             height: 1em;
         }
         li input + ol > li { display: none; margin-left: -14px !important; padding-left: 1px; }
-    li label
+    li.course label
     {
         background: url(/assets/folder-horizontal.png) 15px 1px no-repeat;
         cursor: pointer;
@@ -74,12 +61,15 @@ ol.tree
         padding-left: 37px;
     }
 
-    li input:checked + ol
+    li.course input:checked + ol
     {
         background: url(/assets/toggle-small.png) 40px 5px no-repeat;
         margin: -1.25em 0 0 -44px; /* 20px */
         padding: 1.563em 0 0 80px;
         height: auto;
     }
-        li input:checked + ol > li { display: block; margin: 0 0 0.125em;  /* 2px */}
-        li input:checked + ol > li:last-child { margin: 0 0 0.063em; /* 1px */ }
+
+        li.course input:checked + ol > li { display: block; margin: 0 0 0.125em;  /* 2px */}
+        li.course input:checked + ol > li:last-child { margin: 0 0 0.063em; /* 1px */ }
+
+

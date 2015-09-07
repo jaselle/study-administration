@@ -7,9 +7,22 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+#User is able to mark a event, he wants to join. 
+#if the user is logged in he can mark a event through the show-view.
+  def mark_event
+    event = Event.find(params[:id])
+    unless current_user.nil?
+      event.users << current_user
+      redirect_to event_path(event), notice: "Veranstaltung vorgemerkt"
+    else
+      redirect_to event_path(event), alert: "Nicht eingeloggt"
+    end
+  end
+
   # GET /events/1
   # GET /events/1.json
   def show
+    @id = params[:id]
   end
 
   # GET /events/new
@@ -71,4 +84,6 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:id, :identifier, :title, :description, :prof, :credits, :sws, :cycle, :next, :exam_type, :condition)
     end
+
+   
 end

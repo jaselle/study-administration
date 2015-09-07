@@ -3,4 +3,9 @@
 Tool for planning next semesters courses
 
 TODO: 
-- Add main functions of this tool
+- Mails for remembering stuff (dates and stuff)
+- Overview for Semesters
+- Selecting dates for courses
+- Diagrams and statistics
+- advises and notes in overview
+- Blockwise ETCS achieved/still needed

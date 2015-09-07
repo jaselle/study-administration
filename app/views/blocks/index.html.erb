@@ -13,7 +13,7 @@
 
 <!-- changed links to buttons -->
   <tbody>
-    <% @blocks.each do |block| %>
+    <% @blocks.order("name").each do |block| %>
       <tr>
         <td><%= block.name %></td>
         <td><%= block.credits_min %></td>
