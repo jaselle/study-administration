@@ -7,7 +7,7 @@ class PasswordResetsController < ApplicationController
     @user = User.find_by_email(params[:email])
 
     if not @user
-      redirect_to(:back, :notice => 'Benutzer nicht gefunden.')
+      redirect_to(:back, :alert => 'Benutzer nicht gefunden.')
       return
     end
 
