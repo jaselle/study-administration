@@ -16,5 +16,6 @@ end
  def not_authorized(text)
  	redirect_to root_path, alert: text
  end
+
 end
 

@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+    <% @events.order("title").each do |event| %>
       <tr>
         <td><%= event.identifier %></td>
         <td><%= event.title %></td>
@@ -49,7 +49,16 @@
   </tbody>
 </table>
 
+  
 <br>
+ <!--Vtecker,pklein
+Some code for creating the first view of our import buttons.
+ -->
+<%= form_tag :controller => 'csv_reader', :action => 'import', multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import CSV" %>
+<% end %>
+
 <% if can? :create, @event %>
 <%= link_to 'New Event', new_event_path %>
 <%end%>

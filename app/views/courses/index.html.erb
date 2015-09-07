@@ -26,30 +26,31 @@
   </tbody>
 </table>
 
+
 <ol class = "tree">
-  <li>
+  <li class = "course">
     <!-- Ebene 1: Courses -->
     <label for="Studiengaenge">Studiengaenge</label>
     <input type="checkbox" id="Studiengaenge" />
       <ol>
-      <% @courses.each do |course| %>
-        <li>  
+      <% @courses.order("name").each do |course| %>
+        <li class = "course">
           <label for="course"><%=    link_to course.name,  course %> <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %> </label>
-          <input type="checkbox"  id="Bloecke" />
+          <input type="checkbox"  id="course" />
         
             <ol>
               <!-- Ebene 2: Blocks -->
 
-              <% e = course.blocks.map %>
+              <% e = course.blocks.order("name").map %>
               
                 
               <% e.each do |blocks| %>
-              <li>
+                <li class = "course">
                     <label for="blocks"><%= link_to blocks.name, blocks %></label>
-                    <input type="checkbox"  id="Bloecke" />
+                    <input type="checkbox"  id="blocks" />
 
                     <ol>
-                        <% f = blocks.events.map %>
+                        <% f = blocks.events.order("title").map %>
                         <% f.each do |events| %>
                           <li class="file">
                                 <%= link_to events.title, events %>

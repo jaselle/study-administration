@@ -46,13 +46,21 @@
   <%= @event.condition %>
 </p>
 
-<% if can? :edit, Event %>
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%end%>
-<%= link_to 'Back', events_path %>
-<p>
 
-  
+<p>
+<!-- if logged in, show the Button to mark an event-->
+  <% if logged_in? %>
+    <% unless @event.users.find_by(id: current_user.id) %>
+      <p>
+        <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id%>
+      </p>
+    <% else %>
+       <p>
+         <strong>Die Veranstaltung <%= @event.title %> ist belegt digger!</strong>
+      </p>
+    <%end %>
+  <% end %>
+
  <!-- Displays the single stars for Average Rating -->
   <% (1..5).each do |i| %>
     <%if i <= @event.avg_rating %>
@@ -60,17 +68,16 @@
     <% else %>
       <li class="rating_rest" ></li>
     <% end %>
-<% end %>
-
+  <% end %>
 </p>
+
 <br>
 
  <!-- if the user is logged in, he can see the stars to click.  -->
 <p>
-<% form_id = "event_#{@event.id}_rating" %>
-<% if logged_in? %> <!-- To avoid throwing an exception if no user is signed in -->
+  <% form_id = "event_#{@event.id}_rating" %>
+  <% if logged_in? %> <!-- To avoid throwing an exception if no user is signed in -->
     <% user_id = current_user.id %>
-
     <%= form_for @event.ratings.find_or_create_by(user_id: user_id), :html => {:id => form_id, :class => "star_rating_form"} do |f| %>
         <%= f.hidden_field :event_id, :value => @event.id %>
         <% if logged_in? %>
@@ -79,10 +86,17 @@
         <%= f.hidden_field :stars, :id => form_id + "_stars" %>
     <% end %>
 
-
-<% (1..5).each do |i| %>
-    <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>"></li>
+    <% (1..5).each do |i| %>
+      <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>"></li>
     <% end %>  
-<% end %>
+  <% end %>
 </p>
+
+<br>
+<br>
+
+<% if can? :edit, Event %>
+  <%= link_to 'Edit', edit_event_path(@event) %> |
+<%end%>
+<%= link_to 'Back', events_path %>
 
