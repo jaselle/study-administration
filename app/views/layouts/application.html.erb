@@ -16,25 +16,25 @@
 	<div class="nav">
       <ul>     
         <li class="topmenu"><a class="active logo" href="/">Home</a></li>
-        <li class="topmenu"><a href="/events">Veranstaltungen</a>
+        <li class="topmenu"><a href="/events"><center>Veranstaltungen</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
-        <li class="topmenu"><a href="/users">Users</a>
+        <li class="topmenu"><a href="/users"><center>Users</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
-        <li class="topmenu"><a href="/courses">Courses</a>
+        <li class="topmenu"><a href="/courses"><center>Courses</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
-        <li class="topmenu"><a href="/blocks">Blocks</a>
+        <li class="topmenu"><a href="/blocks"><center>Blocks</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
@@ -51,7 +51,7 @@
         <!-- change .id to .role when role is updated from other group -->
         <li class="topmenu active_user">
           
-          <a href="#"><span class="glyphicon glyphicon-user"></span>  <%= current_user.role.capitalize %>
+          <a href="#"><center><span class="glyphicon glyphicon-user"></span>  <%= current_user.role.capitalize %></center>
           </a>
           <ul>
           <!-- if else case for different submenues depending on roles -->
@@ -79,8 +79,8 @@
           </ul>
         </li>
         <% else %>
-          <li class="no_user topmenu"><a href="/users/new"><span class="glyphicon glyphicon-star"></span> &nbsp SignUp</a></li>
-          <li class="no_user topmenu text-success"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> &nbsp LogIn</a></li>
+          <li class="no_user topmenu"><a href="/users/new"><center><span class="glyphicon glyphicon-star"></span> &nbsp SignUp</center></a></li>
+          <li class="no_user topmenu text-success"><a href="/login"><center><span class="glyphicon glyphicon-log-in"></span> &nbsp LogIn</center></a></li>
         <% end %>
         
       </ul>
