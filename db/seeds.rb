@@ -13,4 +13,4 @@ unless User.find_by_email("mbeutel@uos.de")
 end
 u = User.find_by_email("mbeutel@uos.de")
 u.role = "admin"
-u.save
+u.save!
