@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "doneEventsOverview.css" %>
+
 <%= form_for(@profile) do |f| %>
   <% if @profile.errors.any? %>
     <div id="error_explanation">
@@ -33,6 +35,39 @@
   <div class="field">
     <%= f.label :role%> <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
   </div>
+
+
+
+  <div class="field">
+   <%= f.label :event , 'Bestandene Module wählen' %><br />
+   <%= f.collection_select :id, Event.order(:title), :id, :title,  class: "same_width1_input", :multiple => true %>
+  </div>
+  <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4>
+
+ 
+ <ol class = "tree1">
+    <li class = "profile">
+    <!-- <div class="my_div"> -->
+      <label for="Module">Module</label>
+      <input type="checkbox" id="tolle_checkbox"  />
+     <!-- </div>-->
+      <ol>
+        <li class="profile">
+          <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
+          <%= b.label { b.check_box + b.text } %><br>
+          <% end %>
+        </li>
+      </ol>
+    </li>
+  </ol>
+ 
+
+
+
+
+
+
+
 
   <div class="actions">
     <%= f.submit %>
