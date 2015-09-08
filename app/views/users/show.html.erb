@@ -1,22 +1,2 @@
-<!-- Profile usable for admins -->
-<h3>Profile</h3>
+<%= redirect_to_profile %>
 
-
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>ID:</strong>
-  <%= @user.id %>
-</p>
-
-<p>
-  <strong>Role:</strong>
-  <%= @user.role %>
-</p>
-
-<%= link_to 'Bearbeiten', edit_user_path(@user), class: "btn btn-default" %> 
-<%= link_to 'Zurück', users_path, class: "btn btn-default" %>

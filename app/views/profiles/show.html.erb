@@ -9,6 +9,16 @@
 </p>
 
 <p>
+  <strong>E-Mail:</strong>
+  <%= @profile.user.email %>
+</p>
+
+<p>
+  <strong>Studiengang:</strong>
+  <%= @profile.user.course.name %>
+</p>
+
+<p>
   <strong>Geburtsdatum:</strong>
   <%= @profile.birth_date %>
 </p>
@@ -18,11 +28,7 @@
   <%= @profile.bio %>
 </p>
 
-<p>
-  <strong>ID:</strong>
-  <%= @profile.id %>
-</p>
 
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<%= link_to 'Back', profiles_path %> 
