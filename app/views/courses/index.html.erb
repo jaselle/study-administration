@@ -1,53 +1,63 @@
-<%= stylesheet_link_tag "course_overview.css" %>
+<%= stylesheet_link_tag "courseOverview.css" %>
 
-<ol class = "tree">
+<p>
+<label> Aktuelles Semester: <%= get_current_semester_and_year %> </label>
+</p>
+
+<form method="POST" action="/courses">
+   <select name="semesters" id = "42" >
+      <option>Alle</option> 
+      <option>Sommersemester</option>
+      <option>Wintersemester</option>
+      <option>Unregelmäßig</option> 
+      
+   </select>
+
+  </form>
+
+
+<br>
+
+
+
+    <!-- Ebene 1: Courses -->
+    <!-- get_current_semester calculates and displays the current Semester.-->
+    <label for="Studiengaenge">Meine Studiengänge</label>
   
-  <li class = "course">
-    <!-- Layer 1: heading -->
-    <span class="glyphicon glyphicon-folder-close"></span>
-    <label for="Studiengaenge">Studiengaenge</label>
-    <input type="checkbox" id="Studiengaenge" />
-
-      <!-- Layer 2: study programs -->
-      <ol>
-      <% @courses.order("name").each do |c| %>
+      <ol class = "tree">
+      <% @courses.order("name").each do |course| %>
         <li class = "course">
-          <span class="glyphicon glyphicon-folder-close"></span>
-                    <label for="c"><%= link_to c.name %></label>
-          <input type="checkbox"  id="c" />
-
-          
-            <!-- Layer 3: Blocks -->
-            <ol>
-              <% e = c.blocks.order("name").map %>               
+          <label for="course"><%=    link_to course.name,  course %> <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %> </label>
+          <input type="checkbox"  id="course" />
+            <ol id="outer">
+              <!-- Ebene 2: Blocks -->
+              <% e = course.blocks.order("name").map %>
               <% e.each do |blocks| %>
                 <li class = "course">
                     <span class="glyphicon glyphicon-folder-close"></span>
                     <label for="blocks"><%= link_to blocks.name, blocks %></label>
                     <input type="checkbox"  id="blocks"/>
-
-                    <!-- Layer 4: Events -->
-                    <ol>
-                        <% f = blocks.events.order("title").map %>
-                        <% f.each do |events| %>
-                          <li class="file">
-                          <span class="glyphicon glyphicon-file"></span>
-                          <%= link_to events.title, events %>
-                          <!-- <input type="checkbox"  id="Events" /> -->
-                          </li>
-                        <% end %>
-
-                    </ol>
-                </li>
+                      <ol id="inner">
+                          <% f = blocks.events.order("title").map %>
+                          <% f.each do |events| %>
+                              <li class="file <%= events.cycle %>">
+                                    <%= link_to events.title, events %>
+                              </li>
+                          <% end %>
+                      </ol>
+              </li>
               <% end %>
             </ol>
 
 
         </li>
-        <% end %>
+      <% end %>
     </ol>
+ 
 
-  </li>
-</ol>
+
+
 
 <%= link_to 'New Course', new_course_path %>
+
+<%= params[:semesters] %>

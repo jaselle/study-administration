@@ -15,7 +15,11 @@
 
 <p>
   <strong>Studiengang:</strong>
-  <%= @profile.user.course.name %>
+    <%if @profile.user.course != nil%>      
+        <td><%= @profile.user.course.name %></td>
+    <%else%>
+        <td>Kein Studiengang vorhanden</td>
+    <% end %>
 </p>
 
 <p>

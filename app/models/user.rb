@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 3 }, :on=>[:create, :update]
   validates :password, confirmation: true, :on=>[:create, :update]
   validates :password_confirmation, presence: true, :on=>[:create, :update]
-
-  validates :email, presence: true, email: true, uniqueness: true
   
+  validates :email, presence: true, email: true, uniqueness: true
+
   has_many :ratings
 
   has_many :events_users
@@ -20,5 +20,13 @@ class User < ActiveRecord::Base
   belongs_to :course
 
   accepts_nested_attributes_for :profile
+
+  def self.search(search)
+    if search
+      where("email LIKE ?", "%#{search}%")
+    else
+      where(nil)
+    end
+  end
 
 end
