@@ -1,0 +1,27 @@
+<!-- test highcharts -->
+<div id="container" style="width:100%; height:400px;"></div>
+<script>
+$(function () { 
+    $('#container').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Verteilung Nutzer'
+        },
+        xAxis: {
+            categories: ['Admin', 'Moderator', 'Student']
+        },
+        yAxis: {
+            title: {
+                text: 'Anzahl'
+            }
+        },
+        series: [{
+            name: 'Role',
+            data: [<%= User.where(:role => 'admin').count %>, <%= User.where(:role => 'moderator').count %>,<%= User.where(:role => 'student').count %>]
+                }]
+    });
+});
+
+</script>
