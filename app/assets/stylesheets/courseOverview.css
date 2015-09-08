@@ -58,13 +58,12 @@ input, select, textarea, th, td, ol, li { font-size: 1.04em; }
         width: 1em;
         top: 0;
     }
+
     li.course input + ol{
         background: url(/assets/toggle-small-expand.png) 40px 0 no-repeat;
         margin: -0.938em 0 0 -44px; /* 15px */
         height: 1em;
     }
-
-  
 
     li.course label{
         background: url(/assets/folder-horizontal.png) 15px 1px no-repeat;
@@ -84,7 +83,6 @@ input, select, textarea, th, td, ol, li { font-size: 1.04em; }
     li.course input:checked + ol > li:last-child { 
         margin: 0 0 0.063em ; /* 1px */ 
     }
-
 
     li.course input + ol > li { 
         display: none;
