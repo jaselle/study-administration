@@ -5,8 +5,8 @@
     <tr>
       <th>Name</th>
       <th>Vorname</th>
-      <th>E-Mail</th>
       <th>Studiengang</th>
+      <th>E-Mail</th>
       <th>Geburtsdatum</th>
       <th>Über mich</th>
       <th></th>
@@ -18,15 +18,17 @@
       <tr>
         <td><%= profile.family_name %></td>
         <td><%= profile.name %></td>
+
         <%if profile.user != nil%>      
+          <%if profile.user.course != nil%>      
+            <td><%= profile.user.course.name %></td>
+          <% else %>
+            <td>Kein Studiengang vorhanden</td>
+          <% end %>
           <td><%= profile.user.email %></td>
         <%else%>
-          <td>Keine User für dieses Profil</td>
-        <% end %>
-        <%if profile.user.course != nil%>      
-          <td><%= profile.user.course.name %></td>
-        <%else%>
           <td>Kein Studiengang vorhanden</td>
+          <td>Keine User für dieses Profil</td>
         <% end %>
         <td><%= profile.birth_date %></td>
         <td><%= profile.bio %></td>
