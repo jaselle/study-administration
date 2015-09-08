@@ -45,6 +45,9 @@ gem "highcharts-rails", "~> 3.0.0"
 # Use valid email
 gem 'valid_email'
 
+# Use will paginate for sorting
+gem 'will_paginate'
+
 group :production do
   gem 'rails_12factor'
 end
