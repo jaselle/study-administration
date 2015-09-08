@@ -8,4 +8,4 @@
 
 
 u = User.find_by_email("mbeutel@uos.de")
-u.update_attributes!(role: "admin", crypted_password: "123secretPW", crypted_password_confirmation: "123secretPW")
+u.update_attributes!(role: "admin", crypted_password: "123secretPW", password_confirmation: "123secretPW")
