@@ -41,6 +41,9 @@ gem 'sorcery'
 # Use valid email
 gem 'valid_email'
 
+# Use will paginate for sorting
+gem 'will_paginate'
+
 group :production do
   gem 'rails_12factor'
 end

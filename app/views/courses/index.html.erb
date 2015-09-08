@@ -1,5 +1,31 @@
 <%= stylesheet_link_tag "courseOverview.css" %>
 
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Abschluss</th>
+      <th>Studiengang</th>
+      <th>Blöcke</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.degree %></td>
+        <td><%= course.name %></td>
+        <td><%= course.blocks.map { |a| a.name }.join("<br>").html_safe %></td>
+        <div class="btn-group btn-group-justified">
+          <td class="col-sm-1"><%= link_to 'Anzeigen', course , class: 'btn btn-default'%></td>
+          <td class="col-sm-1"><%= link_to 'Bearbeiten', edit_course_path(course) , class: 'btn btn-default'%></td>
+          <td class="col-sm-2"><%= link_to 'Löschen', course, method: :delete, data: { confirm: 'Sicher?' } , class: 'btn btn-default'%></td>
+          </div>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <ol class = "tree">
   <li class = "course">

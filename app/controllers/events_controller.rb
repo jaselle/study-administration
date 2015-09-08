@@ -84,4 +84,6 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:id, :identifier, :title, :description, :prof, :credits, :sws, :cycle, :next, :exam_type, :condition)
     end
+
+   
 end

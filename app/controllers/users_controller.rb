@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
   #cancancan authorizingController
-  load_and_authorize_resource
+  #load_and_authorize_resource
   
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+  helper_method :sort_column, :sort_direction
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 20, :page => params[:page])
   end
 
   # GET /users/1
@@ -27,15 +29,15 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
+    @user = User.new(user_params.except(:profiles))
+    @user.profile = Profile.create(user_params[:profiles])
     respond_to do |format|
       if @user.save
 
         # Send email to user
         UserMailer.welcome_email(@user).deliver_now
 
-        format.html { redirect_to @user, notice: 'Benutzer wurde erfolgreich erstellt.' }
+        format.html { redirect_to @user.profile}
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -76,11 +78,14 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :crypted_password)
+      params.require(:user).permit(:email, :crypted_password,:password, :password_confirmation, :role, :course_id, profiles: [:name, :family_name])
     end
-    
-    # UsersController receive form attributes sorcery
-    def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :role)
+
+    def sort_column
+      User.column_names.include?(params[:sort]) ? params[:sort] : "email"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
