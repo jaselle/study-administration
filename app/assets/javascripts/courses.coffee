@@ -5,20 +5,20 @@ $ ->
 	$("#42").change -> 
 		sel = $("#42").val()
 		if sel == "Sommersemester"
-			$('.Sommersemester').show()
 			$('.Wintersemester').hide()
+			$('.Sommersemester').css("display", "block")
 			$('.Nicht').hide()
 		else if sel == "Wintersemester"
 			$('.Sommersemester').hide()
-			$('.Wintersemester').show()
+			$('.Wintersemester').css("display", "block")
 			$('.Nicht').hide()
 		else if sel == "Unregelmäßig"
 			$('.Sommersemester').hide()
 			$('.Wintersemester').hide()
-			$('.Nicht').show()
+			$('.Nicht').css("display", "block")
 		else
-			$('.Sommersemester').show()
-			$('.Wintersemester').show()
-			$('.Nicht').show()
+			$('.Sommersemester').css("display", "block")
+			$('.Wintersemester').css("display", "block")
+			$('.Nicht').css("display", "block")
 		return
 		
