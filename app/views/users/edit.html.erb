@@ -21,18 +21,23 @@
   </div>
  
   <!-- virtual field, that will hold the password before it is encrypted into the database -->
-  <div class="field">
-   <%= f.label :password , 'Passwort wählen' %><br />
-   <%= f.password_field :password %>
-</div>
+  <% if can? :edit, @user%>
+     <div class="field">
+       <%= f.label :password , 'Passwort wählen' %><br />
+       <%= f.password_field :password %>
+    </div>
 
-<div class="field">
-   <%= f.label :password_confirmation, 'Passwort wiederholen'%><br />
-   <%= f.password_field :password_confirmation %>
-</div>  
-  <div class="field">
-   <%= f.label :role%> <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
- </div>
+    <div class="field">
+       <%= f.label :password_confirmation, 'Passwort wiederholen'%><br />
+       <%= f.password_field :password_confirmation %>
+    </div>  
+  <%end%>
+  <% if can? :update, @user %>
+     <div class="field">
+       <%= f.label :role%> <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
+     </div>
+ <%end%>
+
  <div class="actions">
    <%= f.submit "Abschicken", class: "btn btn-success" %>  
   </div>

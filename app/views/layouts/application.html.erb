@@ -55,13 +55,12 @@
           <!-- if else case for different submenues depending on roles -->
           <!-- change when role is updated from other group -->
           <% if current_user.role.to_s == "admin" %>
-            <li class="submenu"><a href="/events">Profil</a></li>
+            <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>">Profil</a></li>
             <li class="submenu"><a href="/users">Benutzerliste</a></li>
             <li class="submenu"><%= link_to "Logout", :logout, method: :post %></li>
 
            <% else %>
-
-            <li class="submenu"><a href="/events">Profil</a></li>
+            <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>">Profil</a></li>
             <li class="submenu"><%= link_to "Logout", :logout, method: :post %></li>
            <% end %>
           </ul>

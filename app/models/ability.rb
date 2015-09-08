@@ -8,15 +8,18 @@ class Ability
      user ||= User.new # guest user (not logged in)
         if user.role=="admin"
          can :manage, :all 
+         cannot :manage, :id => user.id
+         cannot :edit, User
+         can :edit, User, :id => user.id
+         cannot :update, User, :id => user.id
+         cannot :destroy, User, :id=> user.id
         elsif user.role=="student"
          can :create, User
          can :read, :all
-         can :destroy, User, :user_id => user.id
+         can :destroy, User, :id => user.id
+         cannot :update, User, :id => user.id
         else
-          can :create , User
-          cannot :create, Event 
-          cannot :edit, :all
-          cannot :destroy, :all
+         can :create , User        
         end
  end
 end
