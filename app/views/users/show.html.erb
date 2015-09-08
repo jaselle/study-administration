@@ -1,5 +1,5 @@
 <!-- Profile usable for admins -->
-<head>Profile</head>
+<h3>Profile</h3>
 
 
 
@@ -18,5 +18,5 @@
   <%= @user.role %>
 </p>
 
-<%= link_to 'Bearbeiten', edit_user_path(@user) %> |
-<%= link_to 'Zurück', users_path %>
+<%= link_to 'Bearbeiten', edit_user_path(@user), class: "btn btn-default" %> 
+<%= link_to 'Zurück', users_path, class: "btn btn-default" %>

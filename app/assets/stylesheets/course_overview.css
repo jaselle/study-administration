@@ -26,12 +26,12 @@ li.course input:checked + ol > li:last-child {
     display: block; 
     margin: 0 0 0.063em; /* 1px */ }
 
-input[type=checkbox] {
+/*input[type=checkbox] {
   width: 75%;
   height: 50%;
   margin-left: -25%;
   cursor: pointer;
   content: '';
   display: inline-block;
-}
+}*/
 
