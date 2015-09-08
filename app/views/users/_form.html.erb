@@ -1,22 +1,23 @@
 <%= form_for(@user) do |f| %>
-<div class = "same_width1">
-  <div class="field">
-    <%= f.label :email, 'Email-Adresse eingeben' %><br/>
-    <%= f.text_field :email, class: "same_width1_input" %>
-  </div>
- 
-  <!-- virtual field, that will hold the password before it is encrypted into the database -->
-  <div class="field">
-   <%= f.label :password , 'Passwort wählen' %><br />
-   <%= f.password_field :password,  class: "same_width1_input" %>
-</div>
+  <div class = "same_width1">
+    <div class="field">
+      <%= f.label :email, 'Email-Adresse eingeben' %><br/>
+      <%= f.text_field :email, class: "same_width1_input" %>
+    </div>
+   
+    <!-- virtual field, that will hold the password before it is encrypted into the database -->
+    <div class="field">
+      <%= f.label :password , 'Passwort wählen' %><br />
+      <%= f.password_field :password,  class: "same_width1_input" %>
+    </div>
 
-<div class="field">
-   <%= f.label :password_confirmation, 'Passwort wiederholen'%><br />
-   <%= f.password_field :password_confirmation, class: "same_width1_input" %>
-</div>  
- <div class="actions">
-   <%= f.submit "Abschicken", class: "btn btn-success my_button1" %>  
-  </div>
+    <div class="field">
+      <%= f.label :password_confirmation, 'Passwort wiederholen'%><br />
+      <%= f.password_field :password_confirmation, class: "same_width1_input" %>
+    </div>  
+    
+    <div class="actions">
+     <%= f.submit "Abschicken", class: "btn btn-success my_button1" %>  
+    </div>
   </div>
 <% end %>

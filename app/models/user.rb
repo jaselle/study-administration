@@ -14,12 +14,17 @@ class User < ActiveRecord::Base
   after_create :create_profile
 
   has_many :ratings
-
-  
  
   has_many :events_users
   has_many :events, through: :events_users
 
-
   has_one :profile, dependent: :destroy
+
+  def self.search(search)
+    if search
+      where("email LIKE ?", "%#{search}%")
+    else
+      where(nil)
+    end
+  end
 end
