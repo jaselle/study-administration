@@ -10,13 +10,12 @@
     <div id="users"><%= render 'users' %></div>
   <% end %>
 
-  <br>
+<br>
 
-  <!-- is this important ? or maybe put to the top of the page? -->
-  <%= link_to 'Neuer Nutzer', new_user_path, class: 'btn btn-success'%>
-<% end %>
+<!-- is this important ? or maybe put to the top of the page? -->
+<%= link_to 'Neuer Nutzer', new_user_path, class: 'btn btn-success'%>
 
 <!-- not authorized redirected root path-->
 <% if cannot? :manage, @user %>
-    <%= not_authorized("Keine Rechte um User Übersicht aufzurufen") %> 
+    <%= not_authorized("Keine Rechte um User Übersicht aufzurufen") %>
 <% end %>

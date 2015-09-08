@@ -51,9 +51,8 @@
 
   
 <br>
- <!--Vtecker,pklein
-Some code for creating the first view of our import buttons.
- -->
+
+ <!--Some code for creating the first view of our import buttons.-->
 <%= form_tag :controller => 'csv_reader', :action => 'import', multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "Import CSV" %>
