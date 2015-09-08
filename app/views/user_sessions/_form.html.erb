@@ -10,16 +10,18 @@
     <%= label_tag :password, "Passwort eingeben" %><br />
     <%= password_field_tag :password , "", class: "same_width1_input"%>
   </div>
+   <!-- Remember me button-->
+   <div> 
+      <%= check_box_tag :remember, params[:remember], true %>
+      <%= label_tag :remember %>
+    </div> <br/>
   <div class="actions" >
   <div class="btn-group wider_btn_group">
     <%= submit_tag "Login", class: "btn btn-success my_button1" %>
     <%= link_to 'Passwort vergessen?', '/password_resets/index' , class: 'btn btn-warning my_button1'%>
   </div>
-    <!-- Remember me button-->
-    <div> 
-      <%= check_box_tag :remember, params[:remember], true %>
-      <%= label_tag :remember %>
-    </div>
+   
+   
   </div>
   </div>
  <% end %>

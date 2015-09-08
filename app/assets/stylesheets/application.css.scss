@@ -23,13 +23,6 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
-@font-face {
-   font-family: 'Glyphicons Halflings'!important;
-   src: asset-data-url('glyphicons-halflings-regular.eot') !important;
-   src: asset-data-url('glyphicons-halflings-regular.woff') format('woff') !important,
-      asset-data-url('glyphicons-halflings-regular.ttf') format('truetype') !important;
-}
-
 /*Spawned content should be below navigation bars, change margin here*/
 .content {
   margin-top: 80px;
@@ -38,8 +31,8 @@ body {
   height: 100%;
   background: rgba(230, 230, 230, 0.75);
   border-radius: 15px;
-  padding-right: 7%;
-  padding-left: 7%;
+  padding-right: 5%;
+  padding-left: 5%;
   padding-top: 2%;
   padding-bottom: 2%;
 }
@@ -47,13 +40,14 @@ body {
 /*Contains navigation and login fields, is fixed so that it will stay visible when scrolling*/
 .bar-container {
     position:fixed;
-    background-color: #444;
+    background-color: #444 !important;
     top: 0;
     padding: 0;
     margin-top: 0%;
     margin-left: -10px;   
     width: 101%;
     height: 25px;
+    z-index: 5;
 }
 
 /*Position of login fields*/
@@ -81,7 +75,6 @@ body {
   display: inline-block;
   margin-right: -4px;
   width: 10%;
-  text-align: center;
 }
 
 /*Outward appearance of login items concerning everything aside from color*/
@@ -93,7 +86,6 @@ body {
   margin-left: 10%;
   margin-right: -4px;
   width: 10%;
-  text-align: center;
 }
 
 
@@ -137,7 +129,6 @@ body {
   display: inline-block;
   margin-right: -4px;
   width: 12%;
-  text-align: center;
   /*float:left;*/
 }
 
@@ -166,7 +157,6 @@ body {
 .topmenu a {
   float:left;
   width:80%;
-  text-align:center;
   text-decoration: none !important;
   display: block;
   transition: .3s background-color;
@@ -231,6 +221,7 @@ body {
 .my_button1 {
   width: 50% !important;
   display: block !important;
+  overflow: hidden !important;
 }
 
 /* configure width of a wider button group*/
@@ -247,11 +238,6 @@ body {
 .overflow_to_scroll {
   overflow-y: scroll;
   height: 55px;
-}
-
-/* make 3-tuple of buttons prettier */
-.show_edit_del {
-  width: 100% !important;
 }
 
 /* change width here for width of whole email,pw,button group*/
@@ -289,6 +275,25 @@ border-collapse: separate;
 .same_width2_in3 {
   display: block !important;
   width: 40% !important;
+}
+
+
+.btn_group_wide1 {
+  width: 100% !important;  
+}
+
+.middle_icon {
+  vertical-align: middle;
+  margin: auto !important;
+}
+
+.col-xs-mini{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: left;
+  width: 5.66666666%;
 }
 
 .overlay {
