@@ -70,14 +70,11 @@
            <% else %>
            <!-- redirects to events because profile link not ready -->
            <% if current_user.profile != nil %>
-            <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>">Profil</a></li>
+            <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>"><span class="glyphicon glyphicon-pushpin"></span> &nbsp Profil</a></li>
             <% else %>
               <li class="submenu"><a href="">Kein Profil</a></li>
              <% end %>
-
-
-
-            <li class="submenu"> <span class="glyphicon glyphicon-log-out"></span> &nbsp <%= link_to "Logout", :logout, method: :post %></li>
+            <li class="submenu"><%= link_to :logout, method: :post do%> <span class="glyphicon glyphicon-log-out"></span> &nbsp Logout <% end %></li>
            <% end %>
           </ul>
         </li>
