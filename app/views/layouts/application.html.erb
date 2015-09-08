@@ -9,6 +9,7 @@
   <!--<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">-->
 </head>
 <body>
+  <div class="overlay"><div class="leftbox"></div><div class="frame1"></div></div>
 <header>
 	<div class="bar-container">
 	<!--Bar containing the important navigation items-->
@@ -94,9 +95,11 @@
 <div>
   <p id="notice"><%= flash[:notice] %></p>
   <p id="alert"><%= flash[:alert] %></p>
+ 
 </div> 
 <%= yield %>
 <!-- </center> -->
 </div>
+
 </body>
 </html>

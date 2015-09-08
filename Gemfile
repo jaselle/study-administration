@@ -38,7 +38,6 @@ gem 'ajaxful_rating' , '>= 3.0.0.beta7'
 
 # Use simple password authentication
 gem 'sorcery'
-
 # Use valid email
 gem 'valid_email'
 
