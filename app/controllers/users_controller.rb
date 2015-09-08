@@ -4,10 +4,12 @@ class UsersController < ApplicationController
   
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  helper_method :sort_column, :sort_direction
+
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 20, :page => params[:page])
   end
 
   # GET /users/1
@@ -78,6 +80,12 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:email, :crypted_password,:password, :password_confirmation, :role, :course_id, profiles: [:name, :family_name])
     end
-    
-  
+
+    def sort_column
+      User.column_names.include?(params[:sort]) ? params[:sort] : "email"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
 end

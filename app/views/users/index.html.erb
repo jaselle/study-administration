@@ -1,37 +1,14 @@
 <!--list of all users viewable for admin-->
 <% if can? :manage, @user %>
-<h1>Alle Nutzer</h1>
+  <h1>Nutzer</h1>
 
-<!-- new table design for all the users -->
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Status</th>
-      </tr>
-  </thead>
-
-<!-- list email of user and options/buttons to show profil, to change passwort and to delete profile -->
-  <tbody>
-    <% @users.each do |user| %>
-      <tr> 
-        <td><%= user.email %></td>
-        <td><%= user.role %></td>
-         <div class="btn-group btn-group-justified">
-          
-          <%if user.profile != nil%>      
-            <td class="col-sm-1"><%= link_to 'Anzeigen', profile_path(user.profile), class: 'btn btn-default'%></td>
-<!-- Button No Profile ersetzen!!!--> 
-          <%else%><td class="col-sm-1"><%= link_to 'No Profile',user, class: 'btn btn-default'%></td>
-          <% end %>
-          <%if user.id != current_user.id%>
-            <td class="col-sm-2"><%= link_to 'Löschen', user, method: :delete, data: { confirm: 'Sicher?' } , class: 'btn btn-default'%></td>   
-          <%end %>
-        </div> 
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= form_tag users_path, :method => 'get', :id => "users_search", remote: true do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Suche", :name => nil %>
+    </p>
+    <div id="users"><%= render 'users' %></div>
+<% end %>
 
 <br>
 
@@ -43,6 +20,3 @@
 <% if cannot? :manage, @user %>
     <%= not_authorized("Keine Rechte um User Übersicht aufzurufen") %>
 <% end %>
-
-
- 

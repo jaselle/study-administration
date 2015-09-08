@@ -38,9 +38,11 @@ gem 'ajaxful_rating' , '>= 3.0.0.beta7'
 
 # Use simple password authentication
 gem 'sorcery'
-
 # Use valid email
 gem 'valid_email'
+
+# Use will paginate for sorting
+gem 'will_paginate'
 
 group :production do
   gem 'rails_12factor'
