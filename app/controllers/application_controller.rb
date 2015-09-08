@@ -13,11 +13,10 @@ def js_logged_in
 end
 
 # proctected sites unauthorized users
- helper_method :not_authorized
+ helper_method :not_authorized, :redirect_to_profile
  def not_authorized(text)
  	redirect_to root_path, alert: text
  end
-
 # gets the current semester calculated with the current date 
 def get_current_semester_and_year
 	#check intervals for winter- or summer-semester
@@ -41,5 +40,8 @@ def get_current_semester
 	return get_current_semester_and_year.split(" ")[0]
 end 
 
+ def redirect_to_profile
+ 	redirect_to profile_path(@user.profile)
+ end
 end
 

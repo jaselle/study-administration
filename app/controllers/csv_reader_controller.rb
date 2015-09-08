@@ -1,12 +1,23 @@
-# Vtecker,pklein
 # The Controller written for our CSV-Reader.
-# Just calls the import and refers back afterwards.
+#It checks the input, calls import and refers back afterwards.
 class CsvReaderController < ApplicationController
 	def import
 
-  		Event.import(params[:file])
-  		
-  		# After the successful import of the CSV-File , we refer back to the current page.
-  		redirect_to :back , notice: "Die Veranstaltungen der ausgewählten CSV-Datei wurden erfolgreich in die Datenbank eingelesen."
-  	end
+		if request.post? && !params[:file].nil? 
+	  	
+	  	file = params[:file]
+  	
+	  		if  file[-4..-1] == ".csv"  # .csv data?
+		  		if Event.import(params[:file])	
+		  		redirect_to :back , notice: "Die Veranstaltungen der ausgewählten CSV-Datei wurden erfolgreich in die Datenbank eingelesen."
+		  		else
+		  		redirect_to :back, alert: "Import fehlgeschlagen. Falsche Formatierung."
+		  		end
+			else
+			redirect_to :back, alert: "Import fehlgeschlagen.Keine CSV-Datei."
+			end
+		else
+		redirect_to :back, alert: "Import fehlgeschlagen." 
+		end	
+   end 
 end
