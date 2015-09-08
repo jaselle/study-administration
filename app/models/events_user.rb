@@ -8,3 +8,4 @@ class EventsUser < ActiveRecord::Base
 	#delete-cascade???
 
 end
+
