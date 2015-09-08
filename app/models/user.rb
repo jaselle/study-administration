@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 3 }, :on=>[:create, :update]
   validates :password, confirmation: true, :on=>[:create, :update]
   validates :password_confirmation, presence: true, :on=>[:create, :update]
-
+  
   validates :email, presence: true, email: true, uniqueness: true
   
   has_many :ratings
@@ -20,5 +20,4 @@ class User < ActiveRecord::Base
   belongs_to :course
 
   accepts_nested_attributes_for :profile
-
 end
