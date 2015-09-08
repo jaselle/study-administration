@@ -34,9 +34,9 @@
               <% e = course.blocks.order("name").map %>
               <% e.each do |blocks| %>
                 <li class = "course">
+                    <span class="glyphicon glyphicon-folder-close"></span>
                     <label for="blocks"><%= link_to blocks.name, blocks %></label>
-                    <input type="checkbox"  id="blocks" />
-
+                    <input type="checkbox"  id="blocks"/>
                       <ol id="inner">
                           <% f = blocks.events.order("title").map %>
                           <% f.each do |events| %>
@@ -48,6 +48,8 @@
               </li>
               <% end %>
             </ol>
+
+
         </li>
       <% end %>
     </ol>

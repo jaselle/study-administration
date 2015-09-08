@@ -13,5 +13,5 @@
   <%= @block.events.map { |a| a.title }.join("<br>").html_safe %>
 </p>
 
-<%= link_to 'Edit', edit_block_path(@block) %> |
-<%= link_to 'Back', :back %>
+<%= link_to 'Bearbeiten', edit_block_path(@block), class: "btn btn-default" %> 
+<%= link_to 'Zurück', :back, class: "btn btn-default" %>

@@ -9,72 +9,93 @@
   <!--<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">-->
 </head>
 <body>
+  <div class="overlay"><div class="leftbox"></div><div class="frame1"></div></div>
 <header>
 	<div class="bar-container">
 	<!--Bar containing the important navigation items-->
 	<div class="nav">
-      <ul>     
+      <ul>
+        <!-- Logo on upper left corner -->
         <li class="topmenu"><a class="active logo" href="/">Home</a></li>
-        <li class="topmenu"><a href="/events">Veranstaltungen</a>
+
+        <!-- Navigation bar items -->
+        <li class="topmenu"><a href="/events"><center>Veranstaltungen</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
-        <li class="topmenu"><a href="/users">Users</a>
+      
+        <li class="topmenu"><a href="/users"><center>Users</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
-        <li class="topmenu"><a href="/courses">Courses</a>
+      
+        <li class="topmenu"><a href="/courses"><center>Courses</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
-        <li class="topmenu"><a href="/blocks">Blocks</a>
+      
+        <li class="topmenu"><a href="/blocks"><center>Blocks</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
+
       </ul>
     </div>
     <!--Bar containing the login and signup buttons-->
-        <div class="login">
+    <div class="login">
       <ul>
         <!-- if else case for signup-login vs loggedin-logout view -->
         <% if current_user %>
         <!--<%= link_to "Edit Profile", edit_user_path(current_user.id) %>-->
         <!-- change .id to .role when role is updated from other group -->
-        <li class="topmenu active_user"><a href="#">
-        <%= current_user.role.capitalize %>
-        </a>
-         <ul>
+        <li class="topmenu active_user">
+          
+          <a href="#"><center><span class="glyphicon glyphicon-user"></span>  <%= current_user.role.capitalize %></center></a>
+
+          <ul>
           <!-- if else case for different submenues depending on roles -->
-          <!-- change when role is updated from other group -->
           <% if current_user.role.to_s == "admin" %>
+
+            <!-- Prevent from loading non-existent profile -->
             <% if current_user.profile != nil %>
-              <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>">Profil</a></li>
-             <% else %>
+              <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>"><span class="glyphicon glyphicon-pushpin"></span> &nbsp Profil</a></li>
+
+            <% else %>
               <li class="submenu"><a href="">Kein Profil</a></li>
-             <% end %>
-            <li class="submenu"><a href="/users">Benutzerliste</a></li>
-            <li class="submenu"><%= link_to "Logout", :logout, method: :post %></li>
-           <% else %>
+            <% end %>
+
+            <li class="submenu"><a href="/users"><span class="glyphicon glyphicon-list-alt"></span> &nbsp Benutzerliste</a></li>
+            <li class="submenu"><%= link_to :logout, method: :post do%> <span class="glyphicon glyphicon-log-out"></span> &nbsp Logout <% end %></li>
+
+          <!-- in case not admin -->
+          <% else %>
+
+            <!-- redirects to events because profile link not ready -->
             <% if current_user.profile != nil %>
-              <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>">Profil</a></li>
-             <% else %>
+              <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>"><span class="glyphicon glyphicon-pushpin"></span> &nbsp Profil</a></li>
+
+            <% else %>
               <li class="submenu"><a href="">Kein Profil</a></li>
-             <% end %>
-            <li class="submenu"><%= link_to "Logout", :logout, method: :post %></li>
-           <% end %>
+            <% end %>
+
+            <li class="submenu"><%= link_to :logout, method: :post do%> <span class="glyphicon glyphicon-log-out"></span> &nbsp Logout <% end %></li>
+          <% end %>
+
           </ul>
-        </li>
+          </li>
+
+        <!-- if not logged in (current_user == false) -->
         <% else %>
-          <li class="no_user topmenu"><a href="/users/new">SignUp</a></li>
-          <li class="no_user topmenu text-success"><a href="/login">LogIn</a></li>
+          <li class="no_user topmenu"><a href="/users/new"><center><span class="glyphicon glyphicon-star"></span> &nbsp SignUp</center></a></li>
+          <li class="no_user topmenu text-success"><a href="/login"><center><span class="glyphicon glyphicon-log-in"></span> &nbsp LogIn</center></a></li>
         <% end %>
         
       </ul>
@@ -86,9 +107,11 @@
 <div>
   <p id="notice"><%= flash[:notice] %></p>
   <p id="alert"><%= flash[:alert] %></p>
+ 
 </div> 
 <%= yield %>
 <!-- </center> -->
 </div>
+
 </body>
 </html>
