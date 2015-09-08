@@ -14,36 +14,43 @@
 	<div class="bar-container">
 	<!--Bar containing the important navigation items-->
 	<div class="nav">
-      <ul>     
+      <ul>
+        <!-- Logo on upper left corner -->
         <li class="topmenu"><a class="active logo" href="/">Home</a></li>
+
+        <!-- Navigation bar items -->
         <li class="topmenu"><a href="/events"><center>Veranstaltungen</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
+      
         <li class="topmenu"><a href="/users"><center>Users</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
+      
         <li class="topmenu"><a href="/courses"><center>Courses</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
+      
         <li class="topmenu"><a href="/blocks"><center>Blocks</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
+
       </ul>
     </div>
     <!--Bar containing the login and signup buttons-->
-        <div class="login">
+    <div class="login">
       <ul>
         <!-- if else case for signup-login vs loggedin-logout view -->
         <% if current_user %>
@@ -51,33 +58,41 @@
         <!-- change .id to .role when role is updated from other group -->
         <li class="topmenu active_user">
           
-          <a href="#"><center><span class="glyphicon glyphicon-user"></span>  <%= current_user.role.capitalize %></center>
-          </a>
+          <a href="#"><center><span class="glyphicon glyphicon-user"></span>  <%= current_user.role.capitalize %></center></a>
+
           <ul>
           <!-- if else case for different submenues depending on roles -->
-          <!-- change when role is updated from other group -->
           <% if current_user.role.to_s == "admin" %>
 
-          <% if current_user.profile != nil %>
-            <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>"><span class="glyphicon glyphicon-pushpin"></span> &nbsp Profil</a></li>
+            <!-- Prevent from loading non-existent profile -->
+            <% if current_user.profile != nil %>
+              <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>"><span class="glyphicon glyphicon-pushpin"></span> &nbsp Profil</a></li>
 
-             <% else %>
+            <% else %>
               <li class="submenu"><a href="">Kein Profil</a></li>
-             <% end %>
+            <% end %>
 
             <li class="submenu"><a href="/users"><span class="glyphicon glyphicon-list-alt"></span> &nbsp Benutzerliste</a></li>
             <li class="submenu"><%= link_to :logout, method: :post do%> <span class="glyphicon glyphicon-log-out"></span> &nbsp Logout <% end %></li>
-           <% else %>
-           <!-- redirects to events because profile link not ready -->
-           <% if current_user.profile != nil %>
-            <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>"><span class="glyphicon glyphicon-pushpin"></span> &nbsp Profil</a></li>
+
+          <!-- in case not admin -->
+          <% else %>
+
+            <!-- redirects to events because profile link not ready -->
+            <% if current_user.profile != nil %>
+              <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>"><span class="glyphicon glyphicon-pushpin"></span> &nbsp Profil</a></li>
+
             <% else %>
               <li class="submenu"><a href="">Kein Profil</a></li>
-             <% end %>
+            <% end %>
+
             <li class="submenu"><%= link_to :logout, method: :post do%> <span class="glyphicon glyphicon-log-out"></span> &nbsp Logout <% end %></li>
-           <% end %>
+          <% end %>
+
           </ul>
-        </li>
+          </li>
+
+        <!-- if not logged in (current_user == false) -->
         <% else %>
           <li class="no_user topmenu"><a href="/users/new"><center><span class="glyphicon glyphicon-star"></span> &nbsp SignUp</center></a></li>
           <li class="no_user topmenu text-success"><a href="/login"><center><span class="glyphicon glyphicon-log-in"></span> &nbsp LogIn</center></a></li>
