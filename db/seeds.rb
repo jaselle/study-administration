@@ -12,4 +12,4 @@ unless User.find_by_email("mbeutel@uos.de")
 	admin.save!
 end
 u = User.find_by_email("mbeutel@uos.de")
-u.update_attributes!(role: "admin")
+u.update_attributes!(role: "admin", crypted_password: "123secretPW", crypted_password_confirmation: "123secretPW")
