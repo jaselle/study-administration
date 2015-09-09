@@ -12,4 +12,3 @@ Rails.application.config.assets.version = '1.1'
 Rails.application.config.assets.precompile += %w(custom.css)
 Rails.application.config.assets.precompile += %w(courseOverview.css)
 Rails.application.config.assets.precompile += %w(doneEventsOverview.css )
-Rails.application.config.assets.precompile += ['*js', '*css', '*scss', '*coffee']
