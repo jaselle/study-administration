@@ -19,3 +19,4 @@ $(document).ready(function() {
   $('.has-tooltip').tooltip();
 });
 // changed this to check if tooltip works
+

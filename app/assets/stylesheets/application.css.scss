@@ -475,3 +475,25 @@ border-collapse: separate;
 .fixed_height_table1 tr {
   height: 50px;
 }
+
+
+/*todo flashmessage!*/
+.flash-message {
+  &.error {
+    border: solid 4px #900;
+          background-color: #FF6565;
+        }
+  &.notice {
+    border: solid 4px #26722D;
+          background-color: #A4E7A0;
+        }
+  color: black;
+  font-weight: bold;
+  width: 50%;
+  margin: 20px;
+  height: 10%;
+        p {
+                font-size: 110%;
+                margin: 15px 0;
+        }
+}

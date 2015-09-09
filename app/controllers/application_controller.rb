@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   helper_method :get_current_semester, :get_current_semester_and_year
   protect_from_forgery with: :exception
 
-
 def js_logged_in
   if(!logged_in?)
     flash[:error] = "Login erforderlich für Rating!"
