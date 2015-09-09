@@ -16,6 +16,7 @@
         <%= builder.text_field :family_name, class: "same_width1_input" %>
       </div>
     <% end %>
+    course = Course.find_by_id(current_user.course_id)
 
     <div class="field">
      <%= f.label :course , 'Studiengang wählen' %><br />

@@ -7,9 +7,9 @@
       <th>Vorname</th>
       <th>Studiengang</th>
       <th>E-Mail</th>
+      <th>Status</th>
       <th>Geburtsdatum</th>
       <th>Über mich</th>
-      <th></th>
     </tr>
   </thead>
 
@@ -26,9 +26,11 @@
             <td>Kein Studiengang vorhanden</td>
           <% end %>
           <td><%= profile.user.email %></td>
+          <td><%= profile.user.role.capitalize %></td>
         <%else%>
-          <td>Kein Studiengang vorhanden</td>
+          <td>-</td>
           <td>Keine User für dieses Profil</td>
+          <td>-</td>
         <% end %>
         <td><%= profile.birth_date %></td>
         <td><%= profile.bio %></td>
@@ -42,5 +44,3 @@
   </tbody>
 </table>
 <br>
-
-<%= link_to 'New Profile', new_profile_path %> 

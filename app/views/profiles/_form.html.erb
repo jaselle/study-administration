@@ -24,19 +24,24 @@
     <%= f.label :birth_date,"Geburtsdatum" %><br>
     <%= f.date_select :birth_date, :start_year => getBirthDateStart(), :end_year => getBirthDateEnd() %>
   </div>
+  <%= f.fields_for :user do |ff| %>
+    <div class="field">
+      <%= ff.label :course, 'Studiengang' %>
+      <%= ff.collection_select :course_id, Course.order(:name), :id, :name, class: "same_width1_input" %>
+    </div>
+    <% if current_user.role == "admin" %>
+    <div class="field">
+      <%= ff.label :role%> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
+    </div>
+    <% end %> 
+  <% end %>
   <div class="field">
     <%= f.label :bio, "Über mich:" %><br>
     <%= f.text_area :bio %>
   </div>
 
-  <%= form_for(@profile.user) do |f| %>
-  <div class="field">
-    <%= f.label :role%> <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
-  </div>
-
   <div class="actions">
     <%= f.submit %>
   </div>
-
-  <% end %>  
+  
  <% end %>

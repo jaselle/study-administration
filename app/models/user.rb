@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   ROLES = %w[admin moderator student]
 
   # validates password and email
-  validates :password, length: { minimum: 3 }, :on=>[:create, :update]
-  validates :password, confirmation: true, :on=>[:create, :update]
-  validates :password_confirmation, presence: true, :on=>[:create, :update]
+  validates :password, length: { minimum: 3 }, :on=>[:create]
+  validates :password, confirmation: true, :on=>[:create]
+  validates :password_confirmation, presence: true, :on=>[:create]
   
   validates :email, presence: true, email: true, uniqueness: true
 
