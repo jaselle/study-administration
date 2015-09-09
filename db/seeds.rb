@@ -11,6 +11,3 @@ unless User.find_by_email("mbeutel@uos.de")
 	admin.profile = Profile.create!(family_name: "Beutel", name: "Miriam")
 	admin.save!
 end
-u = User.find_by_email("mbeutel@uos.de")
-u.role = "admin"
-u.save!
