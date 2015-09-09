@@ -1,320 +1,138 @@
 <!-- test highcharts -->
-<div id="container" style="width:100%; height:400px;"></div>
-<script>
-$(function () { 
-    $('#container1').highcharts({
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Verteilung Nutzer'
-        },
-        xAxis: {
-            categories: ['Admin', 'Moderator', 'Student']
-        },
-        yAxis: {
-            title: {
-                text: 'Anzahl'
-            }
-        },
-        series: [{
-            name: 'Role',
-            data: [<%= User.where(:role => 'admin').count %>, <%= User.where(:role => 'moderator').count %>,<%= User.where(:role => 'student').count %>]
-                }]
-    });
-});
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/data.js"></script>
+<script src="http://code.highcharts.com/modules/drilldown.js"></script>
 
-</script>
-
-<div id="container" style="width:100%; height:400px;"></div>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 <script>
 $(function () {
-    $('#container1').highcharts({
-        chart: {
-            zoomType: 'xy'
-        },
-        title: {
-            text: 'Erreichte Credits je Semester'
-        },
-        subtitle: {
-            text: 'subtile'
-        },
-        xAxis: [{
-            categories: ['1tes', '2tes', '3tes', '4tes', '5tes', '6tes'],
-            crosshair: true
-        }],
-        yAxis: [{ // Primary yAxis
-            min: 0,
-            max: 50,
-            labels: {
-                format: '{value} LP',
-                style: {
-                    color: Highcharts.getOptions().colors[1]
-                }
-            },
-            title: {
-                text: 'durchschnittlich zu erreichende Credits - Regelstudienzeit',
-                style: {
-                    color: Highcharts.getOptions().colors[1]
-                }
-            }
-        }, { // Secondary yAxis
-            min: 0,
-            max: 50,
-            title: {
-                text: 'Rainfall',
-                style: {
-                    color: Highcharts.getOptions().colors[0]
-                }
-            },
-            labels: {
-                format: '{value} LP',
-
-                style: {
-                    color: Highcharts.getOptions().colors[0]
-                }
-            },
-            opposite: true
-        }],
-        tooltip: {
-            shared: true
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'left',
-            x: 120,
-            verticalAlign: 'top',
-            y: 100,
-            floating: true,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-        },
-        series: [{
-            name: 'erreichte Credits',
-            type: 'column',
-            yAxis: 1,
-            data: [23.0, 27.0, 32.0, 28.0, 29.0, 17.0],
-            tooltip: {
-                valueSuffix: ' mm'
-            }
-
-        }, {
-            name: 'Credits',
-            type: 'spline',
-            data: [30.0, 30.0, 30.0, 30.0, 30.0, 30.0],
-            tooltip: {
-                valueSuffix: ' LP'
-            }
-        },{
-            name: '⌀ Credits',
-            type: 'spline',
-            data: [23.0, 25.0, 27.3, 27.5, 27.8, 26.0],
-            tooltip: {
-                valueSuffix: ' LP'
-            }
-        }]
-    });
-});
-</script>
-
-<script>
-$(function () {
-    var colors = Highcharts.getOptions().colors,
-        categories = [ 
-        <%counter = 0%>
-        <% @blocks.each do |block| %> 
-        '<%= block.name%>', <%end%>],
-        data = [ <% @blocks.each do |block| %>{
-            y: <%=((block.credits_min / Block.sum(:credits_min).to_f)*100).round(2)%>,
-            color: colors[<%=counter%>],
-            drilldown: {
-                name: 'Veranstaltung',
-                categories: [ <% block.events.each do |event| %>' <%= event.title%>', <%end%>],
-                data: [<% block.events.each do |event| %>
-                <%=event.credits%>,<%end%>],
-                color: colors[0]
-            } 
-        }, <%counter +=1%><%end%>],
-        browserData = [],
-        versionsData = [],
-        i,
-        j,
-        dataLen = data.length,
-        drillDataLen,
-        brightness;
-
-
-    // Build the data arrays
-    for (i = 0; i < dataLen; i += 1) {
-
-        // add browser data
-        browserData.push({
-            name: categories[i],
-            y: data[i].y,
-            color: data[i].color
+    var chart,
+        colors = Highcharts.getOptions().colors;
+    
+    function setChart(name, categories, data, color) {
+        chart.xAxis[0].setCategories(categories);
+        chart.series[0].remove();
+        chart.addSeries({
+            name: name,
+            data: data,
+            color: color || 'white'
         });
-
-        // add version data
-        drillDataLen = data[i].drilldown.data.length;
-        for (j = 0; j < drillDataLen; j += 1) {
-            brightness = 0.2 - (j / drillDataLen) / 5;
-            versionsData.push({
-                name: data[i].drilldown.categories[j],
-                y: data[i].drilldown.data[j],
-                color: Highcharts.Color(data[i].color).brighten(brightness).get()
-            });
-        }
     }
-
-    // Create the chart
-    $('#container1').highcharts({
-        chart: {
-            type: 'pie'
-        },
-        title: {
-            text: 'Erreichte Credits'
-        },
-        subtitle: {
-            text: 'Source: <a href="http://netmarketshare.com/">netmarketshare.com</a>'
-        },
-        yAxis: {
+    
+    $(document).ready(function() {
+    
+        var categories = [
+        <% @blocks.each do |block| %>
+            '<%=block.name%>',
+            <%end%>],
+            name = 'Blocks',
+            data = [
+            <%color_counter = 0%>
+                <%@blocks.each do |block| %>
+                        <% avgrating = 0%>
+                        <%block.events.each do |event|%>
+                            <% avgrating +=event.avg_rating%>
+                        <%end%>
+                        {
+                        y: <%= (avgrating/block.events.count).round(2) %>,
+                        color: colors[<%=color_counter%>],
+                        drilldown: {
+                        name: '<%=block.name%> Veranstaltungen',
+                        categories: [
+                        <%block.events.each do |event|%>
+                            '<%=event.title%>',
+                        <%end%>],
+                        data: [
+                        <%block.events.each do |event|%>
+                        <%=event.avg_rating%>,
+                        <%end%>],
+                        color: colors[0]
+                                    }
+                        },
+                <%color_counter += 1%>        
+                <%end%>];
+    
+      
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'column'
+            },
             title: {
-                text: 'Total percent market share'
-            }
-        },
-        plotOptions: {
-            pie: {
-                shadow: false,
-                center: ['50%', '50%']
-            }
-        },
-        tooltip: {
-            valueSuffix: '%'
-        },
-        series: [{
-            name: 'Events',
-            data: browserData,
-            size: '60%',
-            dataLabels: {
-                formatter: function () {
-                    return this.y > 5 ? this.point.name : null;
-                },
-                color: 'white',
-                distance: -30
-            }
-        }, {
-            name: 'Versions',
-            data: versionsData,
-            size: '80%',
-            innerSize: '60%',
-            dataLabels: {
-                formatter: function () {
-                    // display only if larger than 1
-                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + '%' : null;
+                text: 'Beliebtesten Veranstaltungen'
+            },
+            subtitle: {
+                text: 'Ratings pro Block'
+            },
+            xAxis: {
+                categories: categories
+            },
+            yAxis: {
+                title: {
+                    text: 'Ratings (★)'
                 }
+            },
+            plotOptions: {
+                column: {
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function() {
+                                var drilldown = this.drilldown;
+                                if (drilldown) { // drill down
+                                    setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color);
+                                } else { // restore
+                                    setChart(name, categories, data);
+                                }
+                            }
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        color: colors[0],
+                        style: {
+                            fontWeight: 'bold'
+                        },
+                        formatter: function() {
+                            return this.y +' ★';
+                        }
+                    }
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                    var point = this.point,
+                        s = this.x +':<b> '+ this.y +' ★</b><br/>';
+                    if (point.drilldown) {
+                        s += 'Click to view '+ point.category +"'s Veranstaltungen";
+                    } else {
+                        s += 'Click to return to Blocks';
+                    }
+                    return s;
+                }
+            },
+            series: [{
+                name: name,
+                data: data,
+                color: 'white'
+            }],
+            exporting: {
+                enabled: false
             }
-        }]
-    });
-});
-</script>
-
-
-<script>
-$(function () {
-    var colors = Highcharts.getOptions().colors,
-        categories = [ 
-        <%counter = 0%>
-        <% @blocks.each do |block| %> 
-        '<%= block.name%>', <%end%>],
-        data = [ <% @blocks.each do |block| %>{
-            y: 22,
-            color: colors[<%=counter%>],
-            drilldown: {
-                name: 'Veranstaltung',
-                categories: [ <% block.events.each do |event| %>' <%= event.title%>', <%end%>],
-                data: [<% block.events.each do |event| %>
-                <%=event.credits%>,<%end%>],
-                color: colors[0]
-            } 
-        }, <%counter +=1%><%end%>],
-        browserData = [],
-        versionsData = [],
-        i,
-        j,
-        dataLen = data.length,
-        drillDataLen,
-        brightness;
-
-
-    // Build the data arrays
-    for (i = 0; i < dataLen; i += 1) {
-
-        // add browser data
-        browserData.push({
-            name: categories[i],
-            y: data[i].y,
-            color: data[i].color
         });
-
-        // add version data
-        drillDataLen = data[i].drilldown.data.length;
-        for (j = 0; j < drillDataLen; j += 1) {
-            brightness = 0.2 - (j / drillDataLen) / 5;
-            versionsData.push({
-                name: data[i].drilldown.categories[j],
-                y: data[i].drilldown.data[j],
-                color: Highcharts.Color(data[i].color).brighten(brightness).get()
-            });
-        }
-    }
-
-    // Create the chart
-    $('#container').highcharts({
-        chart: {
-            type: 'pie'
-        },
-        title: {
-            text: 'Erreichte Credits'
-        },
-        subtitle: {
-            text: 'Source: <a href="http://netmarketshare.com/">netmarketshare.com</a>'
-        },
-        yAxis: {
-            title: {
-                text: 'Total percent market share'
-            }
-        },
-        plotOptions: {
-            pie: {
-                shadow: false,
-                center: ['50%', '50%']
-            }
-        },
-        tooltip: {
-            valueSuffix: '%'
-        },
-        series: [{
-            name: 'Events',
-            data: browserData,
-            size: '60%',
-            dataLabels: {
-                formatter: function () {
-                    return this.y > 5 ? this.point.name : null;
-                },
-                color: 'white',
-                distance: -30
-            }
-        }, {
-            name: 'Versions',
-            data: versionsData,
-            size: '80%',
-            innerSize: '60%',
-            dataLabels: {
-                formatter: function () {
-                    // display only if larger than 1
-                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + '%' : null;
-                }
-            }
-        }]
     });
+    
+    $('.update').on('click', function() {
+        var newData = [{
+            name: 'MSIE versions',
+            categories: ['MSIE 6.0', 'MSIE 7.0', 'MSIE 8.0', 'MSIE 9.0'],
+            data: [1, 2, 3, 4],
+            color: colors[0]
+        }];
+        jQuery.each(newData, function(i, serie) {
+            setChart(serie.name, serie.categories, serie.data, serie.color);        
+        });
+    });
+    
 });
 </script>
