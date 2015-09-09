@@ -186,14 +186,23 @@ body {
   clear:both; /* special IE6 */
 }
 
+.plays_logo {
+  background-image: asset-data-url("PlaYS_Logo_1.png");
+  background-size: cover;
+  background-position: right;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  margin-top: -20px;
+}
+
 /*Logo format in upper left corner*/
 .nav a.logo {
-  background-image: asset-data-url("Logo_b.png");
+  background-image: asset-data-url("PlaYS_Logo_1.png");
   background-size: cover;
   width: 80%;
   height: 65px;
   background-position: center;
-  background-size: 60px 60px;
+  background-size: 100px 60px;
   background-repeat: no-repeat;
   margin-top: -20px;
   float:left;
@@ -384,57 +393,85 @@ border-collapse: separate;
 }
 
 
+/*Format of pagination element*/
 .digg_pagination {
   cursor: default;
   /* self-clearing method: */ }
-  .digg_pagination  li.active > a, .digg_pagination li.active > a:focus, .digg_pagination li.active > a:hover, .digg_pagination li.active > span, .digg_pagination li.active > span:focus, .digg_pagination li.active > span:hover{
-    color: #777 !important;
-    background-color: #00CC66 !important;
-    border-color: #00CC66 !important;
-  }
-  .digg_pagination a, .digg_pagination span, .digg_pagination em {
-    padding: 0.2em 0.5em;
-    display: block;
-    float: left;
-    margin-right: 1px; 
-    color: #777 !important;
-  }
-  .digg_pagination .disabled {
-    /*color: #999999;*/
-    /*border: 1px solid #dddddd; }*/}
-  .digg_pagination .current {
-    font-style: normal;
-    font-weight: bold;
-    background: #00CC66;
-    color: white;
-    border: 1px solid #2e6ab1; }
-  .digg_pagination a {
-    text-decoration: none;
+.digg_pagination  li.active > a, .digg_pagination li.active > a:focus, .digg_pagination li.active > a:hover, .digg_pagination li.active > span, .digg_pagination li.active > span:focus, .digg_pagination li.active > span:hover{
+  color: #777 !important;
+  background-color: #00CC66 !important;
+  border-color: #00CC66 !important;
+}
+.digg_pagination a, .digg_pagination span, .digg_pagination em {
+  padding: 0.2em 0.5em;
+  display: block;
+  float: left;
+  margin-right: 1px; 
+  color: #777 !important;
+}
+.digg_pagination .current {
+  font-style: normal;
+  font-weight: bold;
+  background: #00CC66;
+  color: white;
+  border: 1px solid #2e6ab1; }
+.digg_pagination a {
+  text-decoration: none;
+  color: #00CC66;
+  border: 1px solid #9aafe5; }
+  .digg_pagination a:hover, .digg_pagination a:focus {
     color: #00CC66;
-    border: 1px solid #9aafe5; }
-    .digg_pagination a:hover, .digg_pagination a:focus {
-      color: #00CC66;
-      border-color: #00CC66; }
-  .digg_pagination .page_info {
+    border-color: #00CC66; }
+.digg_pagination .page_info {
+  background: #00CC66;
+  color: white;
+  padding: 0.4em 0.6em;
+  width: 22em;
+  margin-bottom: 0.3em;
+  text-align: center; }
+  .digg_pagination .page_info b {
+    color: #000033;
     background: #00CC66;
-    color: white;
-    padding: 0.4em 0.6em;
-    width: 22em;
-    margin-bottom: 0.3em;
-    text-align: center; }
-    .digg_pagination .page_info b {
-      color: #000033;
-      background: #00CC66;
-      padding: 0.1em 0.25em; }
-  .digg_pagination:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden; }
-  * html .digg_pagination {
-    height: 1%; }
-  *:first-child + html .digg_pagination {
-    overflow: hidden; }
+    padding: 0.1em 0.25em; }
+.digg_pagination:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden; }
+* html .digg_pagination {
+  height: 1%; }
+*:first-child + html .digg_pagination {
+  overflow: hidden; }
 
+/*Sortable Columns with icon*/
+.our_sort:after {
+  margin-left: 1%;
+  font-family: 'Glyphicons Halflings';
+  content: "\e150";
+  font-size: 1vw;
+}
 
+.our_sort {
+  background: none !important;
+  text-decoration: none !important;
+  font-size: 1.25vw;
+}
+
+/* align searchbar and Title */
+.aligned_search {
+  display: inline-block;
+  width: 40%;
+  vertical-align: bottom;
+}
+
+/* Made searchfield bigger */
+.text_field_r {
+  line-height: 1.3vw;
+  width: 50%;
+}
+
+/* maybe figure out way to do this with % without making your own row be smaller than the others*/
+.fixed_height_table1 tr {
+  height: 50px;
+}

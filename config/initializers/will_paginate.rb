@@ -24,7 +24,7 @@ module WillPaginate
         end
 
         def gap
-            tag :li, link(super, '#'), :class => 'disabled'
+            tag :li, link(super, '/events'), :class => 'disabled'
         end
 
         end
