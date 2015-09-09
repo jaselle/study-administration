@@ -2,7 +2,7 @@
 <div id="container" style="width:100%; height:400px;"></div>
 <script>
 $(function () { 
-    $('#container').highcharts({
+    $('#container1').highcharts({
         chart: {
             type: 'bar'
         },
@@ -29,7 +29,7 @@ $(function () {
 <div id="container" style="width:100%; height:400px;"></div>
 <script>
 $(function () {
-    $('#container').highcharts({
+    $('#container1').highcharts({
         chart: {
             zoomType: 'xy'
         },
@@ -166,7 +166,7 @@ $(function () {
     }
 
     // Create the chart
-    $('#container').highcharts({
+    $('#container1').highcharts({
         chart: {
             type: 'pie'
         },
@@ -226,7 +226,7 @@ $(function () {
         <% @blocks.each do |block| %> 
         '<%= block.name%>', <%end%>],
         data = [ <% @blocks.each do |block| %>{
-            y: 25.0,
+            y: 22,
             color: colors[<%=counter%>],
             drilldown: {
                 name: 'Veranstaltung',
@@ -273,7 +273,7 @@ $(function () {
             type: 'pie'
         },
         title: {
-            text: 'Beliebheit der Veranstaltungen pro Block'
+            text: 'Erreichte Credits'
         },
         subtitle: {
             text: 'Source: <a href="http://netmarketshare.com/">netmarketshare.com</a>'
