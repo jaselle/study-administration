@@ -15,3 +15,7 @@
 //= require twitter/bootstrap
 //= require bootstrap-sprockets
 //= require_tree .
+$(document).ready(function() {
+  $('.has-tooltip').tooltip();
+});
+// changed this to check if tooltip works

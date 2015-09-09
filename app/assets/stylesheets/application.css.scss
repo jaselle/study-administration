@@ -186,14 +186,23 @@ body {
   clear:both; /* special IE6 */
 }
 
+.plays_logo {
+  background-image: asset-data-url("PlaYS_Logo_1.png");
+  background-size: cover;
+  background-position: right;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  margin-top: -20px;
+}
+
 /*Logo format in upper left corner*/
 .nav a.logo {
-  background-image: asset-data-url("Logo_b.png");
+  background-image: asset-data-url("PlaYS_Logo_1.png");
   background-size: cover;
   width: 80%;
   height: 65px;
   background-position: center;
-  background-size: 60px 60px;
+  background-size: 100px 60px;
   background-repeat: no-repeat;
   margin-top: -20px;
   float:left;
@@ -437,4 +446,37 @@ border-collapse: separate;
   *:first-child + html .digg_pagination {
     overflow: hidden; }
 
+.our_sort:after {
+  margin-left: 1%;
+  font-family: 'Glyphicons Halflings';
+  content: "\e150";
+  font-size: 1vw;
 
+}
+
+.our_sort {
+  background: none !important;
+  text-decoration: none !important;
+  font-size: 1.25vw;
+}
+
+.aligned_search {
+  display: inline-block;
+  width: 40%;
+  vertical-align: bottom;
+}
+
+.YRUnotWorking {
+  display: inline-block;
+  width: 100%;
+}
+
+.text_field_r {
+  line-height: 1.3vw;
+  width: 50%;
+}
+
+/* maybe figure out way to do this with % without making your own row be smaller than the others*/
+.fixed_height_table1 tr {
+  height: 50px;
+}
