@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   ROLES = %w[admin moderator student]
 
   # validates password and email
-  validates :password, length: { minimum: 3 }, :on=>[:create, :update]
-  validates :password, confirmation: true, :on=>[:create, :update]
-  validates :password_confirmation, presence: true, :on=>[:create, :update]
+  validates :password, length: { minimum: 3 }, :on=>[:create]
+  validates :password, confirmation: true, :on=>[:create]
+  validates :password_confirmation, presence: true, :on=>[:create]
   
   validates :email, presence: true, email: true, uniqueness: true
 
@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :events_users
   has_many :events, through: :events_users
+  accepts_nested_attributes_for :events_users
 
   has_one :profile, dependent: :destroy
   belongs_to :course

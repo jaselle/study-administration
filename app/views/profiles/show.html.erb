@@ -1,38 +1,41 @@
-<p>
-  <strong>Name:</strong>
-  <%= @profile.family_name %>
-</p>
+<%if @profile.user != nil%>
+  <p>
+    <strong>Name:</strong>
+    <%= @profile.family_name %>
+  </p>
 
-<p>
-  <strong>Vorname:</strong>
-  <%= @profile.name %>
-</p>
+  <p>
+    <strong>Vorname:</strong>
+    <%= @profile.name %>
+  </p>
 
-<p>
-  <strong>E-Mail:</strong>
-  <%= @profile.user.email %>
-</p>
+  <p>
+    <strong>E-Mail:</strong>      
+      <%= @profile.user.email %>
+  </p>
 
-<p>
-  <strong>Studiengang:</strong>
-    <%if @profile.user.course != nil%>      
-        <td><%= @profile.user.course.name %></td>
-    <%else%>
-        <td>Kein Studiengang vorhanden</td>
-    <% end %>
-</p>
+  <p>
+    <strong>Studiengang:</strong>
+      <%if @profile.user.course != nil%>      
+        <%= @profile.user.course.name %>
+      <%else%>
+        Kein Studiengang vorhanden
+      <% end %>
+  </p>
 
-<p>
-  <strong>Geburtsdatum:</strong>
-  <%= @profile.birth_date %>
-</p>
+  <p>
+    <strong>Geburtsdatum:</strong>
+    <%= @profile.birth_date %>
+  </p>
 
-<p>
-  <strong>Über mich:</strong>
-  <%= @profile.bio %>
-</p>
-
-
+  <p>
+    <strong>Über mich:</strong>
+    <%= @profile.bio %>
+  </p>
+<% else %>
+  Für dieses Profil existiert kein Benutzer. </br>
+  Falls möglich löschen.
+<% end %></br>
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Zurück', :back, class: 'btn btn-default' %>

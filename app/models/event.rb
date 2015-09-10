@@ -1,11 +1,11 @@
 class Event < ActiveRecord::Base
 
-  has_and_belongs_to_many :profiles
 	has_many :ratings
   has_and_belongs_to_many :blocks
 
   has_many  :events_users
   has_many :users, through: :events_users
+  accepts_nested_attributes_for :events_users
 
 	validates_inclusion_of :cycle, :in => ['Jedes Wintersemester', 'Jedes Sommersemester', 'Jedes Semester', 'Jedes zweite Wintersemester', 'Jedes zweite Sommersemester', 'Nicht regelmäßig']
 	validates_inclusion_of :credits, :in => 0..20
