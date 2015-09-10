@@ -1,6 +1,7 @@
 <%= stylesheet_link_tag "custom.css" %>
 
 
+
 <p>
   <strong>Kürzel:</strong>
   <%= @event.identifier %>
@@ -52,14 +53,52 @@
   <% if logged_in? %>
     <% unless @event.users.find_by(id: current_user.id) %>
       <p>
-        <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id%>
+        <!-- <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id%> -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Vormerken</button>
       </p>
     <% else %>
        <p>
-         <strong>Die Veranstaltung <%= @event.title %> ist belegt digger!</strong>
+         <strong>Die Veranstaltung <%= @event.title %> ist belegt!</strong>
       </p>
+
     <%end %>
   <% end %>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Veranstaltung vormerken</h4>
+      </div>
+      <div class="modal-body">
+      <p>
+        <form method="POST" action="/courses" id="23" >
+          <select name="semesters" id = "24" >
+            <option><%= a=get_current_semester_and_year %></option> 
+            <option><%= b=get_next_semester_and_year(a) %></option>
+            <option><%= c=get_next_semester_and_year(b) %></option>
+            <option><%= d=get_next_semester_and_year(c) %></option>
+          </select>
+          
+        </form>
+        </p>
+        <div id="selector">
+          <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id, :semester => "" %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Zurück</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
  <!-- Displays the single stars for Average Rating -->
   <% (1..5).each do |i| %>

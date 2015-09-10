@@ -6,6 +6,7 @@ class Event < ActiveRecord::Base
 
   has_many  :events_users
   has_many :users, through: :events_users
+  accepts_nested_attributes_for :events_users
 
 	validates_inclusion_of :cycle, :in => ['Jedes Wintersemester', 'Jedes Sommersemester', 'Jedes Semester', 'Jedes zweite Wintersemester', 'Jedes zweite Sommersemester', 'Nicht regelmäßig']
 	validates_inclusion_of :credits, :in => 0..20
