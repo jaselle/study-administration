@@ -47,7 +47,7 @@
             <% if !b %>
               <div class="box" style="background-color: #FFFF43; height:auto;width: 400px;padding:5px" >
               <% if Event.find_by_identifier(cSplitted) != nil %>
-                <%= "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. " %> </br>
+                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_identifier(cSplitted)) %> </br>
               <% else %>
                 <%= "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. " %> </br>
               <% end %>
