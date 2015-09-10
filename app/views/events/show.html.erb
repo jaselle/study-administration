@@ -58,7 +58,7 @@
       </p>
     <% else %>
        <p>
-         <strong>Die Veranstaltung <%= @event.title %> ist belegt digger!</strong>
+         <strong>Die Veranstaltung <%= @event.title %> ist belegt!</strong>
       </p>
 
     <%end %>
@@ -77,14 +77,14 @@
       </div>
       <div class="modal-body">
       <p>
-        <form method="POST" action="/courses" >
+        <form method="POST" action="/courses" id="23" >
           <select name="semesters" id = "24" >
             <option><%= a=get_current_semester_and_year %></option> 
             <option><%= b=get_next_semester_and_year(a) %></option>
             <option><%= c=get_next_semester_and_year(b) %></option>
             <option><%= d=get_next_semester_and_year(c) %></option>
           </select>
-          <input type="hidden" id="Selected"  />
+          
         </form>
         </p>
         <div id="selector">

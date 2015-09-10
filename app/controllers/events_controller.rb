@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     unless current_user.nil?
       event.users << current_user
       cu = event.events_users.where(user_id: current_user.id).first
-      cu.semester = "test"
+      cu.semester = params[:semester]
       puts cu.to_s
       cu.save!
 
