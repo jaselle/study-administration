@@ -80,9 +80,9 @@
  <!--Some code for creating the first view of our import buttons.-->
 <%= form_tag :controller => 'csv_reader', :action => 'import', multipart: true do %>
   <%= file_field_tag :file %>
-  <%= submit_tag "Import CSV" %>
-<% end %>
+  <%= submit_tag "Import CSV",  class: 'btn btn-default' %> 
+<% end %> <br/>
 
 <% if can? :create, @event %>
-<%= link_to 'New Event', new_event_path, class: 'btn btn-success' %>
+<%= link_to 'Neue Veranstaltung', new_event_path, class: 'btn btn-success' %>
 <%end%>

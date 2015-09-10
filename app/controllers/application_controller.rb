@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   helper_method :get_current_semester, :get_current_semester_and_year, :get_next_semester_and_year, :get_current_semester_and_year_from_date
   protect_from_forgery with: :exception
 
-
 def js_logged_in
   if(!logged_in?)
     flash[:error] = "Login erforderlich für Rating!"
@@ -45,6 +44,12 @@ end
  	redirect_to profile_path(@user.profile)
  end
 
+# needed? does not work we assume
+def some_method
+  redirect_to :back
+rescue ActionController::RedirectBackError
+  redirect_to :root
+end
 
 end
 
