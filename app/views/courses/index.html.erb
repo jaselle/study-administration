@@ -18,25 +18,26 @@
 
 <br>
 
-
+  <%if logged_in?%>
 
     <!-- Ebene 1: Courses -->
     <!-- get_current_semester calculates and displays the current Semester.-->
-    <label for="Studiengaenge">Meine Studiengänge</label>
+    <label for="Studiengang">Mein persönlicher Studiengang</label>
   
       <ol class = "tree">
-      <% @courses.order("name").each do |course| %>
+      <%course = @courses.find_by_id(current_user.course_id) %>
+      <% unless course.nil? %>
         <li class = "course">
-          <label for="course"><%=    link_to course.name,  course %> <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %> </label>
-          <input type="checkbox"  id="course" />
+          <label for="course"><%=    link_to course.name,  course %></label>
+          <input type="checkbox"  id="course" style="width: 20px; height: 20px;"/>
             <ol id="outer">
               <!-- Ebene 2: Blocks -->
               <% e = course.blocks.order("name").map %>
               <% e.each do |blocks| %>
                 <li class = "course">
-                    <span class="glyphicon glyphicon-folder-close"></span>
+                    <!-- <span class="glyphicon glyphicon-folder-close"></span> -->
                     <label for="blocks"><%= link_to blocks.name, blocks %></label>
-                    <input type="checkbox"  id="blocks"/>
+                    <input style="border: solid green 1px !important;" type="checkbox"  id="blocks"/>
                       <ol id="inner">
                           <% f = blocks.events.order("title").map %>
                           <% f.each do |events| %>
@@ -55,9 +56,9 @@
     </ol>
  
 
+<%end%>
 
 
-
-<%= link_to 'New Course', new_course_path %>
+<%= link_to 'Neuer Studiengang', new_course_path, class: 'btn btn-success' %>
 
 <%= params[:semesters] %>

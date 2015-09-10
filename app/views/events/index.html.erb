@@ -26,18 +26,25 @@
         <td><%= event.condition %></td>
 
         <!-- added glyphicons to the buttons -->
+        <!-- added tooltip to glyphicons-->
         <td><div class="btn-group btn-group-justified btn_group_wide1">
-          <%= link_to event, class: "btn btn-default" do %>
-              <i class="glyphicon glyphicon-eye-open middle_icon"></i>
+            <%= link_to event, class: "btn btn-default" do %>
+               <span class="has-tooltip" data-toggle="tooltip" title="Anzeigen">
+                <i class="glyphicon glyphicon-eye-open middle_icon"></i>
+              </span>
           <% end %>
           <% if can? :edit, @event %>
           <%= link_to edit_event_path(event), class: "btn btn-default" do %>
-              <i class="glyphicon glyphicon-pencil middle_icon"></i>
+              <span class="has-tooltip" data-toggle="tooltip" title="Bearbeiten">
+                <i class="glyphicon glyphicon-pencil middle_icon"></i>
+              </span>
           <% end %>
           <% end %>
           <% if can? :destroy, @event %>
           <%= link_to event, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
-              <i class="glyphicon glyphicon-trash middle_icon"></i>
+              <span class="has-tooltip" data-toggle="tooltip" title="Löschen">
+                <i class="glyphicon glyphicon-trash middle_icon"></i>
+              </span>
           <% end %>
           <% end %>
         </div>
@@ -77,5 +84,5 @@
 <% end %>
 
 <% if can? :create, @event %>
-<%= link_to 'New Event', new_event_path %>
+<%= link_to 'New Event', new_event_path, class: 'btn btn-success' %>
 <%end%>

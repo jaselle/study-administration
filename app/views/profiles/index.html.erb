@@ -1,15 +1,15 @@
+<% if can? :manage, @user %>
 <h1>Profile</h1>
-
 <table class = "table table-striped">
   <thead>
     <tr>
       <th>Name</th>
       <th>Vorname</th>
-      <th>E-Mail</th>
       <th>Studiengang</th>
+      <th>E-Mail</th>
+      <th>Status</th>
       <th>Geburtsdatum</th>
       <th>Über mich</th>
-      <th></th>
     </tr>
   </thead>
 
@@ -18,27 +18,49 @@
       <tr>
         <td><%= profile.family_name %></td>
         <td><%= profile.name %></td>
+
         <%if profile.user != nil%>      
+          <%if profile.user.course != nil%>      
+            <td><%= profile.user.course.name %></td>
+          <% else %>
+            <td>Kein Studiengang vorhanden</td>
+          <% end %>
           <td><%= profile.user.email %></td>
+          <td><%= profile.user.role.capitalize %></td>
         <%else%>
+          <td>-</td>
           <td>Keine User für dieses Profil</td>
-        <% end %>
-        <%if profile.user.course != nil%>      
-          <td><%= profile.user.course.name %></td>
-        <%else%>
-          <td>Kein Studiengang vorhanden</td>
+          <td>-</td>
         <% end %>
         <td><%= profile.birth_date %></td>
         <td><%= profile.bio %></td>
-        <td><div class="btn-group btn-group-justified show_edit_del">
-          <%= link_to 'Anzeigen', profile , class: 'btn btn-default'%>
-          <%= link_to 'Bearbeiten', edit_profile_path(profile) , class: 'btn btn-default'%>
-          <%= link_to 'Löschen', profile, method: :delete, data: { confirm: 'Sicher?' } , class: 'btn btn-default'%> 
-        </div>
+        <td><div class="btn-group btn-group-justified">
+          <%= link_to profile, class: "btn btn-default" do %>
+            <span class="has-tooltip" data-toggle="tooltip" title="Anzeigen">  
+              <i class="glyphicon glyphicon-eye-open middle_icon"></i>
+            </span>
+          <% end %>
+          <% if can? :edit, @profile %>
+          <%= link_to edit_profile_path(profile), class: "btn btn-default" do %>
+            <span class="has-tooltip" data-toggle="tooltip" title="Bearbeiten">            
+              <i class="glyphicon glyphicon-pencil middle_icon"></i>
+            </span>
+          <% end %>
+          <% end %>
+          <% if can? :destroy, @profile %>
+          <%= link_to profile, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
+            <span class="has-tooltip" data-toggle="tooltip" title="Löschen">
+              <i class="glyphicon glyphicon-trash middle_icon"></i>
+            </span>
+          <% end %>
+          <% end %>
+          </div>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br>
-
-<%= link_to 'New Profile', new_profile_path %> 
+<% end %>
+<% if cannot? :manage, @profile %>
+    <%= not_authorized("Keine Rechte um Profil-Übersicht aufzurufen") %>
+<% end %>

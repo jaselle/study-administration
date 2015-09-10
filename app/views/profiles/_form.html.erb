@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "doneEventsOverview.css" %>
+
 <%= form_for(@profile) do |f| %>
   <% if @profile.errors.any? %>
     <div id="error_explanation">
@@ -11,27 +13,58 @@
     </div>
   <% end %>
 
-
   <div class="field">
     <%= f.label :family_name,"Name" %><br>
     <%= f.text_field :family_name %>
   </div>
+
   <div class="field">
     <%= f.label :name,"Vorname" %><br>
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :birth_date,"Geburtsdatum" %><br>
     <%= f.date_select :birth_date, :start_year => getBirthDateStart(), :end_year => getBirthDateEnd() %>
   </div>
+
+  <%= f.fields_for :user do |ff| %>
+    <div class="field">
+      <%= ff.label :course, 'Studiengang' %>
+      <%= ff.collection_select :course_id, Course.order(:name), :id, :name, class: "same_width1_input" %>
+    </div>
+    <% if current_user != nil && if current_user.role == "admin" %>
+      <div class="field">
+        <%= ff.label :role%> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
+      </div>
+    <% end %> 
+  <% end %>
+
   <div class="field">
     <%= f.label :bio, "Über mich:" %><br>
     <%= f.text_area :bio %>
   </div>
 
+  <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4>
+    <ol class = "tree1">
+      <li class = "profile">
+        <!-- <div class="my_div"> -->
+        <label for="Module">Module</label>
+        <input type="checkbox" id="tolle_checkbox"  />
+        <!-- </div>-->
+        <ol>
+          <li class="profile">
+          <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
+            <%= b.label { b.check_box + b.text } %><br>
+          <% end %>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
-
-  <% end %>  
+ <% end %>
  <% end %>

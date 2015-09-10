@@ -25,6 +25,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+
   end
 
   # POST /users
@@ -50,6 +51,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'Benutzer wurde erfolgreich editiert.' }
@@ -79,7 +81,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :crypted_password,:password, :password_confirmation, :role, :course_id, profiles: [:name, :family_name])
+      params.require(:user).permit(:email, :crypted_password,:password, :password_confirmation, :role, :course_ids => [], profiles: [:name, :family_name])
     end
 
     def sort_column
