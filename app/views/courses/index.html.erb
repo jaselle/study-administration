@@ -1,7 +1,9 @@
 <%= stylesheet_link_tag "courseOverview.css" %>
 
 <p>
-<label> Aktuelles Semester: <%= get_current_semester_and_year_from_date(Time.now) %> </label>
+
+<h3> Aktuelles Semester: <%= get_current_semester_and_year_from_date(Time.now) %> </h3>
+
 </p>
 
 <form method="POST" action="/courses">

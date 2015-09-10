@@ -51,5 +51,7 @@ rescue ActionController::RedirectBackError
   redirect_to :root
 end
 
+add_flash_types :my_flash
+
 end
 
