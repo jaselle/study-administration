@@ -4,7 +4,7 @@ class BlocksController < ApplicationController
   # GET /blocks
   # GET /blocks.json
   def index
-    if current_user.role == 'admin'
+    if !current_user || current_user.role == 'admin'
       @blocks = Block.all
     else
       @blocks = Block.all.where("id IN (SELECT blocks.id FROM blocks, blocks_courses, courses WHERE blocks.id = blocks_courses.block_id AND blocks_courses.course_id = courses.id AND courses.id = " + current_user.course_id.to_s + ")")
