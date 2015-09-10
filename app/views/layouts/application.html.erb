@@ -21,33 +21,42 @@
         <li class="topmenu"><a class="active logo" href="/">Home</a></li>
 
         <!-- Navigation bar items -->
-        <li class="topmenu"><a href="/events"><center>Veranstaltungen</center></a>
-          <ul>
-            <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
-            <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
-          </ul>
-        </li>
-      
-        <li class="topmenu"><a href="/users"><center>Users</center></a>
+        <li class="topmenu"><a href="/courses"><center>Studiengänge</center></a>
           <ul>
             <li class="submenu"><a href="/profiles">Profiles</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
       
-        <li class="topmenu"><a href="/courses"><center>Courses</center></a>
+        <li class="topmenu"><a href="/blocks"><center>Blöcke</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
-      
-        <li class="topmenu"><a href="/blocks"><center>Blocks</center></a>
+
+        <li class="topmenu"><a href="/events"><center>Veranstaltungen</center></a>
           <ul>
             <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
+
+        <% if current_user && current_user.role == "admin"%>
+          <li class="topmenu"><a href="/users"><center>Benutzer</center></a>
+            <ul>
+              <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
+              <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
+            </ul>
+          </li>
+
+          <li class="topmenu"><a href="/profiles"><center>Profile</center></a>
+            <ul>
+              <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
+              <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
+            </ul>
+          </li>
+        <% end %>
 
       </ul>
     </div>

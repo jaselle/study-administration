@@ -11,9 +11,7 @@
  *= require_self
  *= require_tree .
  *= require twitter/bootstrap
- *= require bootstrap_and_overrides
- @import "bootstrap-sprockets"
- @import "bootstrap"
+ */
 
 /*Tag for everything on the page, change font style here for whole page*/
 body {

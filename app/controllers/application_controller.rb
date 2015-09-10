@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  helper_method :get_current_semester, :get_current_semester_and_year
+  helper_method :get_current_semester, :get_current_semester_and_year, :get_next_semester_and_year
   protect_from_forgery with: :exception
 
 def js_logged_in
@@ -17,7 +17,7 @@ end
  	redirect_to root_path, alert: text
  end
 # gets the current semester calculated with the current date 
-def get_current_semester_and_year
+def get_current_semester_and_year()
 	#check intervals for winter- or summer-semester
 	if (Time.now.month < 5 or Time.now.month  > 9)
 		semester = "Wintersemester"
@@ -39,10 +39,28 @@ def get_current_semester
 	return get_current_semester_and_year.split(" ")[0]
 end 
 
+def get_next_semester_and_year(text)
+	
+	if (text.split(" ")[0] == "Wintersemester")
+		semester = "Sommersemester"
+		year = (text.split(" ")[1].split("/")[0].to_i + 1).to_s
+	else
+		semester = "Wintersemester"
+		year1 = text.split(" ")[1].split("/")[0].to_i
+		year2 = year1 + 1
+		year = (year1.to_s)+"/"+(year2.to_s)
+	end
+	
+
+	return semester +" "+ year
+
+end
+
  def redirect_to_profile
  	redirect_to profile_path(@user.profile)
  end
 
+# needed? does not work we assume
 def some_method
   redirect_to :back
 rescue ActionController::RedirectBackError

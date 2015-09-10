@@ -3,13 +3,15 @@
 
 Rails.application.routes.draw do
 
+  get 'charts/index'
+
   resources :profiles
 
   get 'password_resets/index'
   post 'events/mark_event'
 
   resources :courses
-
+  resources :charts
   resources :events
   resources :blocks
   resources :user_sessions
