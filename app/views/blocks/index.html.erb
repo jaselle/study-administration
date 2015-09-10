@@ -30,8 +30,12 @@
         <% sql = "SELECT sum(events.credits) FROM users, blocks, events, events_users, blocks_events WHERE " + current_user.id.to_s  + " = users.id AND users.id = events_users.user_id AND events_users.event_id = events.id AND events.id = blocks_events.event_id AND blocks_events.block_id = blocks.id AND blocks.id = " + block.id.to_s + ";" %>
         <% records_result = ActiveRecord::Base.connection.execute(sql) %>
         <% result = records_result.getvalue(0, 0) %>
+        <% if result.nil? %>
+          <% result = 0 %>
+        <% end %>
         <% progressbarId += 1 %>
         <td>
+        <%= result.to_s + " / " + block.credits_min.to_s %>
         <div id="<%= progressbarId %>" class="progressbar" value="<%= result %>" max="<%= block.credits_min %>"></div>
         <div class="btn-group btn-group-justified">
           <%= link_to block, class: "btn btn-default" do %>
