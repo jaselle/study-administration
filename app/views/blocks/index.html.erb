@@ -11,14 +11,27 @@
     </tr>
   </thead>
 
-<!-- changed links to buttons -->
+  <!-- import progress bar from web, not trivial to handle alternatively -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/trontastic/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+  <div class="blockCount" value="<%= @blocks.count %>">
+  <% progressbarId = 0 %>
+
+  <!-- changed links to buttons -->
   <tbody>
     <% @blocks.order("name").each do |block| %>
       <tr>
         <td><%= block.name %></td>
         <td><%= block.credits_min %></td>
         <td><%= block.events.map { |a| a.title }.join("<br>").html_safe %></td>
+        <% sql = "SELECT count(*) FROM users, blocks, events, events_users, blocks_events WHERE " + current_user.id.to_s  + " = users.id AND users.id = events_users.user_id AND events_users.event_id = events.id AND events.id = blocks_events.event_id AND blocks_events.block_id = blocks.id AND blocks.id = " + block.id.to_s + ";" %>
+        <% records_result = ActiveRecord::Base.connection.execute(sql) %>
+        <% result = records_result.getvalue(0, 0) %>
+        <% progressbarId += 1 %>
         <td>
+        <div id="<%= progressbarId %>" class="progressbar" value="<%= result %>" max="<%= block.events.count %>"></div>
         <div class="btn-group btn-group-justified">
           <%= link_to block, class: "btn btn-default" do %>
               <i class="glyphicon glyphicon-eye-open middle_icon"></i>
@@ -42,4 +55,4 @@
 
 <br>
 
-<%= link_to 'New Block', new_block_path, class: "btn btn-success" %>
+<%= link_to 'Neuer Block', new_block_path, class: "btn btn-success" %>
