@@ -53,6 +53,7 @@
   <% if logged_in? %>
     <% unless @event.users.find_by(id: current_user.id) %>
       <p>
+        <!-- <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id%> -->
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Vormerken</button>
       </p>
     <% else %>
@@ -62,7 +63,6 @@
 
     <%end %>
   <% end %>
-
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -76,14 +76,46 @@
       </div>
       <div class="modal-body">
       <p>
+      <label><%=  @event.cycle  %></label>
+      <!-- Saves the cycle of the event into variable a -->
+
+      <% curr_cycle = @event.cycle.split(" ")[1] %>
+      <% curr_cycle_year = @event.cycle.split(" ")[2] %>
+      <% if curr_cycle == "Semester" %>
+        <% a = 1 %>
+      <% elsif curr_cycle_year %>
+        <% a = 4 %>
+      <% elsif  not curr_cycle == "regelmäßig" %>
+        <% a = 2 %>
+      <% else %>
+        <% a= 100 %>
+      <% end %>
+      <!-- if the current semester does not match die semester cycle of the event, add half a year to the date -->
+      <% b = 0 %>
+      <% unless @event.cycle.include? get_current_semester_and_year_from_date(Time.now).split(" ")[0] or (@event.cycle == "Jedes Semester") %>
+        <% b = b+6 %>
+      <% end %>
+      <!--if Event only runs in straight years (odd years) add a whole year to the date b,
+      but only if the year, the semester starts, is an odd year (straight year) -->
+      <% unless (Time.now.month<4)%>
+        <% yea = Time.now.year.to_i%>
+      <%else%>
+        <% yea = Time.now.year.to_i-1%>
+      <%end%>
+      <% if curr_cycle_year == "(ungerade)" && ((yea % 2) == 0) %>
+        <% b = b+12 %>
+      <% end %>
+      <% if curr_cycle_year == "(gerade)" && ((yea % 2) == 1) %>
+        <% b = b+12 %>
+      <% end %>
+
         <form method="POST" action="/courses" id="23" >
           <select name="semesters" id = "24" >
-            <option><%= a=get_current_semester_and_year %></option> 
-            <option><%= b=get_next_semester_and_year(a) %></option>
-            <option><%= c=get_next_semester_and_year(b) %></option>
-            <option><%= d=get_next_semester_and_year(c) %></option>
-          </select>
-          
+            <option><%= get_current_semester_and_year_from_date(Time.now+b.month.to_i) %></option>
+            <option><%= get_current_semester_and_year_from_date(Time.now+(6*a+b).month.to_i) %></option>
+            <option><%= get_current_semester_and_year_from_date(Time.now+(6*2*a+b).month.to_i) %></option>
+            <option><%= get_current_semester_and_year_from_date(Time.now+(6*3*a+b).month.to_i) %></option> 
+          </select>    
         </form>
         </p>
         <div id="selector">
@@ -98,36 +130,6 @@
   </div>
 </div>
 
- <!-- Displays the single stars for Average Rating -->
-  <% (1..5).each do |i| %>
-    <%if i <= @event.avg_rating %>
-      <li class="rating_avg" ></li>
-    <% else %>
-      <li class="rating_rest" ></li>
-    <% end %>
-  <% end %>
-</p>
-
-<br>
-
- <!-- if the user is logged in, he can see the stars to click.  -->
-<p>
-  <% form_id = "event_#{@event.id}_rating" %>
-  <% if logged_in? %> <!-- To avoid throwing an exception if no user is signed in -->
-    <% user_id = current_user.id %>
-    <%= form_for @event.ratings.find_or_create_by(user_id: user_id), :html => {:id => form_id, :class => "star_rating_form"} do |f| %>
-        <%= f.hidden_field :event_id, :value => @event.id %>
-        <% if logged_in? %>
-            <%= f.hidden_field :user_id, :value => current_user.id %>
-        <% end %>        
-        <%= f.hidden_field :stars, :id => form_id + "_stars" %>
-    <% end %>
-
-    <% (1..5).each do |i| %>
-      <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>"></li>
-    <% end %>  
-  <% end %>
-</p>
 <br>
 <br>
 
@@ -135,4 +137,3 @@
   <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
 <%end%>
 <%= link_to 'Zurück', :back, class: 'btn btn-default' %>
-
