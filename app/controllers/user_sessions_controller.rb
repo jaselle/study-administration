@@ -9,7 +9,7 @@ class UserSessionsController < ApplicationController
       # if logged in, directed to home...alternatives?
       redirect_back_or_to(root_path, notice: 'Login erfolgreich.')
     else
-      flash.now[:alert] = 'Login fehlgeschlagen.'
+      flash.now[:my_flash] = 'Login fehlgeschlagen.'
       render action: 'new'
     end
   end

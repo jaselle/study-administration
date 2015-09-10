@@ -208,11 +208,6 @@ body {
   display: block;
 }
 
-/*Color for errror related elements*/
-.error {
-  color: red;
-}
-
 /* layout of tables, text vertical-aligned to middle */
 .table > tbody > tr > td {
      vertical-align: middle !important;
@@ -475,7 +470,7 @@ border-collapse: separate;
 }
 
 
-/*todo flashmessage!*/
+/*flashmessage if incorrect password or email adress*/
 .flash-message {
   &.error {
     border: solid 4px #900;
@@ -485,13 +480,29 @@ border-collapse: separate;
     border: solid 4px #26722D;
     background-color: #A4E7A0;
   }
+  &.my_flash{
+    color:red;
+  }
   color: black;
   font-weight: bold;
   width: 50%;
-  margin: 20px;
   height: 10%;
+  margin-bottom: 2%;
   p {
     font-size: 110%;
     margin: 15px 0;
   }
+}
+
+/*beautiful cat as a message*/
+.cat {
+    background-image: asset-data-url("vertippt_b.png");
+    background-size: cover;
+    background-position: right;
+    background-size: 274px 252px;
+    background-repeat: no-repeat;
+    position: fixed;
+    width: 274px;
+    height: 252px;
+    margin-left: 40%;
 }
