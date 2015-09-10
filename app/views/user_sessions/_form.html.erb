@@ -15,13 +15,16 @@
       <%= check_box_tag :remember, params[:remember], true %>
       <%= label_tag :remember %>
     </div> <br/>
-  <div class="actions" >
+  <div class="actions">
   <div class="btn-group wider_btn_group">
     <%= submit_tag "Login", class: "btn btn-success my_button1" %>
-    <%= link_to 'Passwort vergessen?', '/password_resets/index' , class: 'btn btn-warning my_button1'%>
+    <%= link_to '/password_resets/index' , class: 'btn btn-warning my_button1' do%><span class="has-tooltip" data-toggle="tooltip" data-container="body" title="Passwort vergessen?"> <i class="glyphicon glyphicon-question-sign"></i></span><% end %>
   </div>
-   
-   
   </div>
   </div>
  <% end %>
+
+ 
+
+
+
