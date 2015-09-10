@@ -62,35 +62,11 @@
   <% end %>
 
  <!-- Displays the single stars for Average Rating -->
-  <% (1..5).each do |i| %>
-    <%if i <= @event.avg_rating %>
-      <li class="rating_avg" ></li>
-    <% else %>
-      <li class="rating_rest" ></li>
-    <% end %>
-  <% end %>
-</p>
+
 
 <br>
 
  <!-- if the user is logged in, he can see the stars to click.  -->
-<p>
-  <% form_id = "event_#{@event.id}_rating" %>
-  <% if logged_in? %> <!-- To avoid throwing an exception if no user is signed in -->
-    <% user_id = current_user.id %>
-    <%= form_for @event.ratings.find_or_create_by(user_id: user_id), :html => {:id => form_id, :class => "star_rating_form"} do |f| %>
-        <%= f.hidden_field :event_id, :value => @event.id %>
-        <% if logged_in? %>
-            <%= f.hidden_field :user_id, :value => current_user.id %>
-        <% end %>        
-        <%= f.hidden_field :stars, :id => form_id + "_stars" %>
-    <% end %>
-
-    <% (1..5).each do |i| %>
-      <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>"></li>
-    <% end %>  
-  <% end %>
-</p>
 
 <br>
 <br>
