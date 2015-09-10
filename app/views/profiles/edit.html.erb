@@ -43,7 +43,26 @@
   </div>
 
   <% end %>  
- <% end %>
+
+ <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4> 
+ <ol class = "tree1">
+    <li class = "profile">
+    <!-- <div class="my_div"> -->
+      <label for="Module">Module</label>
+      <input type="checkbox" id="tolle_checkbox"  />
+     <!-- </div>-->
+      <ol>
+        <li class="profile">
+
+          <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
+            <%= b.label { b.check_box + b.text } %><br>
+          <% end %>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+   <% end %>
 
 <%= link_to 'Anzeigen', @profile, class: 'btn btn-default' %> 
 
