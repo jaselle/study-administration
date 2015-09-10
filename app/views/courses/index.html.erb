@@ -1,7 +1,9 @@
 <%= stylesheet_link_tag "courseOverview.css" %>
 
 <p>
-<label> Aktuelles Semester: <%= get_current_semester_and_year %> </label>
+
+<h3> Aktuelles Semester: <%= get_current_semester_and_year_from_date(Time.now) %> </h3>
+
 </p>
 
 <form method="POST" action="/courses">
@@ -39,6 +41,9 @@
                     <label for="blocks"><%= link_to blocks.name, blocks %></label>
                     <input style="border: solid green 1px !important;" type="checkbox"  id="blocks"/>
                       <ol id="inner">
+
+                          
+
                           <% f = blocks.events.order("title").map %>
                           <% f.each do |events| %>
                               <li class="file <%= events.cycle %>">

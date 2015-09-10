@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   has_many :users, through: :events_users
   accepts_nested_attributes_for :events_users
 
-	validates_inclusion_of :cycle, :in => ['Jedes Wintersemester', 'Jedes Sommersemester', 'Jedes Semester', 'Jedes zweite Wintersemester', 'Jedes zweite Sommersemester', 'Nicht regelmäßig']
+	validates_inclusion_of :cycle, :in => ['Jedes Wintersemester','Jedes Sommersemester','Jedes Semester', 'Jedes Wintersemester (ungerade)', 'Jedes Wintersemester (gerade)', 'Jedes Sommersemester (ungerade)', 'Jedes Sommersemester (gerade)', 'Nicht regelmäßig' ]
 	validates_inclusion_of :credits, :in => 0..20
 	validates_inclusion_of :sws, :in => 0..20
 	validates_presence_of :prof, :title, :identifier
@@ -15,26 +15,7 @@ class Event < ActiveRecord::Base
 
 
 
-#method to calculate the average-rating. 
-def avg_rating
-  average_rating = 0.0
-  count = 0
-  ratings.each do |rating| 
-    if rating.stars != nil 
-      if rating.stars != 0
-      average_rating += rating.stars
-      count += 1
-      end
-    end
-  end
-                
-  if count != 0
-    puts "check"
-    (average_rating / count)
-  else
-    count
-  end
-end
+
 
 
 # The method import imports the CSV-Data, parses the headers
