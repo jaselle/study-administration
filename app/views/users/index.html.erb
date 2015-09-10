@@ -1,11 +1,11 @@
 <!--list of all users viewable for admin-->
 <% if can? :manage, @user %>
-  <h1>Nutzer</h1>
 
 <%= form_tag users_path, :method => 'get', :id => "users_search", remote: true do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Suche", :name => nil %>
+    <h1 class="aligned_search"> Nutzer</h1>
+    <p class="aligned_search">
+      <%= text_field_tag :search, params[:search], class: "text_field_r", :placeholder => "Suche Nutzer..." %>
+      <%= submit_tag "Suche", :name => nil, class: 'btn btn-primary' %>
     </p>
     <div id="users"><%= render 'users' %></div>
 <% end %>
@@ -15,7 +15,6 @@
 <!-- is this important ? or maybe put to the top of the page? -->
 <%= link_to 'Neuer Nutzer', new_user_path, class: 'btn btn-success'%>
 <% end %>
-
 <!-- not authorized redirected root path-->
 <% if cannot? :manage, @user %>
     <%= not_authorized("Keine Rechte um User Übersicht aufzurufen") %>

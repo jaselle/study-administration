@@ -38,6 +38,10 @@ gem 'ajaxful_rating' , '>= 3.0.0.beta7'
 
 # Use simple password authentication
 gem 'sorcery'
+
+#Use Highcharts-Rails
+gem "highcharts-rails", "~> 3.0.0"
+
 # Use valid email
 gem 'valid_email'
 
