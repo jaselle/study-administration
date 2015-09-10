@@ -98,9 +98,24 @@
   </div>
 </div>
 
-<br>
+ <strong>Rating</strong>
+<!-- Displays the single stars for Average Rating -->
+
+  <% (1..5).each do |i| %>
+    <%if i <= @event.avg_rating %>
+      <li class="rating_avg" ></li>
+    <% else %>
+      <li class="rating_rest" ></li>
+    <% end %>
+  <% end %>
+</p>
+
+
 <br>
 
+
+<%= link_to 'Bewertungen ansehen', rating_path(@event.ratings.find_by_user_id(current_user.id)), class: 'btn btn-default' %>
+<br>
 <% if can? :edit, Event %>
   <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
 <%end%>
