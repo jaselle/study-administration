@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-
   # GET /events
   # GET /events.json
   def index
@@ -11,8 +10,23 @@ class EventsController < ApplicationController
 #if the user is logged in he can mark a event through the show-view.
   def mark_event
     event = Event.find(params[:id])
+    #semester = params[:semester]
     unless current_user.nil?
       event.users << current_user
+      cu = event.events_users.where(user_id: current_user.id).first
+      cu.semester = "test"
+      puts cu.to_s
+      cu.save!
+
+     #gu = event.events_users.find_by_user_id(current_user)
+     #puts gu.id
+    # event.update_attributes(events_users_attributes: [{id: current_user, semester: params[:semester]}])
+
+     #puts params[:semester] 
+     #puts gu.nil?
+
+      
+
       redirect_to event_path(event), notice: "Veranstaltung vorgemerkt"
     else
       redirect_to event_path(event), alert: "Nicht eingeloggt"
@@ -82,7 +96,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:id, :identifier, :title, :description, :prof, :credits, :sws, :cycle, :next, :exam_type, :condition)
+      params.require(:event).permit(:id, :identifier, :title, :description, :prof, :credits, :sws, :cycle, :next, :exam_type, :condition, :events_users_attributes => [:semester])
     end
 
    

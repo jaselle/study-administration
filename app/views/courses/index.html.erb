@@ -26,6 +26,7 @@
   
       <ol class = "tree">
       <%course = @courses.find_by_id(current_user.course_id) %>
+      <% unless course.nil? %>
         <li class = "course">
           <label for="course"><%=    link_to course.name,  course %> <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %> </label>
           <input type="checkbox"  id="course" />
@@ -49,6 +50,7 @@
               <% end %>
             </ol>
         </li>
+      <% end %>
     </ol>
  
 

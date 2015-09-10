@@ -22,3 +22,10 @@ $ ->
 			$('.Nicht').css("display", "block")
 		return
 		
+	$("#24").change -> 
+		
+		tmp = $('#selector').find('.button_to').attr('action')
+		$('#selector').find('.button_to').attr('action' , tmp + $("#24").val())
+		alert $('#selector').find('.button_to').attr('action')
+	return
+
