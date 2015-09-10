@@ -23,13 +23,13 @@
   </div>
   <%= f.label :event_ids, 'Veranstaltungen' %><br>
   <div class="box" style="background-color: #f9f9f9; height:500px; border: 1px solid #999999;border-radius:5px;padding:2px" >
-  <div class="overflow_to_scroll" style="height:495px" >
-        <td colspan="8">
-          <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
-      <%= b.label { b.check_box + b.text } %><br>
+    <div class="overflow_to_scroll" style="height:495px" >
+      <td colspan="8">
+      <%= f.collection_check_boxes :event_ids, Event.all, :id, :title, {selected: @block.event_ids}, {multiple: true} do |b| %>
+        <%= b.label { b.check_box + b.text } %><br>
       <% end %>
-        </td>
-  </div>
+      </td>
+    </div>
   </div>
 
   <div class="actions">

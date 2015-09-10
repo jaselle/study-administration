@@ -1,5 +1,5 @@
+<% if can? :manage, @user %>
 <h1>Profile</h1>
-
 <table class = "table table-striped">
   <thead>
     <tr>
@@ -60,7 +60,7 @@
   </tbody>
 </table>
 <br>
-
+<% end %>
 <% if cannot? :manage, @profile %>
     <%= not_authorized("Keine Rechte um Profil-Übersicht aufzurufen") %>
 <% end %>
