@@ -11,9 +11,7 @@
  *= require_self
  *= require_tree .
  *= require twitter/bootstrap
- *= require bootstrap_and_overrides
- @import "bootstrap-sprockets"
- @import "bootstrap"
+ */
 
 /*Tag for everything on the page, change font style here for whole page*/
 body {
@@ -26,8 +24,8 @@ body {
 /*Spawned content should be below navigation bars, change margin here*/
 .content {
   margin-top: 80px;
-  margin-left: 12.5%;
-  width: 70%;
+  margin-left: 7.5%;
+  width: 85%;
   height: 100%;
   background: rgba(230, 230, 230, 0.75);
   border-radius: 15px;
@@ -56,7 +54,7 @@ body {
     top: 0;
     padding: 0;
     margin-top: 0%;
-    margin-left: 80%;
+    margin-left: 72.25%;
     width: 100%;
 }
 
@@ -69,23 +67,23 @@ body {
  
 /*Outward appearance of login items concerning everything aside from color*/
 .login li.no_user{
-  font-size: 1vw;
+  font-size: 1.3vw;
   line-height: 40px;
   height: 40px;
   display: inline-block;
-  margin-right: -4px;
-  width: 10%;
+  /*margin-right: -4px;*/
+  width: 15%;
 }
 
 /*Outward appearance of login items concerning everything aside from color*/
 .login li.active_user{
-  font-size: 1vw;
+  font-size: 1.3vw;
   line-height: 40px;
   height: 40px;
   display: inline-block;
   margin-left: 10%;
-  margin-right: -4px;
-  width: 10%;
+/*  margin-right: -4px;*/
+  width: 15%;
 }
 
 
@@ -123,12 +121,12 @@ body {
 
 /*Outward appearance of navigation items concerning everything aside from color*/
 .nav li.topmenu{
-  font-size: 1vw;
+  font-size: 1.3vw;
   line-height: 40px;
   height: 40px;
   display: inline-block;
   margin-right: -4px;
-  width: 12%;
+  width: 15%;
   /*float:left;*/
 }
 
@@ -180,7 +178,7 @@ body {
 
 /*Layout of submenu texts*/
 .submenu a{
-  font-size:0.8vw;
+  font-size:1.1vw;
   width:100;
   position:relative;
   clear:both; /* special IE6 */
@@ -190,7 +188,7 @@ body {
   background-image: asset-data-url("PlaYS_Logo_1.png");
   background-size: cover;
   background-position: right;
-  background-size: 50% 50%;
+  background-size: 50% 60%;
   background-repeat: no-repeat;
   margin-top: -20px;
 }
@@ -218,12 +216,12 @@ body {
 /* layout of tables, text vertical-aligned to middle */
 .table > tbody > tr > td {
      vertical-align: middle !important;
-     font-size: 0.8vw;
+     font-size: 1.1vw;
 }
 
 /* make column names scalable*/
 .table > thead > tr > th {
-  font-size: 1vw;
+  font-size: 1.3vw;
 }
 
 /* configure button width */
@@ -235,7 +233,7 @@ body {
 
 /* configure width of a wider button group*/
 .wider_btn_group {
-  width: 100% !important;
+  width: 50% !important;
 }
 
 /* make event-description cover whole div */
@@ -449,13 +447,13 @@ border-collapse: separate;
   margin-left: 1%;
   font-family: 'Glyphicons Halflings';
   content: "\e150";
-  font-size: 1vw;
+  font-size: 1.3vw;
 }
 
 .our_sort {
   background: none !important;
   text-decoration: none !important;
-  font-size: 1.25vw;
+  font-size: 1.67vw;
 }
 
 /* align searchbar and Title */
@@ -467,11 +465,33 @@ border-collapse: separate;
 
 /* Made searchfield bigger */
 .text_field_r {
-  line-height: 1.3vw;
+  line-height: 1.73vw;
   width: 50%;
 }
 
 /* maybe figure out way to do this with % without making your own row be smaller than the others*/
 .fixed_height_table1 tr {
   height: 50px;
+}
+
+
+/*todo flashmessage!*/
+.flash-message {
+  &.error {
+    border: solid 4px #900;
+          background-color: #FF6565;
+        }
+  &.notice {
+    border: solid 4px #26722D;
+          background-color: #A4E7A0;
+        }
+  color: black;
+  font-weight: bold;
+  width: 50%;
+  margin: 20px;
+  height: 10%;
+        p {
+                font-size: 110%;
+                margin: 15px 0;
+        }
 }

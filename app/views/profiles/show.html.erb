@@ -63,5 +63,7 @@
   Falls möglich löschen.
 <% end %></br>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Zurück', :back, class: 'btn btn-default' %>
+<!-- check when we know what happens with profile pages. where can user/admin go -->
+<%= link_to 'Bearbeiten', edit_profile_path(@profile), class: 'btn btn-default' %> 
+<!-- where should back button lead? -->
+<%= link_to 'Zurück', profiles_path, class: 'btn btn-default' %> 

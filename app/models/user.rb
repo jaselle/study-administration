@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :events_users
   has_many :events, through: :events_users
+  accepts_nested_attributes_for :events_users
 
   has_one :profile, dependent: :destroy
   belongs_to :course
