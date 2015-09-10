@@ -42,5 +42,12 @@ end
  def redirect_to_profile
  	redirect_to profile_path(@user.profile)
  end
+
+def some_method
+  redirect_to :back
+rescue ActionController::RedirectBackError
+  redirect_to :root
+end
+
 end
 
