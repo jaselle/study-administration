@@ -14,7 +14,12 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+//= require highcharts
+//= require highcharts/highcharts-more
+
 $(document).ready(function() {
   $('.has-tooltip').tooltip();
 });
 // changed this to check if tooltip works
+
+

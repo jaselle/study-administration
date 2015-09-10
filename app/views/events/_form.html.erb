@@ -14,7 +14,7 @@
   </div>
 
   <div class="field text-event">
-    <%= f.label :Beschreibung %><br>
+    <%= f.label :description, 'Beschreibung' %><br>
     <%= f.text_area :description, class: "text-event same_width2_in2" %>
   </div>
 
@@ -39,7 +39,7 @@
   </td>
   <td>
   <div class="field">
-    <%= f.label :cycle %><br>
+    <%= f.label :cycle, 'Zyklus' %><br>
     <%= f.select :cycle, [ 'Jedes Wintersemester','Jedes Sommersemester','Jedes Semester', 'Jedes zweite Wintersemester', 'Jedes zweite Sommersemester', 'Nicht regelmäßig' ], :prompt => 'Bitte auswählen',class: "same_width2_in1" %>
   </div>
   </td>
