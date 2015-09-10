@@ -32,8 +32,8 @@
     <strong>Über mich:</strong>
     <%= @profile.bio %>
   </p>
-
   <p>
+  <div class="box" style="background-color: #FFFF43; height:auto;width: 400px; border-radius: 10px" >
       <% @profile.user.events.each do |eventCondition| %>
         <% if eventCondition.condition != nil%>
           <% @cSplit = eventCondition.condition.split('; ') %>
@@ -45,9 +45,9 @@
               <% end %>
             <% end %>
             <% if !b %>
-              <div class="box" style="background-color: #FFFF43; height:auto;width: 400px;padding:5px" >
+              <div class="box" style="padding:5px" >
               <% if Event.find_by_identifier(cSplitted) != nil %>
-                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_identifier(cSplitted)) %> </br>
+                <%= link_to "Für " + eventCondition.title + " wurde die Veranstaltung " + Event.find_by_identifier(cSplitted).title + " noch nicht belegt. ", event_path(Event.find_by_identifier(cSplitted)) %> </br>
               <% else %>
                 <%= "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. " %> </br>
               <% end %>
@@ -56,6 +56,7 @@
           <% end %>
         <% end %>
       <% end %>
+      </div>
  </p>
 
 <% else %>

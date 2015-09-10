@@ -3,13 +3,12 @@
 <%= form_for(@profile) do |f| %>
   <% if @profile.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-
-      <ul>
-      <% @profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+    <ul>
+    <% @profile.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
     </div>
   <% end %>
 
@@ -35,7 +34,7 @@
     </div>
     <% if current_user != nil && if current_user.role == "admin" %>
       <div class="field">
-        <%= ff.label :role%> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
+      <%= ff.label :role%> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
       </div>
     <% end %> 
   <% end %>
@@ -45,13 +44,8 @@
     <%= f.text_area :bio %>
   </div>
 
-  <%= form_for(@profile.user) do |f| %>
-  <div class="field">
-    <%= f.label :role%> <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
-  </div>
-
   <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4> 
- <ol class = "tree1">
+  <ol class = "tree1">
     <li class = "profile">
     <!-- <div class="my_div"> -->
       <label for="Module">Module</label>
@@ -71,5 +65,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
- <% end %>
- <% end %>
+<% end %>
+<% end %>
