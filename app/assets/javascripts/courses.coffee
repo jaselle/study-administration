@@ -25,6 +25,5 @@ $ ->
 	$('#selector').find('.button_to').click -> 
 		tmp = $('#selector').find('.button_to').attr('action')
 		$('#selector').find('.button_to').attr('action' , tmp + $("#24").val())
-		alert 'hi'
 	return
 
