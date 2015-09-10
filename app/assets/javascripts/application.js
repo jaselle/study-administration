@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+$(document).ready(function() {
+  $('.has-tooltip').tooltip();
+});
+// changed this to check if tooltip works

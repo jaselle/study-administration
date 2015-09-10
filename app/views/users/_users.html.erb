@@ -1,12 +1,15 @@
 <%= hidden_field_tag :direction, params[:direction] %>
 <%= hidden_field_tag :sort, params[:sort] %>
 <!-- new table design for all the users -->
-<table class="table table-striped">
+<table class="table table-striped fixed_height_table1">
   <thead>
     <tr class="sorts">
-        <th><%= sortable "email" %></th>
-        <th><%= sortable "role" %></th>
-        <th>Actions</th>
+        <th width="40%">
+          <%= sortable "email", "Email" %>
+        </th>
+        <th width="40%">
+          <%= sortable "role", "Status" %>
+        </th>
     </tr>
   </thead>
 
@@ -16,21 +19,62 @@
       <tr> 
         <td><%= user.email %></td>
         <td><%= user.role %></td>
-         <div class="btn-group btn-group-justified">
+        <td>
+          <div class="btn-group btn-group-justified btn_group_wide1">
           
-          <%if user.profile != nil%>      
-            <td class="col-sm-1"><%= link_to 'Anzeigen', profile_path(user.profile), class: 'btn btn-default'%></td>
-          <!-- Button No Profile ersetzen!!!--> 
-          <%else%><td class="col-sm-1"><%= link_to 'No Profile',user, class: 'btn btn-default'%></td>
+          <!-- if profile exists, admin can edit it -->
+          <%if user.profile != nil%> 
+              <% if can? :edit, @user %>
+                <td class="col-sm-1">
+                <!-- added tooltip for glyphicons  -->
+                  <%= link_to profile_path(user.profile), class: 'btn btn-default' do%>
+                    <span class="has-tooltip" data-toggle="tooltip" title="Anzeigen"> 
+                      <i class="glyphicon glyphicon-eye-open middle_icon"></i> 
+                    </span>
+                  <%end%>
+                </td>
+              <% end %>
+              <% if can? :destroy, @user %>
+                <%if user.id != current_user.id%>
+                  <td class="col-sm-2">
+                    <%= link_to user, method: :delete, data: { confirm: 'Sicher?' } , class: 'btn btn-default' do %> 
+                      <span class="has-tooltip" data-toggle="tooltip" title="Löschen"> 
+                        <i class="glyphicon glyphicon-trash middle_icon"></i> 
+                      </span>
+                    <% end%>
+                  </td>   
+                <%else %>
+                  <td></td>
+                  <td></td>
+                <% end %>
+              <%end %>
+          
+          <%else%>
+            <!-- deleted "no profile" button, format of table todo -->
+            <!-- <td class="col-sm-1"><%= link_to 'No Profile',user, class: 'btn btn-default'%></td> -->
+            <% if can? :destroy, @user %>
+              <%if user.id != current_user.id%>
+                <td/>
+                <td class="col-sm-2">
+                  <%= link_to user, method: :delete, data: { confirm: 'Sicher?' } , class: 'btn btn-default' do %> 
+                    <span class="has-tooltip" data-toggle="tooltip" title="Löschen">
+                      <i class="glyphicon glyphicon-trash middle_icon"></i> 
+                    </span>
+                  <% end%>
+               </td>   
+              <%else %>
+                <td></td>
+                <td></td>
+              <% end %>
+            <%end %>
           <% end %>
-          <%if user.id != current_user.id%>
-            <td class="col-sm-2"><%= link_to 'Löschen', user, method: :delete, data: { confirm: 'Sicher?' } , class: 'btn btn-default'%></td>   
-          <%end %>
         </div> 
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-
-<%= will_paginate @users %>
+<div class="digg_pagination">
+  <%= will_paginate @users%>
+</div>
