@@ -34,4 +34,24 @@ def self.import(file)
 
 end
 
+
+  def self.search(search)
+    if search
+      where("lower(prof) LIKE lower(?) OR lower(identifier) LIKE lower(?) OR lower(title) LIKE lower(?) OR lower(description) LIKE lower(?) OR lower(cycle) LIKE lower(?) OR lower(exam_type) LIKE lower(?) OR lower(condition) LIKE lower(?)", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%","%#{search}%", "%#{search}%")
+    else
+      where(nil)
+    end
+  end
+
+    # t.string   "identifier"
+    # t.string   "title"
+    # t.string   "description"
+    # t.string   "prof"
+    # t.integer  "credits"
+    # t.integer  "sws"
+    # t.string   "cycle"
+    # t.string   "exam_type"
+    # t.string   "condition"
+
+
 end
