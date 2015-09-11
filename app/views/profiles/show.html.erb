@@ -34,7 +34,7 @@
   </p>
 
   <p>
-    <div class="box" style="background-color: #FF8080; height:auto;width: 600px; border-radius: 10px;" >
+    <div class="box" style="background-color: #FF8080; height:auto;width: 600px; border-radius: 10px" >
       <% isWritten=false %>
       <% @profile.user.events.each do |eventCondition| %>
         <% if eventCondition.condition != nil%>
@@ -47,7 +47,7 @@
               <% end %>
             <% end %>
             <% if !b %>
-              <div class="box" style="padding-left:5px" >
+              <div class="box" style="padding-left:5px;padding-bottom:2px" >
                 <% if !isWritten %>
                   <u><strong>
                     <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen nicht:" %> </br>
@@ -89,7 +89,7 @@
             <% end %>
           <% end %>
           <% if conditAll %>
-            <div class="box" style="padding-left:5px;" >
+            <div class="box" style="padding-left:5px; padding-bottom:2px" >
               <% if !isWritten %>
                 <u><strong>
                   <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
@@ -120,7 +120,7 @@
                     <% @cSplit2=events2.condition.split('; ') %>
                     <% @cSplit2.each do |cSplitted2| %>
                       <% if cSplitted2.eql? events.identifier %>
-                        <div class="box" style="padding-left:5px;" >
+                        <div class="box" style="padding-left:5px;padding-bottom:2px" >
                         <% if !isWritten %>
                           <% isWritten = true %>
                           <u><strong>
