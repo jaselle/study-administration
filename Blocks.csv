@@ -1,22 +1,22 @@
 name,gesamtects,credits_min,relation
-Pflichtbereich 1 (B.Sc.),39,39,Informatik;B.Sc. 
-Pflichtbereich 2 (B.Sc.),12,12,Informatik;B.Sc. 
-Pflichtbereich 3 (B.Sc.),45,36,Informatik;B.Sc. 
-Wahlpflichbereich (B.Sc),138,27,Informatik;B.Sc. 
-Professionalisierungsbereich (B.Sc.),6,6,Informatik;B.Sc. 
-Mathematik Pflichbereich 1 (B.Sc.),18,18,Informatik;B.Sc. 
-Mathematik Pflichbereich 2 (B.Sc.),18,18,Informatik;B.Sc. 
-Agw. Systemwissenschaft Pflichtbereich (B.Sc.),24,30,Informatik;B.Sc. 
-Betriebswirtschaftslehre (B.Sc.),30,30,Informatik;B.Sc. 
-Agw. Systemwissenschaft Wahlpflichbereich (B.Sc.),24,30,Informatik;B.Sc. 
-Cognitive Science Computerlinguistik (B.Sc.),8,30,Informatik;B.Sc. 
-Cognitive Science Neurobiologie (B.Sc.),12,30,Informatik;B.Sc. 
-Cognitive Science Philosophie (B.Sc.),22,30,Informatik;B.Sc. 
-Cognitive Science Psychologie (B.Sc.),20,30,Informatik;B.Sc. 
-Physik Pflichtbereich (B.Sc.),18,30,Informatik;B.Sc. 
-Physik Wahlpflichtbereich (B.Sc.),21,30,Informatik;B.Sc. 
-Volkswirtschaftslehre (B.Sc.),30,30,Informatik;B.Sc. 
-Mathematik Anwendungsfach Pflichbereich (B.Sc.),27,30,Informatik;B.Sc. 
-Mathematik Anwendungsfach Wahlpflichbereich (B.Sc.),6,30,Informatik;B.Sc. 
-Pflichtbereich (M.Sc.),27,27,Informatik;M.Sc. 
-Wahlpflichbereich (M.Sc),39,162,Informatik;M.Sc. 
+Pflichtbereich 1 (B.Sc.),39,39,B.Sc.;Informatik
+Pflichtbereich 2 (B.Sc.),12,12,B.Sc.;Informatik
+Pflichtbereich 3 (B.Sc.),45,36,B.Sc.;Informatik
+Wahlpflichtbereich (B.Sc),138,27,B.Sc.;Informatik
+Professionalisierungsbereich (B.Sc.),6,6,B.Sc.;Informatik
+Mathematik Pflichtbereich 1 (B.Sc.),18,18,B.Sc.;Informatik
+Mathematik Pflichtbereich 2 (B.Sc.),18,18,B.Sc.;Informatik
+Agw. Systemwissenschaft Pflichtbereich (B.Sc.),30,24,B.Sc.;Informatik
+Betriebswirtschaftslehre (B.Sc.),30,30,B.Sc.;Informatik
+Agw. Systemwissenschaft Wahlpflichbereich (B.Sc.),30,24,B.Sc.;Informatik
+Cognitive Science Computerlinguistik (B.Sc.),30,8,B.Sc.;Informatik
+Cognitive Science Neurobiologie (B.Sc.),30,12,B.Sc.;Informatik
+Cognitive Science Philosophie (B.Sc.),30,22,B.Sc.;Informatik
+Cognitive Science Psychologie (B.Sc.),30,20,B.Sc.;Informatik
+Physik Pflichtbereich (B.Sc.),30,18,B.Sc.;Informatik
+Physik Wahlpflichtbereich (B.Sc.),30,21,B.Sc.;Informatik
+Volkswirtschaftslehre (B.Sc.),30,30,B.Sc.;Informatik
+Mathematik Anwendungsfach Pflichtbereich (B.Sc.),27,27,B.Sc.;Informatik
+Mathematik Anwendungsfach Wahlpflichtbereich (B.Sc.),6,6,B.Sc.;Informatik
+Pflichtbereich (M.Sc.),27,27,M.Sc.;Informatik
+Wahlpflichtbereich (M.Sc),162,39,M.Sc.;Informatik
