@@ -219,6 +219,16 @@ body {
   font-size: 1.3vw;
 }
 
+.table2 > tbody > tr > td {
+     vertical-align: middle !important;
+     font-size: 1.1vw;
+     line-height: 1.5vw;
+}
+
+.table2 > thead > tr > th {
+  font-size: 1.3vw;
+}
+
 /* configure button width */
 .my_button1 {
   width: 50% !important;
