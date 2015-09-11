@@ -32,8 +32,10 @@
     <strong>Über mich:</strong>
     <%= @profile.bio %>
   </p>
+
   <p>
-  <div class="box" style="background-color: #FFFF43; height:auto;width: 600px; border-radius: 10px" >
+    <div class="box" style="background-color: #FF8080; height:auto;width: 600px; border-radius: 10px;" >
+      <% isWritten=false %>
       <% @profile.user.events.each do |eventCondition| %>
         <% if eventCondition.condition != nil%>
           <% @cSplit = eventCondition.condition.split('; ') %>
@@ -45,9 +47,15 @@
               <% end %>
             <% end %>
             <% if !b %>
-              <div class="box" style="padding:3px" >
+              <div class="box" style="padding-left:5px" >
+                <% if !isWritten %>
+                  <u><strong>
+                    <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen nicht:" %> </br>
+                  </u></strong>
+                  <% isWritten=true %>
+                <% end %>
               <% if Event.find_by_identifier(cSplitted) != nil %>
-                <%= link_to "Für " + eventCondition.title + " wurde die Veranstaltung " + Event.find_by_identifier(cSplitted).title + " noch nicht belegt. ", event_path(Event.find_by_identifier(cSplitted)) %> </br>
+                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_identifier(cSplitted)) %> </br>
               <% else %>
                 <%= "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. " %> </br>
               <% end %>
@@ -56,8 +64,45 @@
           <% end %>
         <% end %>
       <% end %>
-      </div>
- </p>
+    </div>
+  </p>
+
+  <p>
+    <div class="box" style="background-color:#8DE28D; height:auto;width: 600px; border-radius: 10px" >
+      <% isWritten=false %>
+      <% @eventAll = Event.all %>
+      <% @eventAll.each do |events| %>
+        <% if events.condition != nil%>
+          <% @cSplit=events.condition.split('; ') %>
+          <% conditAll=true %>
+          <% @cSplit.each do|cSplitted| %>
+            <% found = false %>
+            <% @profile.user.events.each do |eventIdent| %>
+              <% if !found %>
+                <% if cSplitted.eql? eventIdent.identifier %>
+                  <% found = true %>
+                <% end %>  
+              <% end %>
+            <% end %>
+            <% if !found %>
+              <% conditAll = false %>
+            <% end %>
+          <% end %>
+          <% if conditAll %>
+            <div class="box" style="padding-left:5px;" >
+              <% if !isWritten %>
+                <u><strong>
+                  <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
+                </u></strong>
+                <% isWritten=true %>
+              <% end %>
+              <%= link_to events.title,event_path(events) %> </br>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </p>
 
   <p>
     <div class="box" style="background-color:#ADD8E6; height:auto;width: 600px; border-radius: 10px" >
@@ -75,12 +120,12 @@
                     <% @cSplit2=events2.condition.split('; ') %>
                     <% @cSplit2.each do |cSplitted2| %>
                       <% if cSplitted2.eql? events.identifier %>
-                        <div class="box" style="padding:3px;" >
+                        <div class="box" style="padding-left:5px;" >
                         <% if !isWritten %>
                           <% isWritten = true %>
-                          <u>
+                          <u><strong>
                            <%= link_to "Wenn sie " + events.title + " belegen:", event_path(events) %> </br>
-                          </u>
+                          </u></strong>
                         <% end %>
                         <%= link_to "Können sie  " + events2.title + " belegen. ", event_path(events2) %> </br>
                         </div>
