@@ -64,3 +64,4 @@ $ ->
      
   $('#search input').keyup ->
     $.get $('#events_search').attr('action'), $('#events_search').serialize(), null, 'script'
+    
