@@ -134,4 +134,5 @@
 <% if can? :edit, Event %>
   <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
 <%end%>
-<%= link_to 'Zurück', :back, class: 'btn btn-default' %>
+<!-- back button incorrect, should lead to event page ??? -->
+<%= link_to 'Zurück', :events, class: 'btn btn-default' %>

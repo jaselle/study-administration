@@ -18,7 +18,7 @@ body {
   margin: 0;
   padding: 0;
   background: rgba(230, 230, 230, 0.25) !important;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', sans-serif; 
 }
 
 /*Spawned content should be below navigation bars, change margin here*/
@@ -305,7 +305,7 @@ border-collapse: separate;
   padding-right: 15px;
   padding-left: 15px;
   float: left;
-  width: 5.66666666%;
+  width: 7.66666666%;
 }
 
 .overlay {
@@ -452,13 +452,13 @@ border-collapse: separate;
   margin-left: 1%;
   font-family: 'Glyphicons Halflings';
   content: "\e150";
-  font-size: 1.3vw;
+  font-size: 1vw;
 }
 
 .our_sort {
   background: none !important;
   text-decoration: none !important;
-  font-size: 1.67vw;
+  font-size: 1.5vw;
 }
 
 /* align searchbar and Title */
