@@ -54,7 +54,7 @@
     <% unless @event.users.find_by(id: current_user.id) %>
       <p>
         <!-- <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id%> -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Vormerken</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Vormerken</button>
       </p>
     <% else %>
        <p>
