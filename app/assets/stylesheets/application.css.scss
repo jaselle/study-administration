@@ -23,7 +23,7 @@ body {
 
 /*Spawned content should be below navigation bars, change margin here*/
 .content {
-  margin-top: 80px;
+  margin-top: 5%;
   margin-left: 7.5%;
   width: 85%;
   height: 100%;
@@ -67,7 +67,7 @@ body {
  
 /*Outward appearance of login items concerning everything aside from color*/
 .login li.no_user{
-  font-size: 1.3vw;
+  font-size: 1.15vw;
   line-height: 40px;
   height: 40px;
   display: inline-block;
@@ -77,7 +77,7 @@ body {
 
 /*Outward appearance of login items concerning everything aside from color*/
 .login li.active_user{
-  font-size: 1.3vw;
+  font-size: 1.15vw;
   line-height: 40px;
   height: 40px;
   display: inline-block;
@@ -121,11 +121,11 @@ body {
 
 /*Outward appearance of navigation items concerning everything aside from color*/
 .nav li.topmenu{
-  font-size: 1.3vw;
+  font-size: 1.15vw;
   line-height: 40px;
   height: 40px;
   display: inline-block;
-  margin-right: -4px;
+  margin-right: -20px;
   width: 15%;
   /*float:left;*/
 }
@@ -178,7 +178,7 @@ body {
 
 /*Layout of submenu texts*/
 .submenu a{
-  font-size:1.1vw;
+  font-size:1.0vw;
   width:100;
   position:relative;
   clear:both; /* special IE6 */
@@ -198,7 +198,7 @@ body {
   background-image: asset-data-url("PlaYS_Logo_1.png");
   background-size: cover;
   width: 80%;
-  height: 65px;
+  height: 64px;
   background-position: center;
   background-size: 100px 60px;
   background-repeat: no-repeat;
@@ -515,4 +515,46 @@ border-collapse: separate;
     width: 274px;
     height: 252px;
     margin-left: 40%;
+}
+
+/*event page container on left side*/
+.left_side {
+  width: 70%;
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  font-size: 1.15vw;
+}
+
+/* change size of headings to be scalable*/
+.left_side h4 {
+  font-size: 1.5vw;
+}
+
+.left_side h3 {
+  font-size: 2vw ;
+}
+
+/*event page container on right side*/
+.right_side {
+  width: 30%;
+  margin-top: right;
+  display: inline-block;
+  float:right;
+  vertical-align: middle;
+  font-size: 1.15vw;
+}
+
+/* two containers in this one are now next to each other*/
+.event_container {
+  overflow: hidden;
+  position: relative;
+}
+
+/*change background color*/
+.container_events {
+  background: rgba(220, 220, 220, 0.75);
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 1%;
 }
