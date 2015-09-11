@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  helper_method :get_current_semester, :get_current_semester_and_year, :get_next_semester_and_year, :get_current_semester_and_year_from_date
+  helper_method :get_current_semester, :get_current_semester_and_year, :get_next_semester_and_year, :get_current_semester_and_year_from_date, :convert_date_to_number
   protect_from_forgery with: :exception
 
 def js_logged_in
@@ -36,7 +36,43 @@ def get_current_semester_and_year_from_date(time)
 		year = " "+ (time.year).to_s
 	end
 	return semester + year
-end		
+end	
+
+
+def convert_date_to_number(string1)
+	
+	curr_date = get_current_semester_and_year_from_date(Time.now)
+	curr_sem= curr_date.split(" ")[0]
+	if(curr_sem == "Sommersemester")
+		curr_year= curr_date.split(" ")[1]
+	else 
+		curr_year = curr_date.split(" ")[1].split("/")[0]
+	end
+	sem = string1.split(" ")[0]
+	if(sem == "Sommersemester")
+		year= string1.split(" ")[1]
+	else 
+		year = string1.split(" ")[1].split("/")[0]
+	end
+
+
+	if (year < curr_year)
+
+	puts "DIE VERANSTALTUNG IST SCHON BESTANDEN!"
+	return "bestanden"
+	elsif ( year == curr_year)
+		if(sem == curr_sem)
+	puts "DAS IST HEUTE DU HAMPELMANN!"
+	return "geplant"
+		end
+		elsif(year > curr_year)
+
+	puts "VERANSTALTUNG IST GEPLANT"
+	return "geplant"
+	end 
+ 
+
+end	
 
 
 
