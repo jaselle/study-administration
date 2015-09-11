@@ -33,7 +33,7 @@
     <%= @profile.bio %>
   </p>
   <p>
-  <div class="box" style="background-color: #FFFF43; height:auto;width: 400px; border-radius: 10px" >
+  <div class="box" style="background-color: #FFFF43; height:auto;width: 600px; border-radius: 10px" >
       <% @profile.user.events.each do |eventCondition| %>
         <% if eventCondition.condition != nil%>
           <% @cSplit = eventCondition.condition.split('; ') %>
@@ -45,7 +45,7 @@
               <% end %>
             <% end %>
             <% if !b %>
-              <div class="box" style="padding:5px" >
+              <div class="box" style="padding:3px" >
               <% if Event.find_by_identifier(cSplitted) != nil %>
                 <%= link_to "Für " + eventCondition.title + " wurde die Veranstaltung " + Event.find_by_identifier(cSplitted).title + " noch nicht belegt. ", event_path(Event.find_by_identifier(cSplitted)) %> </br>
               <% else %>
@@ -58,6 +58,43 @@
       <% end %>
       </div>
  </p>
+
+  <p>
+    <div class="box" style="background-color:#ADD8E6; height:auto;width: 600px; border-radius: 10px" >
+      <% @profile.user.events.each do |eventIdent| %>
+        <% @eventAll = Event.all %>
+        <% @eventAll.each do |events| %>
+         <% if events.condition != nil%>
+            <% @cSplit=events.condition.split('; ') %>
+            <% @cSplit.each do|cSplitted| %>
+             <% isWritten = false %>
+              <% if cSplitted.eql? eventIdent.identifier %>
+                <% @eventAll2 = Event.all %>
+                <% @eventAll2.each do |events2| %>
+                  <% if events2.condition != nil%>
+                    <% @cSplit2=events2.condition.split('; ') %>
+                    <% @cSplit2.each do |cSplitted2| %>
+                      <% if cSplitted2.eql? events.identifier %>
+                        <div class="box" style="padding:3px;" >
+                        <% if !isWritten %>
+                          <% isWritten = true %>
+                          <u>
+                           <%= link_to "Wenn sie " + events.title + " belegen:", event_path(events) %> </br>
+                          </u>
+                        <% end %>
+                        <%= link_to "Können sie  " + events2.title + " belegen. ", event_path(events2) %> </br>
+                        </div>
+                      <% end %>
+                    <% end %>  
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %> 
+    </div>
+  </p>
 
 <% else %>
   Für dieses Profil existiert kein Benutzer. </br>
