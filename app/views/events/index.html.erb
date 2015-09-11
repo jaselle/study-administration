@@ -1,88 +1,11 @@
-<h1>Veranstaltungen</h1>
 
-<table class = "table table-striped" style=" table-layout: fixed; width: 100%;">
-  <thead>
-    <tr>
-      <th class="col-xs-1">Kürzel</th>
-      <th>Titel</th>
-      <th>Professor</th>
-      <th class="col-xs-mini">ECTS</th>
-      <th class="col-xs-mini">SWS</th>
-      <th>Zyklus</th>
-      <th>Bedingung</th>
-      <th ></th>
-    </tr>
-  </thead>
+<%= form_tag events_path, :method => 'get', :id => "events_search", remote: true do %>
+    <h1 class="aligned_search"> Veranstaltungen </h1>
+    <p class="aligned_search">
+      <%= text_field_tag :search, params[:search], class: "text_field_r", :placeholder => "Finde Veranstaltung..." %>
+      <%= submit_tag "Suche", :name => nil, class: 'btn btn-primary' %>
+    </p>
+    <div id="events"><%= render 'events' %></div>
+<% end %>
 
-  <tbody>
-    <% @events.order("title").each_with_index do |event, index| %>
-      <tr>
-        <td><%= event.identifier %></td>
-        <td><%= event.title %></td>
-        <td><%= event.prof %></td>
-        <td><%= event.credits %></td>
-        <td><%= event.sws %></td>
-        <td><%= event.cycle %></td>
-        <td><%= event.condition %></td>
 
-        <!-- added glyphicons to the buttons -->
-        <!-- added tooltip to glyphicons-->
-        <td><div class="btn-group btn-group-justified btn_group_wide1">
-            <%= link_to event, class: "btn btn-default" do %>
-               <span class="has-tooltip" data-toggle="tooltip" title="Anzeigen">
-                <i class="glyphicon glyphicon-eye-open middle_icon"></i>
-              </span>
-          <% end %>
-          <% if can? :edit, @event %>
-          <%= link_to edit_event_path(event), class: "btn btn-default" do %>
-              <span class="has-tooltip" data-toggle="tooltip" title="Bearbeiten">
-                <i class="glyphicon glyphicon-pencil middle_icon"></i>
-              </span>
-          <% end %>
-          <% end %>
-          <% if can? :destroy, @event %>
-          <%= link_to event, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
-              <span class="has-tooltip" data-toggle="tooltip" title="Löschen">
-                <i class="glyphicon glyphicon-trash middle_icon"></i>
-              </span>
-          <% end %>
-          <% end %>
-        </div>
-        </td>
-      </tr>
-      <% if (index % 2 == 0) %>
-      <tr style="background-color: #f9f9f9">
-        <td colspan="8">
-        <div class="overflow_to_scroll">
-          <%= event.description %>
-        </div>
-        </td>
-      </tr>
-      <% else %>
-      <tr style="background-color: rgba(1,0,0,0)">
-        <td colspan="8">
-        <div class="overflow_to_scroll">
-          <%= event.description %>
-        </div>
-        </td>
-      </tr>
-    <% end %>
-      <tr>
-        <td colspan="8">Prüfungsart: <%=event.exam_type %></td>
-      </tr>
-    <% end %>  
-  </tbody>
-</table>
-
-  
-<br>
-
- <!--Some code for creating the first view of our import buttons.-->
-<%= form_tag :controller => 'csv_reader', :action => 'import', multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import CSV",  class: 'btn btn-default' %> 
-<% end %> <br/>
-
-<% if can? :create, @event %>
-<%= link_to 'Neue Veranstaltung', new_event_path, class: 'btn btn-success' %>
-<%end%>
