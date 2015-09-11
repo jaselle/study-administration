@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   get 'charts/index'
 
   resources :profiles
-
+  get 'ratings/index'
   get 'password_resets/index'
   post 'events/mark_event'
-  get 'ratings/index'
+  
 
   resources :courses
   resources :charts

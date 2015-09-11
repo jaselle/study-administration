@@ -16,13 +16,13 @@ class Event < ActiveRecord::Base
 
 
 #method to calculate the average-rating. 
-def avg_rating
+def avg_rating(column)
   average_rating = 0.0
   count = 0
   ratings.each do |rating| 
-    if rating.attend != nil 
-      if rating.attend != 0
-      average_rating += rating.attend
+    if rating.send(column) != nil 
+      if rating.send(column) != 0
+      average_rating += rating.send(column)
       count += 1
       end
     end

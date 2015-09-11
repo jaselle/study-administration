@@ -4,6 +4,11 @@
 
 class RatingsController < ApplicationController
   #creates the rating for the event, and response in Json-Format
+  
+  def index
+    @event = Event.all
+  end
+
   def create
   
     @rating = Rating.new(params[:rating])
@@ -34,7 +39,8 @@ class RatingsController < ApplicationController
   end
 
   def show
-    @rating = Rating.find(params[:id])
+   @rating = Rating.find(params[:id])
+   @event = Rating.find(params[:id]).event
   end
 
   private

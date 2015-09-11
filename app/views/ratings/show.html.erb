@@ -1,77 +1,149 @@
-<thead>
-<center><h3><%=@rating.user.profile.name.capitalize%>'s Bewertung der Veranstaltung</h3></center>
-</thead>
-<br>
+<head>
+  <center>
+    <h4>
+      Bewertung der Veranstaltung: 
+      <%=@event.title%> 
+    </h4>
+  </center>
+</head>
+<br/>
+
 <table> 
-
-<tr>
-<th>Teilnahme</th>
-<td> 
-	<% (1..5).each do |i| %>
-    <%if i <= @rating.attend %>
-      <li class="rating_avg" ></li>
-    <% else %>
-      <li class="rating_rest" ></li>
-    <% end %>
-  	<% end %> 
- </td>
-</tr>
-
-<tr>
-<th>Schwierigkeit</th>
-<td> <% (1..5).each do |i| %>
-    <%if i <= @rating.tough %>
-      <li class="rating_avg" ></li>
-    <% else %>
-      <li class="rating_rest" ></li>
-    <% end %>
-  	<% end %> 
-</td>
-</tr>
-
-<tr>
-<th>Arbeitsaufwand</th>
-<td> <% (1..5).each do |i| %>
-    <%if i <= @rating.effort %>
-      <li class="rating_avg" ></li>
-    <% else %>
-      <li class="rating_rest" ></li>
-    <% end %>
-  	<% end %> 
-</td>
-</tr>
-
-<tr>
-<th>Verhältnis 
-<br>
- Theorie/Praxis</th>
-<td> <% (1..5).each do |i| %>
-    <%if i <= @rating.share %>
-      <li class="rating_avg" ></li>
-    <% else %>
-      <li class="rating_rest" ></li>
-    <% end %>
-  	<% end %>
-</td>
-</tr>
-
-<tr>
-<th>Arbeitsmaterial</th>
-<td> <% (1..5).each do |i| %>
-    <%if i <= @rating.material %>
-      <li class="rating_avg" ></li>
-    <% else %>
-      <li class="rating_rest" ></li>
-    <% end %>
-  	<% end %> 
-</td>
-</tr>
-
-<tr>
-<th>Kommentar</th>
-<td> <%=@rating.comment%> </td>
-</tr>
-
+<thead>
+<th style="width: 30%;"/>
+<th style="width: 30%;"/>
+<th style="width: 10%;"/>
+<th style="width: 30%;"/>
+</thead>
+  <tr>
+    <td>
+    </td>
+    <th>
+      <center>
+        <%=@rating.user.profile.name.capitalize%>
+      </center>
+    </th>
+    <td/>
+    <th>
+      <center> alle Benutzer
+      </center>
+    </th>
+  </tr>
+  <tr>
+    <th>
+      <span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Teilnahme
+      </span>
+    </th> 
+    <td> 
+      <% (1..5).each do |i| %>
+        <%if i <= @rating.attend %>
+          <li class="rating_avg" ></li>
+        <% else %>
+          <li class="rating_rest" ></li>
+        <% end %>
+      <% end %> 
+    </td>
+    <td/>
+    <td>
+       <% (1..5).each do |i| %>
+        <%if i <= @event.avg_rating('attend') %>
+          <li class="rating_avg" ></li>
+        <% else %>
+          <li class="rating_rest" ></li>
+        <% end %>
+      <% end %> 
+    </td>
+  </tr>
+  <tr>
+    <th><span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Schwierigkeit
+      </span></th>
+    <td> 
+      <% (1..5).each do |i| %>
+        <%if i <= @rating.tough %>
+          <li class="rating_avg" ></li>
+        <% else %>
+          <li class="rating_rest" ></li>
+        <% end %>
+      <% end %> 
+    </td>
+    <td/>
+    <td>
+       <% (1..5).each do |i| %>
+        <%if i <= @event.avg_rating('tough') %>
+          <li class="rating_avg" ></li>
+        <% else %>
+          <li class="rating_rest" ></li>
+        <% end %>
+      <% end %> 
+    </td>
+  </tr>
+  <tr>
+    <th><span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Arbeitsaufwand
+      </span></th>
+    <td>
+      <% (1..5).each do |i| %>
+        <%if i <= @rating.effort %>
+          <li class="rating_avg" ></li>
+        <% else %>
+          <li class="rating_rest" ></li>
+        <% end %>
+      <% end %> 
+    </td>
+    <td/>
+    <td>
+       <% (1..5).each do |i| %>
+        <%if i <= @event.avg_rating('effort') %>
+          <li class="rating_avg" ></li>
+        <% else %>
+          <li class="rating_rest" ></li>
+        <% end %>
+      <% end %> 
+    </td>
+  </tr>
+  <tr>
+    <th><span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Verhältnis <br> Theorie/Praxis
+      </span></th>
+    <td> 
+      <% (1..5).each do |i| %>
+        <%if i <= @rating.share %>
+          <li class="rating_avg" ></li>
+        <% else %>
+          <li class="rating_rest" ></li>
+        <% end %>
+      <% end %>
+    </td>
+    <td/>
+    <td>
+       <% (1..5).each do |i| %>
+        <%if i <= @event.avg_rating('share') %>
+          <li class="rating_avg" ></li>
+        <% else %>
+          <li class="rating_rest" ></li>
+        <% end %>
+      <% end %> 
+    </td>
+  </tr>
+  <tr>
+    <th><span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Arbeitsmaterial
+      </span></th>
+    <td> 
+      <% (1..5).each do |i| %>
+        <%if i <= @rating.material %>
+          <li class="rating_avg" ></li>
+        <% else %>
+          <li class="rating_rest" ></li>
+        <% end %>
+      <% end %> 
+    </td>
+    <td/>
+    <td>
+       <% (1..5).each do |i| %>
+        <%if i <= @event.avg_rating('material') %>
+          <li class="rating_avg" ></li>
+        <% else %>
+          <li class="rating_rest" ></li>
+        <% end %>
+      <% end %> 
+    </td>
+  </tr>
 </table>
-
-<a href="/ratings" class="button">Zeige alle Bewertungen der Veranstaltung</a>
