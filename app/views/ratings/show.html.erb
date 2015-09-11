@@ -34,7 +34,27 @@
       <span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Teilnahme
       </span>
     </th> 
-    <td> 
+    <td>   <!--if the user is logged in, he can see the stars to click.  -->
+       <% form_id = "event_#{@event.id}_rating" %>
+       <% if logged_in? %> <!-- To avoid throwing an exception if no user is signed in-->
+       <% user_id = current_user.id %>
+       <%= form_for @event.ratings.find_or_create_by(user_id: user_id), :html => {:id => form_id, :class => "star_rating_form"} do |f| %>
+        <%= f.hidden_field :event_id, :value => @event.id %>
+        <% if logged_in? %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+        <% end %>        
+        <%= f.hidden_field :attend, :id => form_id + "_stars" %>
+    <% end %>
+
+    <% (1..5).each do |i| %>
+      <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>" data-column="attend"></li>
+    <% end %>  
+  <% end %>
+
+
+
+
+
       <% (1..5).each do |i| %>
         <%if i <= @rating.attend %>
           <li class="rating_avg" ></li>
@@ -55,8 +75,10 @@
     </td>
   </tr>
   <tr>
-    <th><span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Schwierigkeit
-      </span></th>
+    <th>
+      <span class="has-tooltip" data-toggle="tooltip" title="Der Anspruch der Veranstaltung: 1 - 5 Sterne | hardcore - easy">Schwierigkeit
+      </span>
+    </th>
     <td> 
       <% (1..5).each do |i| %>
         <%if i <= @rating.tough %>
@@ -78,8 +100,10 @@
     </td>
   </tr>
   <tr>
-    <th><span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Arbeitsaufwand
-      </span></th>
+    <th>
+      <span class="has-tooltip" data-toggle="tooltip" title="Arbeitsaufwand der gesamten Verstaltung (z.B. für Übung, Tutorium, Vor- und Nacharbeiten): 1 - 5 Sterne | viel - wenig">Arbeitsaufwand
+      </span>
+    </th>
     <td>
       <% (1..5).each do |i| %>
         <%if i <= @rating.effort %>
@@ -101,7 +125,7 @@
     </td>
   </tr>
   <tr>
-    <th><span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Verhältnis <br> Theorie/Praxis
+    <th><span class="has-tooltip" data-toggle="tooltip" title="Die praktische Anwendung der in der Vorlesung vermittelten Theorien: 1 - 5 Sterne | reine Theorie - viel Anwendungen">Verhältnis <br> Theorie/Praxis
       </span></th>
     <td> 
       <% (1..5).each do |i| %>
@@ -124,7 +148,7 @@
     </td>
   </tr>
   <tr>
-    <th><span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Arbeitsmaterial
+    <th><span class="has-tooltip" data-toggle="tooltip" title="Nutzen des Arbeitsmateriales (z.B. Skript, Aufzeichnung): 1 - 5 Sterne | nicht hilfreich - hilfreich">Arbeitsmaterial
       </span></th>
     <td> 
       <% (1..5).each do |i| %>

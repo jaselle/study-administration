@@ -102,7 +102,7 @@
 <!-- Displays the single stars for Average Rating -->
 
   <% (1..5).each do |i| %>
-    <%if i <= @event.avg_rating %>
+    <%if i <= @event.avg_rating("attend") %>
       <li class="rating_avg" ></li>
     <% else %>
       <li class="rating_rest" ></li>

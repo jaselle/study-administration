@@ -27,23 +27,22 @@ set_stars = (form_id, stars) ->
 $ ->
   $('.rating_star').click ->
     star = $(this)
-    
     form_id = star.attr('data-form-id')
     stars = star.attr('data-stars')
-
+    column = star.attr('data-column')
+    alert column
     $('#' + form_id + '_stars').val stars
-    
     $.ajax
       type: 'post'
       url: $('#' + form_id).attr('action') + '.json'
-      data: $('#' + form_id).serialize()
+      data: 
+        column: column,
+        value: $('#' + form_id).serialize()
       success: (response) ->
         console.log response
-        
         update_stars()
         if response['avg_rating']
           $('#average_rating').text response['avg_rating']
-
         return
       error: (xhr, ajaxOptions, thrownError) ->
         alert thrownError

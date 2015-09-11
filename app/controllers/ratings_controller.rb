@@ -28,7 +28,7 @@ class RatingsController < ApplicationController
     @rating = Rating.find(params[:id])
     @event = Event.find(params[:rating][:event_id])
 
-    @rating.attend =  params[:rating][:attend]
+    @rating.send(params[:column].to_sym, params[:rating])
     respond_to do |format|
       if @rating.save
         format.json { render :json => { :avg_rating => @event.avg_rating } }
@@ -45,7 +45,6 @@ class RatingsController < ApplicationController
 
   private
     def ratings_params
-      params.require(:rating).permit(:attend, :user_id, :event_id)
+      params.require(:rating).permit(:column,:user_id, :event_id)
     end
 end
-
