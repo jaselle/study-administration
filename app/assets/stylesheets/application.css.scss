@@ -464,7 +464,7 @@ border-collapse: separate;
 /* align searchbar and Title */
 .aligned_search {
   display: inline-block;
-  width: 40%;
+  width: 33%;
   vertical-align: bottom;
 }
 
@@ -558,3 +558,37 @@ border-collapse: separate;
   overflow: hidden;
   padding: 1%;
 }
+
+/* align searchbar and Title */
+.aligned_csv_left {
+  display: inline-block !important;
+  width: 65%;
+  vertical-align: top;
+}
+.aligned_csv_right {
+  display: inline-block !important;
+  width: 25%;
+  vertical-align: top;
+  float:right;
+  margin-top: right;
+}
+
+.import_container {
+  background: rgba(250, 250, 250, 0.75);
+  border-radius: 5px;
+  padding: 0.5%;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  width: 33%;
+  vertical-align: top;
+}
+
+.info_txt {
+  font-size: 1.15vw;
+  background-color: #A4E7A0;
+  line-height: 2vw;
+  border-radius: 5px;
+  padding-left: 1%;
+}
+
