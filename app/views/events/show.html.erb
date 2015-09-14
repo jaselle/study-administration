@@ -14,6 +14,14 @@
     <strong>ECTS:</strong> <%= @event.credits %> <br/>
     <strong>SWS:</strong> <%= @event.sws %><br/>
     <strong>Zyklus:</strong> <%= @event.cycle %>
+    <% if @event.cycle == "Nicht regelmäßig" %>
+        <br>
+        <strong>Nächste Termine:</strong>
+        <% @event.schedules.each do |schedule| %>
+          <%= schedule.date %> <br>
+        <% end %>
+      
+    <% end %> 
   </div>
   </div>
 
@@ -36,6 +44,7 @@
   <strong>Beschreibung:</strong>
   <%= @event.description %>
 </p>
+
 </div>
 <br/>
   
@@ -45,11 +54,11 @@
 
         <!-- <%= button_to "Veranstaltung hinzufügen", :action => "mark_event", :id => @id%> -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Hinzufügen</button>
-
     <% else %>
     <p class="info_txt">
          <strong>Die Veranstaltung <%= @event.title %> wurde zu deinem Plan hinzugefügt!</strong>
     </p>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ändern oder Entfernen</button>
     </br>
     <%end %>
 
@@ -72,7 +81,7 @@
       </div>
       <div class="modal-body">
       <p>
-      <label><%=  @event.cycle  %></label>
+      <label>Angebot: <%=  @event.cycle  %></label>
       <!-- Saves the cycle of the event into variable a -->
       <% curr_cycle = @event.cycle.split(" ")[1] %>
       <% curr_cycle_year = @event.cycle.split(" ")[2] %>
@@ -82,8 +91,7 @@
         <% a = 4 %>
       <% elsif  not curr_cycle == "regelmäßig" %>
         <% a = 2 %>
-      <% else %>
-        <% a= 100 %>
+    
       <% end %>
       <!-- if the current semester does not match die semester cycle of the event, add half a year to the date -->
       <% b = 0 %>
@@ -106,16 +114,24 @@
 
         <form method="POST" action="/courses" id="23" >
           <select name="semesters" id = "24" >
+          <% if @event.cycle != "Nicht regelmäßig" %>
             <option><%= get_current_semester_and_year_from_date(Time.now+b.month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*a+b).month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*2*a+b).month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*3*a+b).month.to_i) %></option> 
+          <% elsif %>
+            <% @event.schedules.each do |s| %>
+              <option><%= s.date %></option>
+            <% end %>
+          <% end %>
           </select>    
         </form>
         </p>
         <div id="selector">
           <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id, :semester => "" %>
         </div>
+          <%= button_to "Veranstaltung abwählen", :action => "demark_event" ,:id => @id%>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Zurück</button>
@@ -127,3 +143,8 @@
 
 <br>
 <br>
+
+<% if can? :edit, Event %>
+  <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
+<%end%>
+<%= link_to 'Zurück', :back, class: 'btn btn-default' %>

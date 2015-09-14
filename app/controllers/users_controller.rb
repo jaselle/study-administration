@@ -32,12 +32,12 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params.except(:profiles))
-    @user.profile = Profile.create(user_params[:profiles])
     respond_to do |format|
       if @user.save
 
         # Send email to user
         UserMailer.welcome_email(@user).deliver_now
+        @user.profile = Profile.create(user_params[:profiles])
 
         format.html { redirect_to @user.profile}
         format.json { render :show, status: :created, location: @user }

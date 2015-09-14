@@ -16,10 +16,9 @@
 </div>
 <br/>
 <div class="container_events">
-<p>
-  <strong>Veranstaltungen:<br></strong>
-  <%= @block.events.map { |a| a.title }.join("<br>").html_safe %>
-</p>
+  <h4><strong>Veranstaltungen:</strong></h4>
+  <%= @block.events.map { |a| a.title }.join("<br/>").html_safe %>
+
 </div>
 
 <br/>

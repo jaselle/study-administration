@@ -62,6 +62,14 @@ li.plannedfile a{
     line-height: 1.43vw;
 }
 
+ol.legend {
+
+ position: absolute;
+  right: 150px;
+
+
+}
+
 
 /*lists courses of one block and assigns picture*/
 li.file a{

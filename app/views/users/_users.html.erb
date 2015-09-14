@@ -10,6 +10,8 @@
         <th width="40%">
           <%= sortable "role", "Status" %>
         </th>
+        <th> </th>
+        <th> </th>
     </tr>
   </thead>
 
@@ -19,7 +21,7 @@
       <tr> 
         <td><%= user.email %></td>
         <td><%= user.role %></td>
-        <td>
+        
           <div class="btn-group btn-group-justified btn_group_wide1">
           
           <!-- if profile exists, admin can edit it -->
@@ -45,7 +47,6 @@
                   </td>   
                 <%else %>
                   <td></td>
-                  <td></td>
                 <% end %>
               <%end %>
           
@@ -69,7 +70,7 @@
             <%end %>
           <% end %>
         </div> 
-        </td>
+
       </tr>
     <% end %>
   </tbody>
