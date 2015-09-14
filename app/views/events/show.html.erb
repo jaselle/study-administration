@@ -32,31 +32,33 @@
 <br/>
 <br/>
 <div class="container_events">
-<p style="font-size: 1.15vw;">
+<p style="font-size: 1.15vw; line-height: 1.3vw;">
   <strong>Beschreibung:</strong>
   <%= @event.description %>
 </p>
 </div>
 <br/>
-<p>
-<!-- if logged in, show the Button to mark an event-->
+  
+  <!-- if logged in, show the Button to mark an event-->
   <% if logged_in? %>
     <% unless @event.users.find_by(id: current_user.id) %>
 
-        <!-- <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id%> -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Vormerken</button>
+        <!-- <%= button_to "Veranstaltung hinzufügen", :action => "mark_event", :id => @id%> -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Hinzufügen</button>
 
     <% else %>
-
-         <strong>Die Veranstaltung <%= @event.title %> ist belegt!</strong>
-      </p>
+    <p class="info_txt">
+         <strong>Die Veranstaltung <%= @event.title %> wurde zu deinem Plan hinzugefügt!</strong>
+    </p>
+    </br>
     <%end %>
+
     <% if can? :edit, Event %>
   <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
 <%end%>
   <% end %>
   <!-- back button incorrect, should lead to event page ??? -->
-<%= link_to 'Zurück', :events, class: 'btn btn-default' %>
+<%= link_to 'Zurück zu den Veranstaltungen', :events, class: 'btn btn-default' %>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
