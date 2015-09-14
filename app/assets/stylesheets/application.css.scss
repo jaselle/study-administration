@@ -23,7 +23,7 @@ body {
 
 /*Spawned content should be below navigation bars, change margin here*/
 .content {
-  margin-top: 5%;
+  margin-top: 7.5%;
   margin-left: 7.5%;
   width: 85%;
   height: 100%;
@@ -592,4 +592,19 @@ border-collapse: separate;
   border-radius: 5px;
   padding-left: 1%;
 }
+
+@media (max-width: 1000px) {
+  .content {
+    margin-top: 10%;
+  }
+  .login li.topmenu {
+    font-size: 2vw;
+  }
+  .nav li.topmenu {
+    font-size: 2vw;
+  }
+}
+
+
+
 
