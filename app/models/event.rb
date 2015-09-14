@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
 
   has_many  :events_users
   has_many :users, through: :events_users
+  has_many :schedules, :dependent => :delete_all
   accepts_nested_attributes_for :events_users
 
 	validates_inclusion_of :cycle, :in => ['Jedes Wintersemester','Jedes Sommersemester','Jedes Semester', 'Jedes Wintersemester (ungerade)', 'Jedes Wintersemester (gerade)', 'Jedes Sommersemester (ungerade)', 'Jedes Sommersemester (gerade)', 'Nicht regelmäßig' ]

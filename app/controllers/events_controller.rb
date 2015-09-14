@@ -6,6 +6,11 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+#
+  def next_method
+
+  end
+
 #User is able to mark a event, he wants to join. 
 #if the user is logged in he can mark a event through the show-view.
   def mark_event
@@ -17,15 +22,6 @@ class EventsController < ApplicationController
       cu.semester = params[:semester]
       puts cu.to_s
       cu.save!
-
-     #gu = event.events_users.find_by_user_id(current_user)
-     #puts gu.id
-    # event.update_attributes(events_users_attributes: [{id: current_user, semester: params[:semester]}])
-
-     #puts params[:semester] 
-     #puts gu.nil?
-
-      
 
       redirect_to event_path(event), notice: "Veranstaltung vorgemerkt"
     else
@@ -51,10 +47,12 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
-
+    @event = Event.new(event_params.except!("schedules"))
+    
     respond_to do |format|
       if @event.save
+        schedules = event_params[:schedules]
+        Schedule.create!(date: event_params[:schedules], event_id: @event.id)
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -68,7 +66,14 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1.json
   def update
     respond_to do |format|
-      if @event.update(event_params)
+      schedules = event_params[:schedules]
+
+      Schedule.where(event_id: @event.id).destroy_all
+
+      event_params[:schedules].each do |sched|
+        Schedule.create(date: sched, event_id: @event.id)
+      end
+      if @event.update(event_params.except!("schedules"))
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
@@ -96,7 +101,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:id, :identifier, :title, :description, :prof, :credits, :sws, :cycle, :next, :exam_type, :condition, :events_users_attributes => [:semester])
+      params.require(:event).permit(:id, :identifier, :title, :description, :prof, :credits, :sws, :cycle, :next, :exam_type, :condition,  :schedules => [], :events_users_attributes => [:semester])
     end
 
    

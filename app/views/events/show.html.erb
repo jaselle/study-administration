@@ -36,6 +36,14 @@
   <strong>Zyklus:</strong>
   <%= @event.cycle %>
 </p>
+<% if @event.cycle == "Nicht regelmäßig" %>
+  <p>
+    <strong>Nächste Termine:</strong>
+    <% @event.schedules.each do |schedule| %>
+      <%= schedule.date %>
+    <% end %>
+  </p>
+<% end %> 
 
 <p>
   <strong>Prüfungsart:</strong>
@@ -75,7 +83,7 @@
       </div>
       <div class="modal-body">
       <p>
-      <label><%=  @event.cycle  %></label>
+      <label>Angebot: <%=  @event.cycle  %></label>
       <!-- Saves the cycle of the event into variable a -->
       <% curr_cycle = @event.cycle.split(" ")[1] %>
       <% curr_cycle_year = @event.cycle.split(" ")[2] %>
@@ -85,8 +93,7 @@
         <% a = 4 %>
       <% elsif  not curr_cycle == "regelmäßig" %>
         <% a = 2 %>
-      <% else %>
-        <% a= 100 %>
+    
       <% end %>
       <!-- if the current semester does not match die semester cycle of the event, add half a year to the date -->
       <% b = 0 %>
@@ -109,10 +116,16 @@
 
         <form method="POST" action="/courses" id="23" >
           <select name="semesters" id = "24" >
+          <% if @event.cycle != "Nicht regelmäßig" %>
             <option><%= get_current_semester_and_year_from_date(Time.now+b.month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*a+b).month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*2*a+b).month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*3*a+b).month.to_i) %></option> 
+          <% elsif %>
+            <% @event.schedules.each do |s| %>
+              <option><%= s.date %></option>
+            <% end %>
+          <% end %>
           </select>    
         </form>
         </p>
