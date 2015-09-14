@@ -1,5 +1,15 @@
 <%= stylesheet_link_tag "courseOverview.css" %>
 
+
+<ol class = "legend" >
+  <li style="list-style: square; color:#8DE28D;">Veranstaltung absolviert</li>
+  <li style="list-style: square; color:#ADD8E6;">Veranstaltung eingeplant </li>
+  <li style="list-style: square;">Veranstaltung noch nicht belegt</li>
+
+
+</ol>
+
+
 <p>
 
 <h3> Aktuelles Semester: <%= get_current_semester_and_year_from_date(Time.now) %> </h3>

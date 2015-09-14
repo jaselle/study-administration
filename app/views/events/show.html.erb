@@ -54,11 +54,11 @@
 
         <!-- <%= button_to "Veranstaltung hinzufügen", :action => "mark_event", :id => @id%> -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Hinzufügen</button>
-
     <% else %>
     <p class="info_txt">
          <strong>Die Veranstaltung <%= @event.title %> wurde zu deinem Plan hinzugefügt!</strong>
     </p>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ändern oder Entfernen</button>
     </br>
     <%end %>
 
@@ -130,6 +130,8 @@
         <div id="selector">
           <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id, :semester => "" %>
         </div>
+          <%= button_to "Veranstaltung abwählen", :action => "demark_event" ,:id => @id%>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Zurück</button>
@@ -141,3 +143,8 @@
 
 <br>
 <br>
+
+<% if can? :edit, Event %>
+  <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
+<%end%>
+<%= link_to 'Zurück', :back, class: 'btn btn-default' %>
