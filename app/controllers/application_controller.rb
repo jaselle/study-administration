@@ -57,18 +57,19 @@ def convert_date_to_number(string1)
 
 
 	if (year < curr_year)
-
-	puts "DIE VERANSTALTUNG IST SCHON BESTANDEN!"
-	return "bestanden"
+		return "bestanden"
 	elsif ( year == curr_year)
 		if(sem == curr_sem)
-	puts "DAS IST HEUTE DU HAMPELMANN!"
-	return "geplant"
+			return "geplant"
+		elsif(sem != curr_sem)
+			if(sem== "Wintersemester")
+				return "geplant"
+			else
+				return "bestanden"
+			end
 		end
-		elsif(year > curr_year)
-
-	puts "VERANSTALTUNG IST GEPLANT"
-	return "geplant"
+	elsif(year > curr_year)
+		return "geplant"
 	end 
  
 
