@@ -19,7 +19,6 @@ class EventsController < ApplicationController
       event.users << current_user
       cu = event.events_users.where(user_id: current_user.id).first
       cu.semester = params[:semester]
-      puts cu.to_s
       cu.save!
 
      #gu = event.events_users.find_by_user_id(current_user)
@@ -31,7 +30,7 @@ class EventsController < ApplicationController
 
       
 
-      redirect_to event_path(event), notice: "Veranstaltung vorgemerkt"
+      redirect_to event_path(event), notice: "Veranstaltung belegt!"
     else
       redirect_to event_path(event), alert: "Nicht eingeloggt"
     end
