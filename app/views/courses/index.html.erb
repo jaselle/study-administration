@@ -1,5 +1,15 @@
 <%= stylesheet_link_tag "courseOverview.css" %>
 
+
+<ol class = "legend" >
+  <li style="list-style: square; color:#8DE28D;">Veranstaltung absolviert</li>
+  <li style="list-style: square; color:#ADD8E6;">Veranstaltung eingeplant </li>
+  <li style="list-style: square;">Veranstaltung noch nicht belegt</li>
+
+
+</ol>
+
+
 <p>
 
 <h3> Aktuelles Semester: <%= get_current_semester_and_year_from_date(Time.now) %> </h3>
@@ -45,9 +55,25 @@
                           
 
                           <% f = blocks.events.order("title").map %>
-                          <% f.each do |events| %>
-                              <li class="file <%= events.cycle %>">
-                                    <%= link_to events.title, events %>
+                          <% f.each do |event| %>
+                          <% if current_user.events_users.map(&:event_id).include?(event.id) %>                              
+                            <%case convert_date_to_number(event.events_users.find_by_user_id(current_user.id).semester) %>
+                            <%when "geplant" %>
+                              <li class="plannedfile <%= event.cycle %>">
+                               <%= link_to event.title, event  %>
+
+                                <%when "bestanden"%>
+                                  <li class="passedfile <%= event.cycle %>">
+                                  <%= link_to event.title, event  %>
+
+                            <%end%>
+
+                           <%else%>
+                           <li class="file <%= event.cycle %>">
+                                
+                           <%= link_to event.title, event  %>
+
+                              <% end %>
                               </li>
                           <% end %>
                       </ol>

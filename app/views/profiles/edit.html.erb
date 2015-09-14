@@ -1,10 +1,7 @@
-<!-- check when we know what happens with profile pages. where can user/admin go -->
-
 <h1>Profil bearbeiten</h1>
+
 
 <%= render 'form' %>
 
-<%= link_to 'Anzeigen', @profile, class: 'btn btn-default' %> 
 
-<!-- link to go back is not correct. leads to all profiles. is this right or only available for admins???? -->
-<!--<%= link_to 'Zurück', :back, class: 'btn btn-default' %> -->
+<%= link_to 'Zurück zum Profil', :back, class: 'btn btn-default'  %>

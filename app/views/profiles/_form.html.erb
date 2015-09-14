@@ -3,6 +3,7 @@
 <%= form_for(@profile) do |f| %>
   <% if @profile.errors.any? %>
     <div id="error_explanation">
+
       <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
       <ul>
         <% @profile.errors.full_messages.each do |message| %>
@@ -37,7 +38,7 @@
     </div>
     <% if current_user != nil && current_user.role == "admin" %>
       <div class="field">
-        <%= ff.label :role%> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
+      <%= ff.label :role%> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
       </div>
     <% end %> 
   <% end %>
@@ -46,7 +47,6 @@
     <%= f.label :bio, "Über mich:" %><br>
     <%= f.text_area :bio %>
   </div>
-
 
 
   <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4> 
@@ -85,3 +85,5 @@
   </div>
 
 <% end %>
+
+
