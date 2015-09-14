@@ -23,15 +23,15 @@ end
 
 def get_current_semester_and_year_from_date(time)
 	#check intervals for winter- or summer-semester
-	if (time.month.to_i < 5 or time.month.to_i  > 9)
+	if (time.month.to_i < 4 or time.month.to_i  > 9)
 		semester = "Wintersemester"
 		#double if-clause to check which of both possible wintersemesters is meant.
-		if (time.month.to_i < 5)
+		if (time.month.to_i < 4)
 			year = " "+((time.year-1).to_s)+"/"+((time.year).to_s)
 		else
 			year = " "+((time.year).to_s)+"/"+((time.year+1).to_s)
 		end
-	elsif (time.month.to_i  > 4 and time.month.to_i  < 10)
+	elsif (time.month.to_i  > 3 and time.month.to_i  < 10)
 		semester = "Sommersemester"
 		year = " "+ (time.year).to_s
 	end
