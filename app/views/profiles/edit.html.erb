@@ -1,70 +1,8 @@
-<!-- check when we know what happens with profile pages. where can user/admin go -->
-
 <h1>Profil bearbeiten</h1>
 
-<%= form_for(@profile) do |f| %>
-  <% if @profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
 
-      <ul>
-      <% @profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= render 'form' %>
 
 
-  <div class="field">
-    <%= f.label :family_name,"Name" %><br>
-    <%= f.text_field :family_name %>
-  </div>
-  <div class="field">
-    <%= f.label :name,"Vorname" %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :birth_date,"Geburtsdatum" %><br>
-    <%= f.date_select :birth_date, :start_year => getBirthDateStart(), :end_year => getBirthDateEnd() %>
-  </div>
-  <div class="field">
-    <%= f.label :bio, "Über mich:" %><br>
-    <%= f.text_area :bio %>
-  </div>
-
-  <%= form_for(@profile.user) do |f| %>
-  <div class="field">
-    <%= f.label :role%> <%= f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-
-  <% end %>  
-
- <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4> 
- <ol class = "tree1">
-    <li class = "profile">
-    <!-- <div class="my_div"> -->
-      <label for="Module">Module</label>
-      <input type="checkbox" id="tolle_checkbox"  />
-     <!-- </div>-->
-      <ol>
-        <li class="profile">
-
-          <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
-            <%= b.label { b.check_box + b.text } %><br>
-          <% end %>
-        </li>
-      </ol>
-    </li>
-  </ol>
-
-   <% end %>
-
-<%= link_to 'Anzeigen', @profile, class: 'btn btn-default' %> 
-
-<!-- link to go back is not correct. leads to all profiles. is this right or only available for admins???? -->
-<!--<%= link_to 'Zurück', :back, class: 'btn btn-default' %> -->
+<%= link_to 'Show', @profile %> |
+<%= link_to 'Back', profiles_path %>
