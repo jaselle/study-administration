@@ -38,6 +38,21 @@ class RatingsController < ApplicationController
     end
   end
 
+  def rating
+    @rating = Rating.find(params[:rating_id])
+    @rating.send("#{params[:column]}=", params[:stars])
+ 
+    respond_to do |format|
+      if @rating.save
+      format.json { 
+        render :json => {
+          success: true
+        }
+      }
+    end
+end
+  end
+
   def show
    @rating = Rating.find(params[:id])
    @event = Rating.find(params[:id]).event

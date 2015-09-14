@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'ratings/index'
   get 'password_resets/index'
   post 'events/mark_event'
-  
+  post 'ratings/rate' => 'ratings#rating'
 
   resources :courses
   resources :charts

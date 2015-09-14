@@ -7,40 +7,46 @@
 #
 
 
-update_stars = ->
-  $('.star_rating_form').each ->
-    form_id = $(this).attr('id')
-    set_stars form_id, $('#' + form_id + '_stars').val()
+update_stars = (form_id)->
+
+    #alert column_name = $("#"+ form_id + "_"+ column).attr('data-column')
+
+    set_stars form_id, column_name,$('#' + form_id + '_stars').val()
     return
-  return
+
 
 set_stars = (form_id, stars) ->
   i = 1
   while i <= 5
     if i <= stars
-      $('#' + form_id + '_' + i).addClass 'on'
+      alert 
+      $('#' + form_id + "_" + i.toString()).addClass 'on'
     else
-      $('#' + form_id + '_' + i).removeClass 'on'
+      $('#' + form_id + "_" + i.toString()).removeClass 'on'
     i++
   return
+
+
 
 $ ->
   $('.rating_star').click ->
     star = $(this)
-    form_id = star.attr('data-form-id')
+    form_id = star.attr('data-form-id') 
+    rating_id = star.attr('data-rating-id')
     stars = star.attr('data-stars')
     column = star.attr('data-column')
-    alert column
     $('#' + form_id + '_stars').val stars
+
     $.ajax
       type: 'post'
-      url: $('#' + form_id).attr('action') + '.json'
+      url: "/ratings/rate"   
+      dataType: 'json'   
       data: 
+        rating_id: rating_id,
+        stars: stars,
         column: column,
-        value: $('#' + form_id).serialize()
       success: (response) ->
-        console.log response
-        update_stars()
+        set_stars(form_id, stars)
         if response['avg_rating']
           $('#average_rating').text response['avg_rating']
         return

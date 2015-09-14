@@ -10,164 +10,93 @@
 
 <table> 
 <thead>
-<th style="width: 30%;"/>
-<th style="width: 30%;"/>
+<th style="width: 20%;"/>
+<th style="width: 20%;"/>
 <th style="width: 10%;"/>
-<th style="width: 30%;"/>
+<th style="width: 20%;"/>
+<th style="width: 10%;"/>
+<th style="width: 20%;"/>
 </thead>
   <tr>
     <td>
     </td>
     <th>
+      <center> alle Benutzer
+      </center>
+    </th>
+      <td/>
+    <th>
       <center>
         <%=@rating.user.profile.name.capitalize%>
       </center>
     </th>
-    <td/>
-    <th>
-      <center> alle Benutzer
-      </center>
-    </th>
+  <td/>
+  <th>
+  <center>
+    Set user rating
+  </center>
+  </th>
   </tr>
+  <!--  Arrays for tooltip, name rating-category and column name -->
+  <%tooltip = [ 
+       "Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen",     
+       "Der Anspruch der Veranstaltung: 1 - 5 Sterne | hardcore - easy",
+       "Arbeitsaufwand der gesamten Verstaltung (z.B. für Übung, Tutorium, Vor- und Nacharbeiten): 1 - 5 Sterne | viel - wenig", 
+       "Die praktische Anwendung der in der Vorlesung vermittelten Theorien: 1 - 5 Sterne | reine Theorie - viel Anwendungen", 
+       "Nutzen des Arbeitsmateriales (z.B. Skript, Aufzeichnung): 1 - 5 Sterne | nicht hilfreich - hilfreich"]%>
+  <%rating_category = ["Teilnahme", "Schwierigkeit", "Arbeitsaufwand","Verhältnis Theorie/Praxis", "Arbeitsmaterial"]%>
+  <%column_name = ["attend", "tough", "effort" , "share", "material"]%>
+
+  <% (0..4).each do |a|%>
+
   <tr>
-    <th>
-      <span class="has-tooltip" data-toggle="tooltip" title="Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen">Teilnahme
+    <th><span class="has-tooltip" data-toggle="tooltip" title="<%=tooltip[a]%>"><%=rating_category[a]%>
       </span>
     </th> 
-    <td>   <!--if the user is logged in, he can see the stars to click.  -->
-       <% form_id = "event_#{@event.id}_rating" %>
-       <% if logged_in? %> <!-- To avoid throwing an exception if no user is signed in-->
-       <% user_id = current_user.id %>
-       <%= form_for @event.ratings.find_or_create_by(user_id: user_id), :html => {:id => form_id, :class => "star_rating_form"} do |f| %>
-        <%= f.hidden_field :event_id, :value => @event.id %>
-        <% if logged_in? %>
-            <%= f.hidden_field :user_id, :value => current_user.id %>
-        <% end %>        
-        <%= f.hidden_field :attend, :id => form_id + "_stars" %>
-    <% end %>
-
-    <% (1..5).each do |i| %>
-      <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>" data-column="attend"></li>
-    <% end %>  
-  <% end %>
-
-
-
-
-
-      <% (1..5).each do |i| %>
-        <%if i <= @rating.attend %>
-          <li class="rating_avg" ></li>
-        <% else %>
-          <li class="rating_rest" ></li>
-        <% end %>
-      <% end %> 
-    </td>
-    <td/>
     <td>
        <% (1..5).each do |i| %>
-        <%if i <= @event.avg_rating('attend') %>
-          <li class="rating_avg" ></li>
-        <% else %>
-          <li class="rating_rest" ></li>
-        <% end %>
-      <% end %> 
-    </td>
-  </tr>
-  <tr>
-    <th>
-      <span class="has-tooltip" data-toggle="tooltip" title="Der Anspruch der Veranstaltung: 1 - 5 Sterne | hardcore - easy">Schwierigkeit
-      </span>
-    </th>
-    <td> 
-      <% (1..5).each do |i| %>
-        <%if i <= @rating.tough %>
-          <li class="rating_avg" ></li>
-        <% else %>
-          <li class="rating_rest" ></li>
-        <% end %>
-      <% end %> 
-    </td>
-    <td/>
-    <td>
-       <% (1..5).each do |i| %>
-        <%if i <= @event.avg_rating('tough') %>
-          <li class="rating_avg" ></li>
-        <% else %>
-          <li class="rating_rest" ></li>
-        <% end %>
-      <% end %> 
-    </td>
-  </tr>
-  <tr>
-    <th>
-      <span class="has-tooltip" data-toggle="tooltip" title="Arbeitsaufwand der gesamten Verstaltung (z.B. für Übung, Tutorium, Vor- und Nacharbeiten): 1 - 5 Sterne | viel - wenig">Arbeitsaufwand
-      </span>
-    </th>
-    <td>
-      <% (1..5).each do |i| %>
-        <%if i <= @rating.effort %>
-          <li class="rating_avg" ></li>
-        <% else %>
-          <li class="rating_rest" ></li>
-        <% end %>
-      <% end %> 
-    </td>
-    <td/>
-    <td>
-       <% (1..5).each do |i| %>
-        <%if i <= @event.avg_rating('effort') %>
-          <li class="rating_avg" ></li>
-        <% else %>
-          <li class="rating_rest" ></li>
-        <% end %>
-      <% end %> 
-    </td>
-  </tr>
-  <tr>
-    <th><span class="has-tooltip" data-toggle="tooltip" title="Die praktische Anwendung der in der Vorlesung vermittelten Theorien: 1 - 5 Sterne | reine Theorie - viel Anwendungen">Verhältnis <br> Theorie/Praxis
-      </span></th>
-    <td> 
-      <% (1..5).each do |i| %>
-        <%if i <= @rating.share %>
+        <%if i <= @event.avg_rating("#{column_name[a]}") %>
           <li class="rating_avg" ></li>
         <% else %>
           <li class="rating_rest" ></li>
         <% end %>
       <% end %>
     </td>
-    <td/>
-    <td>
-       <% (1..5).each do |i| %>
-        <%if i <= @event.avg_rating('share') %>
-          <li class="rating_avg" ></li>
-        <% else %>
-          <li class="rating_rest" ></li>
-        <% end %>
-      <% end %> 
-    </td>
-  </tr>
-  <tr>
-    <th><span class="has-tooltip" data-toggle="tooltip" title="Nutzen des Arbeitsmateriales (z.B. Skript, Aufzeichnung): 1 - 5 Sterne | nicht hilfreich - hilfreich">Arbeitsmaterial
-      </span></th>
-    <td> 
-      <% (1..5).each do |i| %>
-        <%if i <= @rating.material %>
-          <li class="rating_avg" ></li>
-        <% else %>
-          <li class="rating_rest" ></li>
-        <% end %>
-      <% end %> 
     </td>
     <td/>
     <td>
-       <% (1..5).each do |i| %>
-        <%if i <= @event.avg_rating('material') %>
+   <% (1..5).each do |i| %>
+        <%if i <= @rating.send(column_name[a])%>
           <li class="rating_avg" ></li>
         <% else %>
           <li class="rating_rest" ></li>
         <% end %>
-      <% end %> 
-    </td>
+      <% end %>
+      </td>
+      <td/>
+      <td> <!-- if user clicks button, rating is visible   -->
+   
+
+        <!--if the user is logged in, he can see the stars to click.  -->
+       <% form_id = "event_#{@event.id}_rating_#{column_name[a]}" %>
+       <% if logged_in? %> <!-- To avoid throwing an exception if no user is signed in-->
+         <% user_id = current_user.id %>
+         <% rating =  @event.ratings.find_or_create_by(user_id: user_id) %>
+         <%= form_for rating, :html => {:id => form_id, :class => "star_rating_form"} do |f| %>
+            <%= f.hidden_field :event_id, :value => @event.id %>
+            <% if logged_in? %>
+              <%= f.hidden_field :user_id, :value => current_user.id %>
+            <% end %>        
+            <%= f.hidden_field :"#{column_name[a]}", :id => form_id + "_stars" %>
+      <% end %>
+
+    <% (1..5).each do |i| %>
+      <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>" data-column="<%=column_name[a]%>" data-rating-id="<%= rating.id %>"></li>
+    <% end %>  
+   
+  <% end %>
+    
   </tr>
+<%end%>
 </table>
+
