@@ -1,0 +1,110 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<table class = "table table-striped" style=" table-layout: fixed; width: 100%;">
+  <thead>
+    <tr class="sorts">
+      <th class="col-xs-1"><%= sortable "identifier", "Kürzel" %></th>
+      <th><%= sortable "title", "Titel" %></th>
+      <th><%= sortable "prof", "Professor" %></th>
+      <th><%= sortable "cycle", "Zyklus" %></th>
+      <th class="col-xs-mini"><%= sortable "credits", "ECTS" %></th>
+      <th class="col-xs-mini"><%= sortable "sws", "SWS" %></th>
+      <th style="width:12%;" />
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.order("title").each_with_index do |event, index| %>
+    <% if (index % 2 == 0) %>
+      <tr>
+        <td><%= event.identifier %></td>
+        <td><%= event.title %></td>
+        <td><%= event.prof %></td>
+        <td><%= event.cycle %></td>
+        <td><center><%= event.credits %></center></td>
+        <td><center><%= event.sws %></center></td>
+        <!-- added glyphicons to the buttons -->
+        <!-- added tooltip to glyphicons-->  
+        <td><div class="btn-group btn-group-justified btn_group_wide1">
+            <%= link_to event, class: "btn btn-default" do %>
+               <span class="has-tooltip" data-toggle="tooltip" title="Anzeigen">
+                <i class="glyphicon glyphicon-eye-open middle_icon"></i>
+              </span>
+          <% end %>
+          <% if can? :edit, @event %>
+          <%= link_to edit_event_path(event), class: "btn btn-default" do %>
+              <span class="has-tooltip" data-toggle="tooltip" title="Bearbeiten">
+                <i class="glyphicon glyphicon-pencil middle_icon"></i>
+              </span>
+          <% end %>
+          <% end %>
+          <% if can? :destroy, @event %>
+          <%= link_to event, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
+              <span class="has-tooltip" data-toggle="tooltip" title="Löschen">
+                <i class="glyphicon glyphicon-trash middle_icon"></i>
+              </span>
+          <% end %>
+          <% end %>
+        </div>
+        </td>
+      </tr>
+      <tr style="background-color: #f9f9f9;"> <!-- style="background-color: #f9f9f9">-->
+        <td colspan="7" style="height:4vw; vertical-align: top !important; ">
+          <i>Vorraussetzung:</i> <%= event.condition %>
+        </td>
+      </tr>
+
+
+       <% else %>
+      <tr style="background-color: rgba(1,0,0,0)">
+        <td><%= event.identifier %></td>
+        <td><%= event.title %></td>
+        <td><%= event.prof %></td>
+        <td><%= event.cycle %></td>
+        <td><center><%= event.credits %></center></td>
+        <td><center><%= event.sws %></center></td>
+        <!-- added glyphicons to the buttons -->
+        <!-- added tooltip to glyphicons-->  
+        <td><div class="btn-group btn-group-justified btn_group_wide1">
+            <%= link_to event, class: "btn btn-default" do %>
+               <span class="has-tooltip" data-toggle="tooltip" title="Anzeigen">
+                <i class="glyphicon glyphicon-eye-open middle_icon"></i>
+              </span>
+          <% end %>
+          <% if can? :edit, @event %>
+          <%= link_to edit_event_path(event), class: "btn btn-default" do %>
+              <span class="has-tooltip" data-toggle="tooltip" title="Bearbeiten">
+                <i class="glyphicon glyphicon-pencil middle_icon"></i>
+              </span>
+          <% end %>
+          <% end %>
+          <% if can? :destroy, @event %>
+          <%= link_to event, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
+              <span class="has-tooltip" data-toggle="tooltip" title="Löschen">
+                <i class="glyphicon glyphicon-trash middle_icon"></i>
+              </span>
+          <% end %>
+          <% end %>
+        </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="7" style="height:4vw; vertical-align: top !important; ">
+          <i>Vorraussetzung:</i> <%= event.condition %>
+        </td>
+      </tr>
+    <% end %>
+    <% end %>  
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+  <%= will_paginate @events%>
+</div>
+
+
+<% if can? :create, @event %>
+<%= link_to 'Neue Veranstaltung', new_event_path, class: 'btn btn-success' %>
+<%end%>

@@ -44,10 +44,7 @@
   </div>
   <div id="nextDate" class="field" style="display: none;" >
     <%= f.label :schedules, 'Nächster Termin' %><br>
-    <!--
-    <%= f.select :schedules,  [ get_current_semester_and_year_from_date(Time.now+6.month.to_i) , get_current_semester_and_year_from_date(Time.now+12.month.to_i) , get_current_semester_and_year_from_date(Time.now+18.month.to_i) , get_current_semester_and_year_from_date(Time.now+24.month.to_i)] %>
-    -->
-
+        <!-- the next 4 semesters are able to choose -->
         <%= f.select :schedules, options_for_select( [ get_current_semester_and_year_from_date(Time.now+6.month.to_i) , get_current_semester_and_year_from_date(Time.now+12.month.to_i) , get_current_semester_and_year_from_date(Time.now+18.month.to_i) , get_current_semester_and_year_from_date(Time.now+24.month.to_i)] ),{}, {:multiple => true}  %> 
        
   </div>
@@ -66,7 +63,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Abschicken", class: "btn btn-success" %>
+    <%= f.submit "Änderungen übernehmen", class: "btn btn-success" %>
   </div>
 </div>
 

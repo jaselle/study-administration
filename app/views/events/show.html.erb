@@ -1,75 +1,73 @@
 <%= stylesheet_link_tag "custom.css" %>
 
+<div class="container_events">
+  <div class="event_container">
+  <div class="left_side">
+  <h3>  <%= @event.identifier %> - <%= @event.title %></h3>
+  <h4>
+    <strong>Professor:</strong>
+    <%= @event.prof %>
+  </h4>
+  </div>
+  <div class="right_side">
+  <br/>
+    <strong>ECTS:</strong> <%= @event.credits %> <br/>
+    <strong>SWS:</strong> <%= @event.sws %><br/>
+    <strong>Zyklus:</strong> <%= @event.cycle %>
+    <% if @event.cycle == "Nicht regelmäßig" %>
+        <br>
+        <strong>Nächste Termine:</strong>
+        <% @event.schedules.each do |schedule| %>
+          <%= schedule.date %> <br>
+        <% end %>
+      
+    <% end %> 
+  </div>
+  </div>
 
+  <br/>
 
-<p>
-  <strong>Kürzel:</strong>
-  <%= @event.identifier %>
-</p>
+  <div class="left_side">
+    <strong>Prüfungsart:</strong>
+    <%= @event.exam_type %>
+  </div>
 
-<p>
-  <strong>Titel:</strong>
-  <%= @event.title %>
-</p>
+  <div class="right_side"><strong>Vorraussetzungen:</strong>
+   <%= @event.condition %>
+  </div>
+</div>
 
-<p>
+<br/>
+<br/>
+<div class="container_events">
+<p style="font-size: 1.15vw; line-height: 1.3vw;">
   <strong>Beschreibung:</strong>
   <%= @event.description %>
 </p>
 
-<p>
-  <strong>Professor:</strong>
-  <%= @event.prof %>
-</p>
-
-<p>
-  <strong>Credits:</strong>
-  <%= @event.credits %>
-</p>
-
-<p>
-  <strong>SWS:</strong>
-  <%= @event.sws %>
-</p>
-
-<p>
-  <strong>Zyklus:</strong>
-  <%= @event.cycle %>
-</p>
-<% if @event.cycle == "Nicht regelmäßig" %>
-  <p>
-    <strong>Nächste Termine:</strong>
-    <% @event.schedules.each do |schedule| %>
-      <%= schedule.date %>
-    <% end %>
-  </p>
-<% end %> 
-
-<p>
-  <strong>Prüfungsart:</strong>
-  <%= @event.exam_type %>
-</p>
-
-<p>
-  <strong>Bedingung:</strong>
-  <%= @event.condition %>
-</p>
-
-
-<p>
-<!-- if logged in, show the Button to mark an event-->
+</div>
+<br/>
+  
+  <!-- if logged in, show the Button to mark an event-->
   <% if logged_in? %>
     <% unless @event.users.find_by(id: current_user.id) %>
-      <p>
-        <!-- <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id%> -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Vormerken</button>
-      </p>
+
+        <!-- <%= button_to "Veranstaltung hinzufügen", :action => "mark_event", :id => @id%> -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Hinzufügen</button>
+
     <% else %>
-       <p>
-         <strong>Die Veranstaltung <%= @event.title %> ist belegt!</strong>
-      </p>
+    <p class="info_txt">
+         <strong>Die Veranstaltung <%= @event.title %> wurde zu deinem Plan hinzugefügt!</strong>
+    </p>
+    </br>
     <%end %>
+
+    <% if can? :edit, Event %>
+  <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
+<%end%>
   <% end %>
+  <!-- back button incorrect, should lead to event page ??? -->
+<%= link_to 'Zurück zu den Veranstaltungen', :events, class: 'btn btn-default' %>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -79,7 +77,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Veranstaltung vormerken</h4>
+        <h4 class="modal-title">Veranstaltung belegen</h4>
       </div>
       <div class="modal-body">
       <p>
@@ -143,8 +141,3 @@
 
 <br>
 <br>
-
-<% if can? :edit, Event %>
-  <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
-<%end%>
-<%= link_to 'Zurück', :back, class: 'btn btn-default' %>

@@ -1,13 +1,12 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+
+  helper_method :sort_column, :sort_direction
+
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-  end
-
-#
-  def next_method
+    @events = Event.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
 
   end
 
@@ -20,10 +19,8 @@ class EventsController < ApplicationController
       event.users << current_user
       cu = event.events_users.where(user_id: current_user.id).first
       cu.semester = params[:semester]
-      puts cu.to_s
       cu.save!
-
-      redirect_to event_path(event), notice: "Veranstaltung vorgemerkt"
+      redirect_to event_path(event), notice: "Veranstaltung belegt!"
     else
       redirect_to event_path(event), alert: "Nicht eingeloggt"
     end
@@ -52,7 +49,10 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         schedules = event_params[:schedules]
-        Schedule.create!(date: event_params[:schedules], event_id: @event.id)
+
+        event_params[:schedules].each do |sched|
+          Schedule.create!(date: sched, event_id: @event.id)
+        end
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -67,7 +67,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       schedules = event_params[:schedules]
-
+      # delete old schedules to avoid duplicates
       Schedule.where(event_id: @event.id).destroy_all
 
       event_params[:schedules].each do |sched|
@@ -104,5 +104,13 @@ class EventsController < ApplicationController
       params.require(:event).permit(:id, :identifier, :title, :description, :prof, :credits, :sws, :cycle, :next, :exam_type, :condition,  :schedules => [], :events_users_attributes => [:semester])
     end
 
+    #sort events
+    def sort_column
+      Event.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
    
 end
