@@ -461,6 +461,26 @@ border-collapse: separate;
   font-size: 1.5vw;
 }
 
+.our_link {
+  background: none !important;
+  text-decoration: none !important;
+  font-size: 1.15vw;
+  line-height: 1.5vw;
+  padding-left: 2%;
+}
+
+.our_link_head {
+  background: none !important;
+  text-decoration: none !important;
+  font-size: 1.15vw;
+  line-height: 1.5vw;
+  color: black;
+}
+
+.our_link_head:visited {
+  color: black;
+}
+
 /* align searchbar and Title */
 .aligned_search {
   display: inline-block;

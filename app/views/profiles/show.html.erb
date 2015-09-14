@@ -1,40 +1,45 @@
-<%if @profile.user != nil%>
-  <p>
-    <strong>Name:</strong>
-    <%= @profile.family_name %>
-  </p>
-
-  <p>
-    <strong>Vorname:</strong>
-    <%= @profile.name %>
-  </p>
-
-  <p>
-    <strong>E-Mail:</strong>      
+<div class="container_events">
+  <div class="event_container">
+    <div class="left_side">
+      <%if @profile.user != nil%>
+      <h3>
+      <%= @profile.name %> <%= @profile.family_name %>
+      </h3>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="container_events">
+  <div class="event_container">
+    <div class="left_side">
+      <strong>Geburtsdatum:</strong>
+      <%= @profile.birth_date %>
+      <br/>
+      <strong>E-Mail:</strong>      
       <%= @profile.user.email %>
-  </p>
-
-  <p>
-    <strong>Studiengang:</strong>
+      <br/>
+      <strong>Studiengang:</strong>
       <%if @profile.user.course != nil%>      
         <%= @profile.user.course.name %>
       <%else%>
         Kein Studiengang vorhanden
       <% end %>
-  </p>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="container_events">
+  <div class="event_container">
+    <div class="left_side">
+      <strong>Über mich:</strong>
+      <%= @profile.bio %>
+    </div>
+  </div>
+</div>
+
 
   <p>
-    <strong>Geburtsdatum:</strong>
-    <%= @profile.birth_date %>
-  </p>
-
-  <p>
-    <strong>Über mich:</strong>
-    <%= @profile.bio %>
-  </p>
-
-  <p>
-    <div class="box" style="background-color: #FF8080; height:auto;width: 600px; border-radius: 10px" >
+    <div class="box" style="background-color: rgba(255,128,128,0.5); width: 100%; border-radius: 5px; " >
       <% isWritten=false %>
       <% @profile.user.events.each do |eventCondition| %>
         <% if eventCondition.condition != nil%>
@@ -47,28 +52,32 @@
               <% end %>
             <% end %>
             <% if !b %>
-              <div class="box" style="padding-left:5px;padding-bottom:2px" >
+              <div class="box" style="padding-left: 2%;" >
                 <% if !isWritten %>
-                  <u><strong>
+                  <br/>
+                  <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
                     <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen nicht:" %> </br>
                   </u></strong>
                   <% isWritten=true %>
                 <% end %>
-              <% if Event.find_by_identifier(cSplitted) != nil %>
-                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_identifier(cSplitted)) %> </br>
-              <% else %>
-                <%= "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. " %> </br>
-              <% end %>
+<!--               <% if Event.find_by_identifier(cSplitted) != nil %>
+                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_identifier(cSplitted)), :class =>'our_link' %>
+               <% else %> -->
+
+               <!-- removed link to needed event, now only the event which was wrongly added to your plan is linked -->
+                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
+              <!-- <% end %> -->
               </div>
             <% end %>
           <% end %>
         <% end %>
       <% end %>
+      <br/>
     </div>
   </p>
 
   <p>
-    <div class="box" style="background-color:#8DE28D; height:auto;width: 600px; border-radius: 10px" >
+    <div class="box" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; " >
       <% isWritten=false %>
       <% @eventAll = Event.all %>
       <% @eventAll.each do |events| %>
@@ -90,24 +99,26 @@
           <% end %>
           <% if conditAll %>
             <% if @profile.user.events.find_by_identifier(events.identifier) == nil %>
-              <div class="box" style="padding-left:5px; padding-bottom:2px" >
+              <div class="box" style="padding-left: 2%;" >
                 <% if !isWritten %>
-                  <u><strong>
+                  <br/>
+                  <u style="line-height:1.5vw; font-size: 1.25vw; text-decoration:none;"><strong>
                   <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
                   </u></strong>
                 <% isWritten=true %>
                 <% end %>
-                <%= link_to events.title,event_path(events) %> </br>
+                 <u style="line-height:1.5vw; text-decoration:none;"><%= link_to events.title,event_path(events), :class=>'our_link' %> </u>
               </div>
             <% end %>
           <% end %>
         <% end %>
       <% end %>
+      </br>
     </div>
   </p>
 
   <p>
-    <div class="box" style="background-color:#ADD8E6; height:auto;width: 600px; border-radius: 10px" >
+    <div class="box" style="background-color: rgba(173,216,230,0.5); height:auto;width: 100%; border-radius: 5px;" >
       <% @profile.user.events.each do |eventIdent| %>
         <% @eventAll = Event.all %>
         <% @eventAll.each do |events| %>
@@ -123,14 +134,15 @@
                     <% @cSplit2.each do |cSplitted2| %>
                       <% if cSplitted2.eql? events.identifier %>
                         <% if @profile.user.events.find_by_identifier(events.identifier) == nil %>
-                          <div class="box" style="padding-left:5px;padding-bottom:2px" >
+                          <div class="box" style="padding-left: 2%;" >
                             <% if !isWritten %>
                               <% isWritten = true %>
-                              <u><strong>
-                                <%= link_to "Wenn sie " + events.title + " belegen:", event_path(events) %> </br>
+                              <br/>
+                              <u style="line-height:1.5vw; font-size: 1.25vw; text-decoration:none;"><strong>
+                                <%= link_to "Wenn sie " + events.title + " belegen:", event_path(events), :class=>'our_link_head'%> </br>
                               </u></strong>
                             <% end %>
-                            <%= link_to "Können sie  " + events2.title + " belegen. ", event_path(events2) %> </br>
+                            <%= link_to "Können sie  " + events2.title + " belegen. ", event_path(events2), :class=>'our_link' %> </br>
                           </div>
                         <% end %>
                       <% end %>
@@ -142,6 +154,7 @@
           <% end %>
         <% end %>
       <% end %> 
+      <br/>
     </div>
   </p>
 
