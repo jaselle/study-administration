@@ -16,11 +16,16 @@ class EventsController < ApplicationController
     event = Event.find(params[:id])
     #semester = params[:semester]
     unless current_user.nil?
+      if (event.events_users.where(user_id: current_user.id).first.nil?)
       event.users << current_user
       cu = event.events_users.where(user_id: current_user.id).first
       cu.semester = params[:semester]
       cu.save!
-
+      else
+        cu = event.events_users.where(user_id: current_user.id).first
+        cu.semester = params[:semester]
+        cu.save!
+        end
      #gu = event.events_users.find_by_user_id(current_user)
      #puts gu.id
     # event.update_attributes(events_users_attributes: [{id: current_user, semester: params[:semester]}])
@@ -36,10 +41,19 @@ class EventsController < ApplicationController
     end
   end
 
+
+  def demark_event
+    event = Event.find(params[:id])
+    event.events_users.where(user_id: current_user.id).first.destroy
+    redirect_to event_path(event), notice: "Veranstaltung wieder abgewählt!"
+
+  end
+
   # GET /events/1
   # GET /events/1.json
   def show
     @id = params[:id]
+    puts 1
   end
 
   # GET /events/new
