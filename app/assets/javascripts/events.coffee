@@ -53,18 +53,13 @@ $ ->
       $("#nextDate").show()
     else 
       $("#nextDate").hide()
+    return   
+    if $("#event_cycle").val() == "Nicht regelmäßig"
+      $("#nextDate").show()
+    else 
+      $("#nextDate").hide()
     return
-    
-  if $("#event_cycle").val() == "Nicht regelmäßig"
-    $("#nextDate").show()
-  else 
-    $("#nextDate").hide()
-  return
-  
-  return
 
-
-  $ ->
   $('body').on 'click', 'tr.sorts th a', (e) ->
     e.preventDefault()
     $.ajax
@@ -82,4 +77,24 @@ $ ->
   $('#search input').keyup ->
     $.get $('#events_search').attr('action'), $('#events_search').serialize(), null, 'script'
     
+  $('#myDiv1').click ->
+    if $('#1').prop('checked')
+      $('#1').prop 'checked', false
+    else
+      $('#1').prop 'checked', true
+    return
+
+  $('#myDiv0').click ->
+    if $('#0').prop('checked')
+      $('#0').prop 'checked', false
+    else
+      $('#0').prop 'checked', true
+    return
+
+  $('#myCourse').click ->
+    if $('#check_course').prop('checked')
+      $('#check_course').prop 'checked', false
+    else
+      $('#check_course').prop 'checked', true
+    return
 
