@@ -89,15 +89,17 @@
             <% end %>
           <% end %>
           <% if conditAll %>
-            <div class="box" style="padding-left:5px; padding-bottom:2px" >
-              <% if !isWritten %>
-                <u><strong>
+            <% if @profile.user.events.find_by_identifier(events.identifier) == nil %>
+              <div class="box" style="padding-left:5px; padding-bottom:2px" >
+                <% if !isWritten %>
+                  <u><strong>
                   <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
-                </u></strong>
+                  </u></strong>
                 <% isWritten=true %>
-              <% end %>
-              <%= link_to events.title,event_path(events) %> </br>
-            </div>
+                <% end %>
+                <%= link_to events.title,event_path(events) %> </br>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
@@ -120,15 +122,17 @@
                     <% @cSplit2=events2.condition.split('; ') %>
                     <% @cSplit2.each do |cSplitted2| %>
                       <% if cSplitted2.eql? events.identifier %>
-                        <div class="box" style="padding-left:5px;padding-bottom:2px" >
-                        <% if !isWritten %>
-                          <% isWritten = true %>
-                          <u><strong>
-                           <%= link_to "Wenn sie " + events.title + " belegen:", event_path(events) %> </br>
-                          </u></strong>
+                        <% if @profile.user.events.find_by_identifier(events.identifier) == nil %>
+                          <div class="box" style="padding-left:5px;padding-bottom:2px" >
+                            <% if !isWritten %>
+                              <% isWritten = true %>
+                              <u><strong>
+                                <%= link_to "Wenn sie " + events.title + " belegen:", event_path(events) %> </br>
+                              </u></strong>
+                            <% end %>
+                            <%= link_to "Können sie  " + events2.title + " belegen. ", event_path(events2) %> </br>
+                          </div>
                         <% end %>
-                        <%= link_to "Können sie  " + events2.title + " belegen. ", event_path(events2) %> </br>
-                        </div>
                       <% end %>
                     <% end %>  
                   <% end %>
