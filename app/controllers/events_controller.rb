@@ -6,8 +6,15 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
+    if !current_user || current_user.role == 'admin'
+      @events = Event.all
+    else
+      @events = Event.all.where("id IN (SELECT events.id FROM events, blocks_events, blocks, blocks_courses WHERE
+                                events.id = blocks_events.event_id AND blocks_events.block_id = blocks.id AND
+                                blocks.id = blocks_courses.block_id AND blocks_courses.course_id = " + current_user.course_id.to_s + ")")
+    end
 
+    @events = @events.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
   end
 
 #User is able to mark a event, he wants to join. 
