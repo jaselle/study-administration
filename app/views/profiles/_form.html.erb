@@ -4,14 +4,16 @@
   <% if @profile.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-
       <ul>
-      <% @profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
+
+   
+  
 
   <div class="field">
     <%= f.label :family_name,"Name" %><br>
@@ -33,7 +35,7 @@
       <%= ff.label :course, 'Studiengang' %>
       <%= ff.collection_select :course_id, Course.order(:name), :id, :name, class: "same_width1_input" %>
     </div>
-    <% if current_user != nil && if current_user.role == "admin" %>
+    <% if current_user != nil && current_user.role == "admin" %>
       <div class="field">
         <%= ff.label :role%> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
       </div>
@@ -46,34 +48,40 @@
   </div>
 
 
-    <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4> 
- <ol class = "tree1">
+
+  <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4> 
+  <ol class = "tree1">
     <li class = "profile">
-    <!-- <div class="my_div"> -->
       <label for="Module">Module</label>
       <input type="checkbox" id="tolle_checkbox"  />
-     <!-- </div>-->
       <ol>
         <li class="profile">
-
           <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
             <%= b.label { b.check_box + b.text } %><br>
-              <ol>
-                <li class="semester">
-                  <!-- <%= f.collection_select :semester, Provider.order(:name),:id,:name, include_blank: true %>-->
-                </li>
-              </ol>
+            <select name="semester<%= b.value %>" >
+              <option selected="true" disabled="disabled">Bitte wählen</option>
+              <option><%= get_current_semester_and_year_from_date(Time.now-6.month.to_i) %></option>
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*2).month.to_i) %></option>
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*3).month.to_i) %></option> 
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*4).month.to_i) %></option> 
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*5).month.to_i) %></option> 
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*6).month.to_i) %></option> 
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*8).month.to_i) %></option>
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*9).month.to_i) %></option> 
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*10).month.to_i) %></option> 
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*11).month.to_i) %></option> 
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*12).month.to_i) %></option> 
+              <option><%= get_current_semester_and_year_from_date(Time.now-(6*13).month.to_i) %></option> 
+            </select>    
+            <br>
           <% end %>
         </li>
       </ol>
     </li>
   </ol>
 
-
-
-
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Abschicken", class: "btn btn-success" %>
   </div>
- <% end %>
- <% end %>
+
+<% end %>

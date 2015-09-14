@@ -15,7 +15,6 @@ class EventsController < ApplicationController
       event.users << current_user
       cu = event.events_users.where(user_id: current_user.id).first
       cu.semester = params[:semester]
-      puts cu.to_s
       cu.save!
 
      #gu = event.events_users.find_by_user_id(current_user)
