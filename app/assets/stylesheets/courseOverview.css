@@ -27,6 +27,41 @@ li.file
 {
     margin-left: -1px !important;
 }
+/*list events which are already passed*/
+li.passedfile
+{
+    margin-left: -1px !important;
+    background-color: #8DE28D;
+}
+
+li.plannedfile
+{
+    margin-left: -1px !important;
+    background-color: #ADD8E6;
+}
+
+
+/*lists passed events of one block and assigns picture*/
+li.passedfile a{
+    background: url(/assets/file.png) 0 0 no-repeat;
+    background-size: 23px 28.5px;
+    padding-left: 40px;
+    text-decoration: none;
+    display: block;
+    font-size: 1.3vw;
+    line-height: 1.43vw;
+}
+
+li.plannedfile a{
+    background: url(/assets/file.png) 0 0 no-repeat;
+    background-size: 23px 28.5px;
+    padding-left: 40px;
+    text-decoration: none;
+    display: block;
+    font-size: 1.3vw;
+    line-height: 1.43vw;
+}
+
 
 /*lists courses of one block and assigns picture*/
 li.file a{
@@ -40,11 +75,13 @@ li.file a{
 }
 
 
+
 li.file input + ol > li{
     display: none;
     margin-left: -14px !important; 
     padding-left: 1px;
 }
+
 
 input:checked + ol > li.file { 
     display: block; 
