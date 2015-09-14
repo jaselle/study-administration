@@ -32,7 +32,7 @@ class BlocksController < ApplicationController
 
     respond_to do |format|
       if @block.save
-        format.html { redirect_to @block, notice: 'Block was successfully created.' }
+        format.html { redirect_to @block, notice: 'Block wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @block }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class BlocksController < ApplicationController
   def update
     respond_to do |format|
       if @block.update(block_params)
-        format.html { redirect_to @block, notice: 'Block was successfully updated.' }
+        format.html { redirect_to @block, notice: 'Block wurde erfolgreich geändert.' }
         format.json { render :show, status: :ok, location: @block }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class BlocksController < ApplicationController
   def destroy
     @block.destroy
     respond_to do |format|
-      format.html { redirect_to blocks_url, notice: 'Block was successfully destroyed.' }
+      format.html { redirect_to blocks_url, notice: 'Block wurde erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
   end
