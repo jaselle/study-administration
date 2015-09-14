@@ -6,15 +6,6 @@
 #
 #
 
-
-update_stars = (form_id)->
-
-    #alert column_name = $("#"+ form_id + "_"+ column).attr('data-column')
-
-    set_stars form_id, column_name,$('#' + form_id + '_stars').val()
-    return
-
-
 set_stars = (form_id, stars) ->
   i = 1
   while i <= 5

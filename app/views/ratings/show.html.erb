@@ -1,3 +1,10 @@
+<script>$(function(){
+                   $("div2").hide();
+              $("a").click(function(event){event.preventDefault(); 
+              $("div2").toggle(); 
+              });
+       });</script>
+
 <head>
   <center>
     <h4>
@@ -33,7 +40,7 @@
   <td/>
   <th>
   <center>
-    Set user rating
+     <a href ="#"> Bewertung abgeben</a> 
   </center>
   </th>
   </tr>
@@ -73,10 +80,11 @@
         <% end %>
       <% end %>
       </td>
-      <td/>
+      <td/> 
       <td> <!-- if user clicks button, rating is visible   -->
    
-
+       
+       <div2>       
         <!--if the user is logged in, he can see the stars to click.  -->
        <% form_id = "event_#{@event.id}_rating_#{column_name[a]}" %>
        <% if logged_in? %> <!-- To avoid throwing an exception if no user is signed in-->
@@ -95,7 +103,8 @@
     <% end %>  
    
   <% end %>
-    
+    </div2>
+    </td>
   </tr>
 <%end%>
 </table>
