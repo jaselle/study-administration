@@ -40,7 +40,7 @@
       <%course = @courses.find_by_id(current_user.course_id) %>
       <% unless course.nil? %>
         <li class = "course">
-          <label for="course"><%=    link_to course.name,  course %></label>
+          <label for="course"><%= link_to course.name,  course %></label>
           <input type="checkbox"  id="course" style="width: 20px; height: 20px;"/>
             <ol id="outer">
               <!-- Ebene 2: Blocks -->
@@ -48,7 +48,7 @@
               <% e.each do |blocks| %>
                 <li class = "course">
                     <!-- <span class="glyphicon glyphicon-folder-close"></span> -->
-                    <label for="blocks"><%= link_to blocks.name, blocks %></label>
+                    <label for="blocks"><%= link_to blocks.name, blocks %>  | <%= blocks.credits_min %> ECTS Credits sind zu erreichen.</label>
                     <input style="border: solid green 1px !important;" type="checkbox"  id="blocks"/>
                       <ol id="inner">
 
