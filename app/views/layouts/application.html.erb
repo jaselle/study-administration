@@ -23,7 +23,7 @@
         <!-- Navigation bar items -->
         <li class="topmenu"><a href="/courses"><center>Studiengänge</center></a>
           <ul>
-            <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
+            <li class="submenu"><a href="/profiles">Profiles</a></li>
             <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
           </ul>
         </li>
@@ -115,11 +115,14 @@
  </header>
 <div class="content">
 <!-- allows alerts and notice -->
-<div>
+<!-- <div>
   <p id="notice"><%= flash[:notice] %></p>
   <p id="alert"><%= flash[:alert] %></p>
  
-</div> 
+</div> -->
+<div class="notification_container">
+  <%= render partial: "/layouts/flash", flash: flash %>
+</div>
 <%= yield %>
 <!-- </center> -->
 </div>

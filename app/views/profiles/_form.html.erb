@@ -3,13 +3,12 @@
 <%= form_for(@profile) do |f| %>
   <% if @profile.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-
-      <ul>
-      <% @profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+    <ul>
+    <% @profile.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
     </div>
   <% end %>
 
@@ -35,7 +34,7 @@
     </div>
     <% if current_user != nil && if current_user.role == "admin" %>
       <div class="field">
-        <%= ff.label :role%> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
+      <%= ff.label :role%> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
       </div>
     <% end %> 
   <% end %>
@@ -45,15 +44,16 @@
     <%= f.text_area :bio %>
   </div>
 
-  <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4>
-    <ol class = "tree1">
-      <li class = "profile">
-        <!-- <div class="my_div"> -->
-        <label for="Module">Module</label>
-        <input type="checkbox" id="tolle_checkbox"  />
-        <!-- </div>-->
-        <ol>
-          <li class="profile">
+  <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4> 
+  <ol class = "tree1">
+    <li class = "profile">
+    <!-- <div class="my_div"> -->
+      <label for="Module">Module</label>
+      <input type="checkbox" id="tolle_checkbox"  />
+     <!-- </div>-->
+      <ol>
+        <li class="profile">
+
           <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
             <%= b.label { b.check_box + b.text } %><br>
           <% end %>
@@ -62,9 +62,8 @@
     </li>
   </ol>
 
-
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Abschicken", class: "btn btn-success" %>
   </div>
- <% end %>
- <% end %>
+<% end %>
+<% end %>

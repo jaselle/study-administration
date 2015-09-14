@@ -7,22 +7,37 @@
 #
 
 
-#update_stars = ->
-# $('.star_rating_form').each ->
-#    form_id = $(this).attr('id')
-#    set_stars form_id, $('#' + form_id + '_stars').val()
-#    return
-#  return
-
-#set_stars = (form_id, stars) ->
-#  i = 1
-#  while i <= 5
-#    if i <= stars
-#      $('#' + form_id + '_' + i).addClass 'on'
-#    else
-#      $('#' + form_id + '_' + i).removeClass 'on'
-#    i++
-#  return
+  $("#event_cycle").change -> 
+    if $("#event_cycle").val() == "Nicht regelmäßig"
+      $("#nextDate").show()
+    else 
+      $("#nextDate").hide()
+    return
+    
+  if $("#event_cycle").val() == "Nicht regelmäßig"
+    $("#nextDate").show()
+  else 
+    $("#nextDate").hide()
+  return
+  
+  return
 
 
-#  return
+  $ ->
+  $('body').on 'click', 'tr.sorts th a', (e) ->
+    e.preventDefault()
+    $.ajax
+      type: 'GET',
+      url: @href,
+      dataType: 'Script'
+
+  $('body').on 'click', '.pagination a', (e) ->
+    e.preventDefault()
+    $.ajax
+      type: 'GET',
+      url: @href,
+      dataType: 'Script'
+     
+  $('#search input').keyup ->
+    $.get $('#events_search').attr('action'), $('#events_search').serialize(), null, 'script'
+    

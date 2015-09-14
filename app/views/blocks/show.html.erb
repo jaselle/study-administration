@@ -1,17 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="container_events">
+  <div class="event_container">
+  <div class="left_side">
 
-<p>
-  <strong>Name:</strong>
+<h3>
   <%= @block.name %>
-</p>
-<p>
-  <strong>Zu erreichende Credits:</strong>
-  <%= @block.credits_min %>
-</p>
-<p>
-  <strong>Veranstaltungen:<br></strong>
-  <%= @block.events.map { |a| a.title }.join("<br>").html_safe %>
-</p>
+</h3>
+</div>
+<div class="right_side" style="position: relative;
+  transform: translateY(60%);">
+<h4 style="font-size: 1.4vw">
+  Zu erreichende Credits: <%= @block.credits_min %>
+</h4>
+</div>
+</div>
+</div>
+<br/>
+<div class="container_events">
+  <h4><strong>Veranstaltungen:</strong></h4>
+  <%= @block.events.map { |a| a.title }.join("<br/>").html_safe %>
 
+</div>
+
+<br/>
 <%= link_to 'Bearbeiten', edit_block_path(@block), class: "btn btn-default" %> 
 <%= link_to 'Zurück zu den Blöcken', '/blocks', class: "btn btn-default" %>

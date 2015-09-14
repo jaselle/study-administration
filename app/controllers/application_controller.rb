@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  helper_method :get_current_semester, :get_current_semester_and_year, :get_next_semester_and_year
+  helper_method :get_current_semester, :get_current_semester_and_year, :get_next_semester_and_year, :get_current_semester_and_year_from_date, :convert_date_to_number
   protect_from_forgery with: :exception
-
 
 def js_logged_in
   if(!logged_in?)
@@ -17,50 +16,79 @@ end
  def not_authorized(text)
  	redirect_to root_path, alert: text
  end
-# gets the current semester calculated with the current date 
-def get_current_semester_and_year()
-	#check intervals for winter- or summer-semester
-	if (Time.now.month < 5 or Time.now.month  > 9)
-		semester = "Wintersemester"
-		#double if-clause to check which of both possible wintersemesters is meant.
-		if (Time.now.month < 5)
-			year = " "+((Time.now.year-1).to_s)+"/"+Date.today.strftime("%Y")
-		else
-			year = " "+Date.today.strftime("%Y")+"/"+((Time.now.year+1).to_s)
-		end
-	elsif (Time.now.month  > 4 and Time.now.month  < 10)
-		semester = "Sommersemester"
-		year = " "+ Date.today.strftime("%Y")
-	end
 
-	return semester + year
-end		
-
-def get_current_semester
-	return get_current_semester_and_year.split(" ")[0]
+def get_current_semester_from_date(time)
+	return get_current_semester_and_year_from_date(time).split(" ")[0]
 end 
 
-def get_next_semester_and_year(text)
-	
-	if (text.split(" ")[0] == "Wintersemester")
-		semester = "Sommersemester"
-		year = (text.split(" ")[1].split("/")[0].to_i + 1).to_s
-	else
+def get_current_semester_and_year_from_date(time)
+	#check intervals for winter- or summer-semester
+	if (time.month.to_i < 4 or time.month.to_i  > 9)
 		semester = "Wintersemester"
-		year1 = text.split(" ")[1].split("/")[0].to_i
-		year2 = year1 + 1
-		year = (year1.to_s)+"/"+(year2.to_s)
+		#double if-clause to check which of both possible wintersemesters is meant.
+		if (time.month.to_i < 4)
+			year = " "+((time.year-1).to_s)+"/"+((time.year).to_s)
+		else
+			year = " "+((time.year).to_s)+"/"+((time.year+1).to_s)
+		end
+	elsif (time.month.to_i  > 3 and time.month.to_i  < 10)
+		semester = "Sommersemester"
+		year = " "+ (time.year).to_s
 	end
+	return semester + year
+end	
+
+
+def convert_date_to_number(string1)
 	
+	curr_date = get_current_semester_and_year_from_date(Time.now)
+	curr_sem= curr_date.split(" ")[0]
+	if(curr_sem == "Sommersemester")
+		curr_year= curr_date.split(" ")[1]
+	else 
+		curr_year = curr_date.split(" ")[1].split("/")[0]
+	end
+	sem = string1.split(" ")[0]
+	if(sem == "Sommersemester")
+		year= string1.split(" ")[1]
+	else 
+		year = string1.split(" ")[1].split("/")[0]
+	end
 
-	return semester +" "+ year
 
-end
+	if (year < curr_year)
+		return "bestanden"
+	elsif ( year == curr_year)
+		if(sem == curr_sem)
+			return "geplant"
+		elsif(sem != curr_sem)
+			if(sem== "Wintersemester")
+				return "geplant"
+			else
+				return "bestanden"
+			end
+		end
+	elsif(year > curr_year)
+		return "geplant"
+	end 
+ 
+
+end	
+
+
 
  def redirect_to_profile
  	redirect_to profile_path(@user.profile)
  end
 
+# needed? does not work we assume
+def some_method
+  redirect_to :back
+rescue ActionController::RedirectBackError
+  redirect_to :root
+end
+
+add_flash_types :my_flash
 
 end
 

@@ -16,7 +16,6 @@ def avg_rating(column)
   end
                 
   if count != 0
-    puts "check"
     (average_rating / count)
   else
     count

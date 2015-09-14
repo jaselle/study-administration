@@ -10,7 +10,6 @@ set_stars = (form_id, stars) ->
   i = 1
   while i <= 5
     if i <= stars
-      alert 
       $('#' + form_id + "_" + i.toString()).addClass 'on'
     else
       $('#' + form_id + "_" + i.toString()).removeClass 'on'

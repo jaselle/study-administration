@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'ratings/index'
   get 'password_resets/index'
   post 'events/mark_event'
-  post 'ratings/rate' => 'ratings#rating'
+  post 'events/demark_event'
 
   resources :courses
   resources :charts
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
 get 'login' => 'user_sessions#new', :as => :login
 post 'logout' => 'user_sessions#destroy', :as => :logout
+post 'ratings/rate' => 'ratings#rating'
 post "csv_reader/import" # access to post for CSV-Reader.
 
 
