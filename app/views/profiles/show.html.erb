@@ -40,7 +40,7 @@
 
   <!-- Warnings in case the conditions aren't met -->
   <p>
-    <div class="box" style="background-color: rgba(255,128,128,0.5); width: 100%; border-radius: 5px; " >
+    <div class="box" style="background-color: rgba(255,128,128,0.5); width: 100%; border-radius: 5px; height:auto;" >
       <% isWritten=false %>
       <!-- All events the user has selected -->
       <% @profile.user.events.each do |eventCondition| %>
@@ -83,7 +83,7 @@
 
   <!-- Immediate suggestions -->
   <p>
-    <div class="box" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; " >
+    <div class="box" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; height:auto; " >
       <% isWritten=false %>
       <!-- All conditions for all events -->
       <% @eventAll = Event.all %>
