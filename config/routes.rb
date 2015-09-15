@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'charts/index'
 
   resources :profiles
-
+  get 'ratings/index'
   get 'password_resets/index'
   post 'events/mark_event'
   post 'events/demark_event'
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
 get 'login' => 'user_sessions#new', :as => :login
 post 'logout' => 'user_sessions#destroy', :as => :logout
+post 'ratings/rate' => 'ratings#rating'
 post "csv_reader/import" # access to post for CSV-Reader.
 
 
