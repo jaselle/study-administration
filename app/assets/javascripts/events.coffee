@@ -43,13 +43,6 @@ $ ->
       $('#check_course').prop 'checked', true
     return
 
-  $('#myDiv1').click ->
-    if $('#1').prop('checked')
-      $('#1').prop 'checked', false
-    else
-      $('#1').prop 'checked', true
-    return
-
   $('.our_list_item').each (index) ->
     $('#myDiv' + index).click ->
       if $('#' + index).prop('checked')
