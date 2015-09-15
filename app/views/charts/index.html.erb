@@ -4,8 +4,7 @@
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-<% query = "Select "
-%>
+<%column_name = ["attend", "tough", "effort" , "share", "material"]%>
 
 <script>
 $(function () {
@@ -21,7 +20,7 @@ $(function () {
             color: color || 'white'
         });
     }
-    
+   
     $(document).ready(function() {
     
         var categories = [
@@ -34,7 +33,12 @@ $(function () {
                 <%@blocks.each do |block| %>
                         <% avgrating = 0%>
                         <%block.events.each do |event|%>
-                            <% avgrating +=event.avg_rating("attend")%>
+                            <% avgcolumn = 0%>
+                            <% (0..4).each do |a|%>
+                                <% avgcolumn +=event.avg_rating("#{column_name[a]}")%>
+                            <%end%>
+                            <%avgcolumn /= 5%>
+                            <% avgrating += avgcolumn%>
                         <%end%>
                         {
                         y: <%= (avgrating/block.events.count).round(2) %>,
@@ -47,7 +51,12 @@ $(function () {
                         <%end%>],
                         data: [
                         <%block.events.each do |event|%>
-                        <%=event.avg_rating("attend")%>,
+                            <% avgcolumn = 0%>
+                            <% (0..4).each do |a|%>
+                                <% avgcolumn +=event.avg_rating("#{column_name[a]}")%>
+                            <%end%>
+                            <%avgcolumn /= 5%>
+                        <%=avgcolumn%>,
                         <%end%>],
                         color: colors[0]
                                     }

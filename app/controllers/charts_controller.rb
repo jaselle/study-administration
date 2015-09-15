@@ -1,6 +1,7 @@
 class ChartsController < ApplicationController
   def index
-  	@blocks = Block.all
+    @course = Course.find(current_user.course_id)
+   	@blocks = @course.blocks
 
   end
 
