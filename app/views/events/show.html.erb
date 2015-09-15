@@ -146,9 +146,6 @@
 <!-- Displays the single stars for Average Rating -->
  <% query = "SELECT (avg(attend) + avg(tough) + avg(effort) + avg(share) + avg(material)) / 5 FROM ratings WHERE attend != 0 AND tough != 0 AND effort != 0 AND share != 0 AND material != 0 AND event_id = " + @event.id.to_s + ";" %>
  <% records_result = ActiveRecord::Base.connection.execute(query) %>
- <% records_array = records_result.values %>
- <% puts records_array %>
-
  <% result = records_result.getvalue(0, 0) %>
   <% (1..5).each do |i| %>
     <%if i <= (result.to_f + 0.5) %>
