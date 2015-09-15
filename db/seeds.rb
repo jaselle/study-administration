@@ -13,4 +13,4 @@ unless User.find_by_email("mbeutel@uos.de")
 end
 
 Course.import("Courses.csv")
-Blocks.import("Blocks.csv")
+Block.import("Blocks.csv")
