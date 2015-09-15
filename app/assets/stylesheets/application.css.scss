@@ -249,7 +249,6 @@ body {
 /* make scrollable field for too long texts */
 .overflow_to_scroll {
   overflow-y: scroll;
-  height: 55px;
 }
 
 /* change width here for width of whole email,pw,button group*/
@@ -636,4 +635,43 @@ border-collapse: separate;
 
 .text_colum {
   width: 50%;
+}
+
+.profile_mod {
+  line-height: 2vw;
+  font-size: 1.15vw;
+}
+
+#check_modul {
+  position: absolute;
+  left: 250%;
+}
+
+#myModule {
+  cursor: pointer;
+  font-size: 1.5vw;
+  line-height: 2vw;
+}
+
+#myModule:after {
+  font-family: 'Glyphicons Halflings';
+  content: "  \e117  ";
+  font-size: 1vw;
+}
+
+.our_form_fields {
+  font-size: 1.15vw;
+}
+
+.our_profile_fields {
+  width: 100% !important;
+}
+
+.col-profile {
+  width:25vw;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: left;
 }
