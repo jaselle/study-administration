@@ -14,7 +14,6 @@ class Block < ActiveRecord::Base
 	      row_hash = row.to_hash
 	      block = Block.create! row_hash.except!("relation")
 	      course = row_hash["relation"].split(";")
-
 	      course = Course.find_by(degree: course[0], name: course[1])
 	      unless course.nil? && !course.blocks.find_by_name(row_hash["name"]).nil?
 	        course.blocks << block
