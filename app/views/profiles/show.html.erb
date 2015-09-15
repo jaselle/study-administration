@@ -1,147 +1,232 @@
-<%if @profile.user != nil%>
-  <p>
-    <strong>Name:</strong>
-    <%= @profile.family_name %>
-  </p>
-
-  <p>
-    <strong>Vorname:</strong>
-    <%= @profile.name %>
-  </p>
-
-  <p>
-    <strong>E-Mail:</strong>      
+<div class="container_events">
+  <div class="event_container">
+    <div class="left_side">
+      <%if @profile.user != nil%>
+      <h3>
+      <%= @profile.name %> <%= @profile.family_name %>
+      </h3>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="container_events">
+  <div class="event_container">
+    <div class="left_side">
+      <strong>Geburtsdatum:</strong>
+      <%= @profile.birth_date %>
+      <br/>
+      <strong>E-Mail:</strong>      
       <%= @profile.user.email %>
-  </p>
-
-  <p>
-    <strong>Studiengang:</strong>
+      <br/>
+      <strong>Studiengang:</strong>
       <%if @profile.user.course != nil%>      
         <%= @profile.user.course.name %>
       <%else%>
         Kein Studiengang vorhanden
       <% end %>
-  </p>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="container_events">
+  <div class="event_container">
+    <div class="left_side">
+      <strong>Über mich:</strong>
+      <%= @profile.bio %>
+    </div>
+  </div>
+</div>
 
-  <p>
-    <strong>Geburtsdatum:</strong>
-    <%= @profile.birth_date %>
-  </p>
 
+  <!-- Warnings in case the conditions aren't met -->
   <p>
-    <strong>Über mich:</strong>
-    <%= @profile.bio %>
-  </p>
-
-  <p>
-    <div class="box" style="background-color: #FF8080; height:auto;width: 600px; border-radius: 10px" >
+    <div class="box" style="background-color: rgba(255,128,128,0.5); width: 100%; border-radius: 5px; height:auto;" >
       <% isWritten=false %>
+      <!-- All events the user has selected -->
       <% @profile.user.events.each do |eventCondition| %>
-        <% if eventCondition.condition != nil%>
+      
+        <!-- If they have a condition -->
+        <% if !eventCondition.condition.blank? %>
+        
           <% @cSplit = eventCondition.condition.split('; ') %>
+          <!-- Check all conditions of user selected events -->
           <% @cSplit.each do |cSplitted| %>
+          
             <% b = false %>
             <% @profile.user.events.each do |events| %>
+            
               <% if cSplitted.eql? events.identifier %>
                 <% b = true %>
               <% end %>
             <% end %>
+            <!-- If a condition isn't met, show in profile -->
             <% if !b %>
-              <div class="box" style="padding-left:5px;padding-bottom:2px" >
+              <div class="box" style="padding-left: 2%;" >
                 <% if !isWritten %>
-                  <u><strong>
+                  <br/>
+                  <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
                     <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen nicht:" %> </br>
                   </u></strong>
                   <% isWritten=true %>
                 <% end %>
-              <% if Event.find_by_identifier(cSplitted) != nil %>
-                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_identifier(cSplitted)) %> </br>
-              <% else %>
-                <%= "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. " %> </br>
-              <% end %>
+<!--               <% if Event.find_by_identifier(cSplitted) != nil %>
+                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_identifier(cSplitted)), :class =>'our_link' %>
+               <% else %> -->
+
+               <!-- removed link to needed event, now only the event which was wrongly added to your plan is linked -->
+                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
+              <!-- <% end %> -->
               </div>
+            <%else%>
             <% end %>
           <% end %>
+          <%else%>
+          <div class="box" style="padding-left: 2%;" >
+            <br/>
+            <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+               Sie erfüllen die Vorraussetzungen für alle von Ihnen hinzugefügten Veranstaltungen!</br>
+            </u></strong>
+          </div>
         <% end %>
       <% end %>
+      <br/>
     </div>
   </p>
 
+  <!-- Immediate suggestions -->
   <p>
-    <div class="box" style="background-color:#8DE28D; height:auto;width: 600px; border-radius: 10px" >
+    <div class="box" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; height:auto; " >
       <% isWritten=false %>
+      <!-- All conditions for all events -->
       <% @eventAll = Event.all %>
       <% @eventAll.each do |events| %>
-        <% if events.condition != nil%>
-          <% @cSplit=events.condition.split('; ') %>
-          <% conditAll=true %>
-          <% @cSplit.each do|cSplitted| %>
-            <% found = false %>
-            <% @profile.user.events.each do |eventIdent| %>
-              <% if !found %>
-                <% if cSplitted.eql? eventIdent.identifier %>
-                  <% found = true %>
-                <% end %>  
-              <% end %>
-            <% end %>
-            <% if !found %>
-              <% conditAll = false %>
-            <% end %>
-          <% end %>
-          <% if conditAll %>
-            <% if @profile.user.events.find_by_identifier(events.identifier) == nil %>
-              <div class="box" style="padding-left:5px; padding-bottom:2px" >
-                <% if !isWritten %>
-                  <u><strong>
-                  <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
-                  </u></strong>
-                <% isWritten=true %>
+        <!-- If the event is relevant to the user -->
+        <% events.blocks.each do |eBlock| %>
+          <% eBlock.courses.each do |eCourse| %>
+            <% if @profile.user.course == eCourse %> 
+              <% if !events.condition.blank? %>
+                <% @cSplit=events.condition.split('; ') %>
+                <% conditAll=true %>
+                <% @cSplit.each do|cSplitted| %>
+                  <% found = false %>
+                  <!-- Check if the user meets all conditions -->
+                  <% @profile.user.events.each do |eventIdent| %>
+                    <% if !found %>
+                      <% if cSplitted.eql? eventIdent.identifier %>
+                        <% found = true %>
+                      <% end %>  
+                    <% end %>
+                  <% end %>
+                  <% if !found %>
+                    <% conditAll = false %>
+                  <% end %>
                 <% end %>
-                <%= link_to events.title,event_path(events) %> </br>
-              </div>
+                <!-- If all conditions are met, show in profile -->
+                <!-- If the user has not already selected the event -->
+                <% if conditAll %>
+                  <% if @profile.user.events.find_by_identifier(events.identifier) == nil %>
+                    <div class="box" style="padding-left: 2%;" >
+                      <% if !isWritten %>
+                        <br/>
+                        <u style="line-height:1.5vw; font-size: 1.25vw; text-decoration:none;"><strong>
+                          <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
+                        </u></strong>
+                        <% isWritten=true %>
+                      <% end %>
+                      <u style="line-height:1.5vw; text-decoration:none;"><%= link_to events.title,event_path(events), :class=>'our_link' %> </u>
+                      <% if !isWritten %>
+                        <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+                        "Keine Veranstaltungsvorschläge vorhanden."</br>
+                        </u></strong>
+                      <%end%>
+                    </div>
+                  <% end %>
+                <% end %>
+              <!-- If an event does not have conditions -->
+              <% else %>
+                <% if @profile.user.events.find_by_identifier(events.identifier) == nil %>
+                  <div class="box" style="padding-left: 2%;" >
+                    <% if !isWritten %>
+                      <u style="line-height:1.5vw; font-size: 1.25vw; text-decoration:none;"><strong>
+                        <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
+                      </u></strong>
+                      <% isWritten=true %>
+                    <% end %>
+                    <u style="line-height:1.5vw; text-decoration:none;"><%= link_to events.title,event_path(events), :class=>'our_link' %> </u>
+                      <% if !isWritten %>
+                        <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+                        "Keine Veranstaltungsvorschläge vorhanden."</br>
+                        </u></strong>
+                      <%end%>
+                  </div>
+                <% end %>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
       <% end %>
+      </br>
     </div>
   </p>
 
+  <!-- Conditional suggestions -->
   <p>
-    <div class="box" style="background-color:#ADD8E6; height:auto;width: 600px; border-radius: 10px" >
+    <div class="box" style="background-color: rgba(173,216,230,0.5); height:auto;width: 100%; border-radius: 5px;" >
+      <!-- All user selected events -->
       <% @profile.user.events.each do |eventIdent| %>
         <% @eventAll = Event.all %>
         <% @eventAll.each do |events| %>
-         <% if events.condition != nil%>
-            <% @cSplit=events.condition.split('; ') %>
-            <% @cSplit.each do|cSplitted| %>
-             <% isWritten = false %>
-              <% if cSplitted.eql? eventIdent.identifier %>
-                <% @eventAll2 = Event.all %>
-                <% @eventAll2.each do |events2| %>
-                  <% if events2.condition != nil%>
-                    <% @cSplit2=events2.condition.split('; ') %>
-                    <% @cSplit2.each do |cSplitted2| %>
-                      <% if cSplitted2.eql? events.identifier %>
-                        <% if @profile.user.events.find_by_identifier(events.identifier) == nil %>
-                          <div class="box" style="padding-left:5px;padding-bottom:2px" >
-                            <% if !isWritten %>
-                              <% isWritten = true %>
-                              <u><strong>
-                                <%= link_to "Wenn sie " + events.title + " belegen:", event_path(events) %> </br>
-                              </u></strong>
+          <!-- If the event is relevant to the user -->
+          <% events.blocks.each do |eBlock| %>
+            <% eBlock.courses.each do |eCourse| %>
+              <% if @profile.user.course == eCourse %> 
+                <% if !events.condition.blank? %>
+                  <!-- All conditions of events -->
+                  <% @cSplit=events.condition.split('; ') %>
+                  <% @cSplit.each do|cSplitted| %>
+                    <% isWritten = false %>
+                    <!-- If the user meets the conditions -->
+                    <% if cSplitted.eql? eventIdent.identifier %>
+                      <% @eventAll2 = Event.all %>
+                      <% @eventAll2.each do |events2| %>
+                        <% if events2.condition != nil%>
+                          <!-- All conditions of events, second time -->
+                          <% @cSplit2=events2.condition.split('; ') %>
+                          <% @cSplit2.each do |cSplitted2| %>
+                            <!-- If the condition matches the event -->
+                            <% if cSplitted2.eql? events.identifier %>
+                              <!-- If the user has not already selected the event -->
+                              <!-- Show in profile, the events and its condition -->
+                              <% if @profile.user.events.find_by_identifier(events.identifier) == nil %>
+                                <div class="box" style="padding-left: 2%;" >
+                                  <% if !isWritten %>
+                                    <% isWritten = true %>
+                                    </br>
+                                    <u style="line-height:1.5vw; font-size: 1.25vw; text-decoration:none;"><strong>
+                                      <%= link_to "Wenn Sie " + events.title + " belegen:", event_path(events), :class=>'our_link_head' %> </br>
+                                    </u></strong>
+                                  <% end %>
+                                  <%= link_to "Können Sie  " + events2.title + " belegen. ", event_path(events2), :class=>'our_link' %> </br>
+                                  <% if !isWritten %>
+                                    <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+                                    "Keine Veranstaltungsvorschläge vorhanden."</br>
+                                    </u></strong>
+                                  <%end%>
+                                </div>
+                              <% end %>
                             <% end %>
-                            <%= link_to "Können sie  " + events2.title + " belegen. ", event_path(events2) %> </br>
-                          </div>
+                          <% end %>  
                         <% end %>
                       <% end %>
-                    <% end %>  
+                    <% end %>
                   <% end %>
                 <% end %>
               <% end %>
-            <% end %>
+            <% end %> 
           <% end %>
         <% end %>
       <% end %> 
+      <br/>
     </div>
   </p>
 

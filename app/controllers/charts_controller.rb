@@ -12,6 +12,13 @@ class ChartsController < ApplicationController
 
   end
 
+    # execute sql query
+  def executesql(query)
+      records_result = ActiveRecord::Base.connection.execute(query)
+      result = records_result.getvalue(0, 0)
+    return result
+  end
+
   def block_users
   	sumblock = 0
   	@blocks.each do |block|

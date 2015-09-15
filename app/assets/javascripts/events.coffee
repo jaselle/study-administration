@@ -6,65 +6,19 @@
 #
 #
 
-
-update_stars = ->
-  $('.star_rating_form').each ->
-    form_id = $(this).attr('id')
-    set_stars form_id, $('#' + form_id + '_stars').val()
-    return
-  return
-
-set_stars = (form_id, stars) ->
-  i = 1
-  while i <= 5
-    if i <= stars
-      $('#' + form_id + '_' + i).addClass 'on'
-    else
-      $('#' + form_id + '_' + i).removeClass 'on'
-    i++
-  return
-
 $ ->
-  $('.rating_star').click ->
-    star = $(this)
-
-    form_id = star.attr('data-form-id')
-    stars = star.attr('data-stars')
-    $('#' + form_id + '_stars').val stars
-    $.ajax
-      type: 'post'
-      url: $('#' + form_id).attr('action') + '.json'
-      data: $('#' + form_id).serialize()
-      success: (response) ->
-        console.log response
-        
-        update_stars()
-        if response['avg_rating']
-          $('#average_rating').text response['avg_rating']
-        return
-      error: (xhr, ajaxOptions, thrownError) ->
-        alert thrownError
-    return
-
-  
-
   $("#event_cycle").change -> 
     if $("#event_cycle").val() == "Nicht regelmäßig"
       $("#nextDate").show()
     else 
       $("#nextDate").hide()
+    return   
+    if $("#event_cycle").val() == "Nicht regelmäßig"
+      $("#nextDate").show()
+    else 
+      $("#nextDate").hide()
     return
-    
-  if $("#event_cycle").val() == "Nicht regelmäßig"
-    $("#nextDate").show()
-  else 
-    $("#nextDate").hide()
-  return
-  
-  return
 
-
-  $ ->
   $('body').on 'click', 'tr.sorts th a', (e) ->
     e.preventDefault()
     $.ajax
@@ -81,5 +35,19 @@ $ ->
      
   $('#search input').keyup ->
     $.get $('#events_search').attr('action'), $('#events_search').serialize(), null, 'script'
-    
 
+  $('#myCourse').click ->
+    if $('#check_course').prop('checked')
+      $('#check_course').prop 'checked', false
+    else
+      $('#check_course').prop 'checked', true
+    return
+
+  $('.our_list_item').each (index) ->
+    $('#myDiv' + index).click ->
+      if $('#' + index).prop('checked')
+        $('#' + index).prop 'checked', false
+      else
+        $('#' + index).prop 'checked', true
+      return
+    return

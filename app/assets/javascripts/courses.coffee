@@ -32,3 +32,4 @@ $ ->
 		$('#selector').find('.button_to').attr('action' , tmp + $("#24").val())
 	return
 
+	

@@ -1,6 +1,4 @@
 /* Just some base styles not needed for example to function */
-
-
 /* CSS Tree menu styles */
 ol.tree {   
 padding: 0 0 0 2%;
@@ -20,32 +18,22 @@ ol.tree a {
 li.course 
 { 
     position: relative; 
-    margin-left: -15px;
     list-style: none;
-}
-li.file
-{
-    margin-left: -1px !important;
 }
 /*list events which are already passed*/
 li.passedfile
 {
-    margin-left: -1px !important;
     background-color: #8DE28D;
 }
 
 li.plannedfile
 {
-    margin-left: -1px !important;
     background-color: #ADD8E6;
 }
 
 
 /*lists passed events of one block and assigns picture*/
 li.passedfile a{
-    background: url(/assets/file.png) 0 0 no-repeat;
-    background-size: 23px 28.5px;
-    padding-left: 40px;
     text-decoration: none;
     display: block;
     font-size: 1.3vw;
@@ -53,29 +41,15 @@ li.passedfile a{
 }
 
 li.plannedfile a{
-    background: url(/assets/file.png) 0 0 no-repeat;
-    background-size: 23px 28.5px;
-    padding-left: 40px;
     text-decoration: none;
     display: block;
     font-size: 1.3vw;
     line-height: 1.43vw;
 }
 
-ol.legend {
-
- position: absolute;
-  right: 150px;
-
-
-}
-
 
 /*lists courses of one block and assigns picture*/
 li.file a{
-    background: url(/assets/file.png) 0 0 no-repeat;
-    background-size: 1.25vw 1.5vw;
-    padding-left: 40px;
     text-decoration: none;
     display: block;
     font-size: 1.3vw;
@@ -86,71 +60,128 @@ li.file a{
 
 li.file input + ol > li{
     display: none;
-    margin-left: -14px !important; 
-    padding-left: 1px;
 }
 
 
 input:checked + ol > li.file { 
     display: block; 
+}
+
+input:not(:checked) + ol > li.file{ 
+    display: none !important; 
+}
+
+/* Has to be added so that planned and passed files are hidden when parent folder is closed*/
+input:checked + ol > li.passedfile { 
+    display: block; 
+}
+input:not(:checked) + ol > li.passedfile{ 
+    display: none !important; 
+    margin: 0 0 0.125em ;  
+}
+
+li.plannedfile a:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e022  ";
+}
+
+li.passedfile a:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e022  ";
+}
+
+li.file a:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e022  ";
+}
+
+input:checked + ol > li.plannedfile { 
+    display: block; 
+    margin: 0 0 0.125em ; 
+}
+input:not(:checked) + ol > li.plannedfile{ 
+    display: none !important; 
+    margin: 0 0 0.125em ;  
+}
+
+input:checked + ol > li.plannedfile { 
+    display: block; 
     margin: 0 0 0.125em ;  /* 2px */
 }
-input:not(:checked) + ol > li.file{ 
+input:not(:checked) + ol > li.plannedfile{ 
+    display: none !important; 
+    margin: 0 0 0.125em ;  /* 2px */
+}
+
+input:checked + ol > li.passedfile { 
+    display: block; 
+    margin: 0 0 0.125em ;  /* 2px */
+}
+input:not(:checked) + ol > li.passedfile{ 
     display: none !important; 
     margin: 0 0 0.125em ;  /* 2px */
 }
 
 li.course input
 {
+    transform: scale(1);
     position: absolute;
-    left: 0;
-    margin-left: 0;
-    opacity: 0;
-    z-index: 2;
-    cursor: pointer;
-    height: 1em;
-    width: 1em;
-    top: 0;
+    left: 250%;
 }
-li.course input + ol{
-    background: url(/assets/folder_closed.png) 50px 0px no-repeat;
-    background-size: 1.5vw 1.5vw;
-    margin: -1.938em 0 0 -44px; /* 15px */
-    height: 1em;
+li.course input + ol:after{
     font-size: 1.3vw;
     line-height: 1.43vw;
+}
+
+li.course label:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e117  "
 }
 
 li.course label{
     cursor: pointer;
     display: block;
-    padding-left: 55px;
     font-size: 1.3vw;
     line-height: 2.8vw;
 }
 
 li.course input:checked + ol
 {
-    background: url(/assets/folder_open.png) 50px 0px no-repeat;
-    padding-left: 40px;
-    background-size: 1.5vw 1.25vw;
-    margin: -2.25em 0 0 -44px; /* 20px */
-    padding: 1.563em 0 0 80px;
     height: auto;
 }
 
+/*maybe not needed at all...*/
 li.course input:checked + ol > li:last-child { 
-    margin: 0 0 0.063em ; /* 1px */ 
+    /*margin: 0 0 0.063em ;*/
 }
 
 
 li.course input + ol > li { 
     display: none;
-    margin-left: -14px !important; 
-    padding-left: 1px;
 }
 
 li.course input:checked + ol > li{ 
     display: block; 
-    margin: 0 0 0.125em ;  /* 2px */
+}
+
+.legend {
+    overflow: hidden;
+}
+
+.legend_container {
+    float:right;
+    border-radius: 5px;
+    background-color: rgba(220,220,220,0.5);
+    padding: 2%;
+}
+
+.legend_square {
+    font-size: 1.15vw !important;
+    list-style: none;
+}
+
+.legend_square:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\2601 ";
+    margin-right: 1%;
 }

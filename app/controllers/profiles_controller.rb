@@ -28,7 +28,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        format.html { redirect_to @profile, notice: 'Profil wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }
@@ -41,23 +41,56 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1.json
   def update
     @profile.user = User.update(@profile.user.id, profile_params[:user_attributes])
-    respond_to do |format|
-      if @profile.update(profile_params.except(:user_attributes))
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
-        format.json { render :show, status: :ok, location: @profile }
+    if !current_user.nil?
+      if current_user.role == "admin" || current_user.id == @profile.user.id 
+        valid = true
+        params[:profile][:id].each do |i|
+          unless i.blank? or i.nil?
+            if params[('semester' + i.to_s).to_sym].nil?
+              valid = false
+            end
+          end
+        end
+        params[:profile][:id].each do |i| 
+          unless i.blank? or i.nil?
+            event = Event.find(i)
+            if valid
+              if !event.users.find_by(id: current_user.id)
+                event.users << current_user 
+                cu = event.events_users.find_by(user_id: current_user.id)
+                cu.semester = params[('semester' + i.to_s).to_sym]
+                cu.save!
+              else 
+                event.users.delete(current_user.id)
+                event.users << current_user 
+                cu = event.events_users.find_by(user_id: current_user.id)
+                cu.semester = params[('semester' + i.to_s).to_sym]
+                cu.save!
+              end  
+            else 
+              redirect_to :back, alert: "Zu jeder bestandenen Veranstaltung muss das Semester angegeben werden!" and return
+            end
+          end
+        end
+        if @profile.update(profile_params.except(:user_attributes))
+          redirect_to "/profiles/#{@profile.id}", notice: "Profil erfolgreich bearbeitet!" and return
+        else
+          redirect_to '/profiles/#{@profile.id}/edit', alert: "Fehler. Bitte nochmal versuchen." and return
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
+        redirect_to :back, alert: "Keine Rechte." and return
       end
+    else 
+      redirect_to :back, alert: "Nicht eingeloggt." and return
     end
   end
-
+      
   # DELETE /profiles/1
   # DELETE /profiles/1.json
   def destroy
     @profile.destroy
     respond_to do |format|
-      format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
+      format.html { redirect_to profiles_url, notice: 'Profil wurde erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
   end

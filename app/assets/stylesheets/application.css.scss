@@ -23,7 +23,7 @@ body {
 
 /*Spawned content should be below navigation bars, change margin here*/
 .content {
-  margin-top: 5%;
+  margin-top: 7.5%;
   margin-left: 7.5%;
   width: 85%;
   height: 100%;
@@ -461,6 +461,26 @@ border-collapse: separate;
   font-size: 1.5vw;
 }
 
+.our_link {
+  background: none !important;
+  text-decoration: none !important;
+  font-size: 1.15vw;
+  line-height: 1.5vw;
+  padding-left: 2%;
+}
+
+.our_link_head {
+  background: none !important;
+  text-decoration: none !important;
+  font-size: 1.15vw;
+  line-height: 1.5vw;
+  color: black;
+}
+
+.our_link_head:visited {
+  color: black;
+}
+
 /* align searchbar and Title */
 .aligned_search {
   display: inline-block;
@@ -593,3 +613,15 @@ border-collapse: separate;
   padding-left: 1%;
 }
 
+/*change size when window is getting to small*/
+@media (max-width: 1000px) {
+  .content {
+    margin-top: 10%;
+  }
+  .login li.topmenu {
+    font-size: 2vw;
+  }
+  .nav li.topmenu {
+    font-size: 2vw;
+  }
+}
