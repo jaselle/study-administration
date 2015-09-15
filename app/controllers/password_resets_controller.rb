@@ -38,6 +38,12 @@ class PasswordResetsController < ApplicationController
       return
     end
 
+    if params[:user][:password] != params[:user][:password_confirmation]
+      flash[:alert] = "Passwörter stimmen nicht überein."
+      render :action => "edit"
+      return
+    end
+
     # the next line makes the password confirmation validation work
     @user.password_confirmation = params[:user][:password_confirmation]
     # the next line clears the temporary token and updates the password
