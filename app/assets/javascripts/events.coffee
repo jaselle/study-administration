@@ -77,18 +77,13 @@ $ ->
   $('#search input').keyup ->
     $.get $('#events_search').attr('action'), $('#events_search').serialize(), null, 'script'
     
-  $('#myDiv1').click ->
-    if $('#1').prop('checked')
-      $('#1').prop 'checked', false
-    else
-      $('#1').prop 'checked', true
-    return
-
-  $('#myDiv0').click ->
-    if $('#0').prop('checked')
-      $('#0').prop 'checked', false
-    else
-      $('#0').prop 'checked', true
+  $('.our_list_item').each (index) ->
+    $('#myDiv' + index).click ->
+      if $('#' + index).prop('checked')
+        $('#' + index).prop 'checked', false
+      else
+        $('#' + index).prop 'checked', true
+      return
     return
 
   $('#myCourse').click ->

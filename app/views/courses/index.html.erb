@@ -45,8 +45,7 @@
               <!-- Ebene 2: Blocks -->
               <% e = course.blocks.order("name").map %>
               <% e.each_with_index  do |blocks, index| %>
-                <li class = "course">
-                    <!-- <span class="glyphicon glyphicon-folder-close"></span> -->
+                <li class = "course our_list_item">
                     <label id="myDiv<%= index%>" for="blocks"><%= blocks.name %></label>
                     <input type="checkbox" id="<%= index%>"/>
                       <ol id="inner">
