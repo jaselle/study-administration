@@ -76,11 +76,6 @@
           <td>
         <% end %>
         <div class="btn-group btn-group-justified">
-          <%= link_to block, class: "btn btn-default" do %>
-            <span class="has-tooltip" data-toggle="tooltip" title="Anzeigen">  
-              <i class="glyphicon glyphicon-eye-open middle_icon"></i>
-            </span>
-          <% end %>
           <% if can? :edit, @block %>
           <%= link_to edit_block_path(block), class: "btn btn-default" do %>
             <span class="has-tooltip" data-toggle="tooltip" title="Bearbeiten">            
