@@ -164,7 +164,7 @@
 
   <!-- Conditional suggestions -->
   <p>
-    <div class="box" style="background-color: rgba(173,216,230,0.5); height:auto;width: 100%; border-radius: 5px;" >s
+    <div class="box" style="background-color: rgba(173,216,230,0.5); height:auto;width: 100%; border-radius: 5px;" >
       <% isUsed = false %>
       <!-- All user selected events -->
       <% @profile.user.events.each do |eventIdent| %>
@@ -220,7 +220,7 @@
         <div class="box" style="padding-left: 2%;" >
           <br/>
           <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
-          Keine Veranstaltungsvorschläge vorhanden.</br>
+          Es existieren im Moment keine durch Belegung verfügbar werdende Veranstaltungen für Sie!</br>
           </u></strong>
         </div>
       <%end%>
