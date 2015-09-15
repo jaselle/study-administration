@@ -170,6 +170,7 @@
   <!-- Conditional suggestions -->
   <p>
     <div class="box" style="background-color: rgba(173,216,230,0.5); height:auto;width: 100%; border-radius: 5px;" >
+      <% exist = false %>
       <!-- All user selected events -->
       <% @profile.user.events.each do |eventIdent| %>
         <% @eventAll = Event.all %>
@@ -199,6 +200,7 @@
                                 <div class="box" style="padding-left: 2%;" >
                                   <% if !isWritten %>
                                     <% isWritten = true %>
+                                    <% exist = true %>
                                     </br>
                                     <u style="line-height:1.5vw; font-size: 1.25vw; text-decoration:none;"><strong>
                                       <%= link_to "Wenn Sie " + events.title + " belegen:", event_path(events), :class=>'our_link_head' %> </br>
@@ -224,7 +226,7 @@
           <% end %>
         <% end %>
       <% end %> 
-      <% if !isWritten %>
+      <% if !exist %>
           <div class="box" style="padding-left: 2%;" >
             <br/>
             <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
