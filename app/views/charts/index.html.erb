@@ -3,6 +3,10 @@
 <script src="http://code.highcharts.com/modules/drilldown.js"></script>
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<% query = "Select "
+%>
+
 <script>
 $(function () {
     var chart,
@@ -30,7 +34,7 @@ $(function () {
                 <%@blocks.each do |block| %>
                         <% avgrating = 0%>
                         <%block.events.each do |event|%>
-                            <% avgrating +=event.avg_rating%>
+                            <% avgrating +=event.avg_rating("attend")%>
                         <%end%>
                         {
                         y: <%= (avgrating/block.events.count).round(2) %>,
@@ -43,7 +47,7 @@ $(function () {
                         <%end%>],
                         data: [
                         <%block.events.each do |event|%>
-                        <%=event.avg_rating%>,
+                        <%=event.avg_rating("attend")%>,
                         <%end%>],
                         color: colors[0]
                                     }
@@ -121,6 +125,10 @@ $(function () {
         });
     });
     
+
+
+
+
     $('.update').on('click', function() {
         var newData = [{
             name: 'MSIE versions',

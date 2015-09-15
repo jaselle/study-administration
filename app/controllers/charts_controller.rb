@@ -1,25 +1,32 @@
-class ChartsController < ApplicationController
-  def index
-  	@blocks = Block.all
 
-  end
 
-  def sumevent(block)
-  	sumevent = 0
-  		block.events.each do |event|
-  			sumevent += event.users.count
-  		end
 
-  end
 
+
+
+
+      
+        sumevent += event.users.count
+      block.events.each do |event|
+      end
+      sumblock += sumevent(block)
+    @blocks = Block.all
+    @blocks.each do |block|
+    end
+    return sumblock
+    sumblock = 0
+    sumevent = 0
+      records_result = ActiveRecord::Base.connection.execute(query)
+      result = records_result.getvalue(0, 0)
+    # execute sql query
+    return result
   def block_users
-  	sumblock = 0
-  	@blocks.each do |block|
-  		
-  		sumblock += sumevent(block)
-  	return sumblock
-  	end
-
+  def executesql(query)
+  def index
+  def sumevent(block)
   end
-
+  end
+  end
+  end
+class ChartsController < ApplicationController
 end
