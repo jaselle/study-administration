@@ -49,69 +49,68 @@
     <%= f.text_area :bio , :class => "our_profile_fields"%>
   </div>
 
-</div>
-<div style="display:inline-block; width:7%;"></div>
-<div class="right_side" style="vertical-align:top !important; float:none; width:60%;">
-  <h3><%= f.label :event , 'Bestandene Module wählen:' %></h3> 
-  <div class="overflow_to_scroll" style="height: 30vw; ">
-  <!-- Makes one Checkbox per event and markes it green if it is already passed   -->
-  <ol class = "tree1">
-    <li class = "profile" style="list-style:none">
-      <label id="myModule" for="Module">Module</label>
-      <input type="checkbox" id="check_modul"  />
-      <ol>
-        <li class="profile" >
-
-        <table>       
-          <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
-            <% bevent = Event.find(b.value) %>
-            <tr>
-            <td class='profile_mod'>
-            <%if current_user.events_users.map(&:event_id).include?(bevent.id) %>
-                <%if convert_date_to_number(bevent.events_users.find_by_user_id(current_user.id).semester) == "bestanden" %>
-                  <li class="passedfile_profile <%= bevent.cycle %>" style="list-style:none; width: 29vw;">   
-                    <%= b.label { b.check_box + " " + b.text } %>
-                  </li>   
-                <% else %>
-                  <li class="file <%= bevent.cycle %>" style="list-style:none; width: 29vw;">   
-                    <%= b.label { b.check_box + " " + b.text } %>
-                  </li>
-                <%end%>
-                <% else %>
-                  <li class="file <%= bevent.cycle %>" style="list-style:none; width: 29vw;">                   
-                    <%= b.label { b.check_box + " " + b.text } %>
-                  </li>
-              <% end %>
-            </td>
-            <td><select class="form-control" name="semester<%= b.value %>" style="width: 11vw;" >
-            <!-- creating Select Box options by calculating the last 13 Semester -->
-              <option selected="true" disabled="disabled">Bitte wählen</option>
-              <option><%= get_current_semester_and_year_from_date(Time.now-6.month.to_i) %></option>
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*2).month.to_i) %></option>
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*3).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*4).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*5).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*6).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*8).month.to_i) %></option>
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*9).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*10).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*11).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*12).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*13).month.to_i) %></option> 
-            </select>    
-            </td>
-            </tr>
-          <% end %>
-        </table>
-
+  </div>
+  <div style="display:inline-block; width:7%;"></div>
+  <div class="right_side" style="vertical-align:top !important; float:none; width:60%;">
+    <h3><%= f.label :event , 'Bestandene Module wählen:' %></h3> 
+    <div class="overflow_to_scroll" style="height: 30vw; ">
+      <!-- Makes one Checkbox per event and markes it green if it is already passed   -->
+      <ol class = "tree1">
+        <li class = "profile" style="list-style:none">
+          <label id="myModule" for="Module">Module</label>
+          <input type="checkbox" id="check_modul"  />
+          <ol>
+            <li class="profile" >
+              <table>       
+                <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
+                  <% doneEv = false %>
+                  <% bevent = Event.find(b.value) %>
+                  <tr>
+                    <td class='profile_mod'>
+                      <%if current_user.events_users.map(&:event_id).include?(bevent.id) %>
+                        <%if convert_date_to_number(bevent.events_users.find_by_user_id(current_user.id).semester) == "bestanden" %>
+                          <% doneEv = true %>
+                        <% else %>
+                          <li class="file <%= bevent.cycle %>" style="list-style:none; width: 29vw;">   
+                            <%= b.label { b.check_box + " " + b.text } %>
+                          </li>
+                        <%end%>
+                      <% else %>
+                        <li class="file <%= bevent.cycle %>" style="list-style:none; width: 29vw;">                   
+                          <%= b.label { b.check_box + " " + b.text } %>
+                        </li>
+                      <% end %>
+                    </td>
+                    <% if doneEv == false %>
+                      <td>
+                        <select class="form-control" name="semester<%= b.value %>" style="width: 11vw;" >
+                          <!-- creating Select Box options by calculating the last 13 Semester -->
+                          <option selected="true" disabled="disabled">Bitte wählen</option>
+                          <option><%= get_current_semester_and_year_from_date(Time.now-6.month.to_i) %></option>
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*2).month.to_i) %></option>
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*3).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*4).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*5).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*6).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*8).month.to_i) %></option>
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*9).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*10).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*11).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*12).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*13).month.to_i) %></option> 
+                        </select>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </table>
+            </li>
+          </ol>
         </li>
       </ol>
-    </li>
-  </ol>
-</div>   
-</div>
-
- <div class="actions">
+    </div>   
+  </div>
+  <div class="actions">
     <%= f.submit "Abschicken", class: "btn btn-success" %>
   </div>
 <% end %>
