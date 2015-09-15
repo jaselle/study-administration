@@ -3,6 +3,8 @@
 
 Rails.application.routes.draw do
 
+  get 'semester/index'
+
   get 'charts/index'
 
   resources :profiles
