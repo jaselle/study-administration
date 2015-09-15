@@ -23,40 +23,37 @@
   <thead>
     <th style="width: 20%"/>
     <th style="width: 20%"/>
-    <th style="width: 10%"/>
+    <th style="width: 5%"/>
     <th style="width: 20%"/>
-    <th style="width: 10%"/>
+    <th style="width: 5%"/>
     <th style="width: 20%"/>
   </thead>
+  <tbody>  
     <tr>
       <td/>
       <th>
-        <center> alle Benutzer</center>
+        alle Benutzer
       </th>
       <td/>
       <th>
-        <center>
-          <%=@rating.user.profile.name.capitalize%>
-        </center>
+        <%=@rating.user.profile.name.capitalize%>
       </th>
       <td/>
       <th>
-      <center>
          <a class="Bewertung" href ="#"> Bewertung abgeben</a>
-      </center>
       </th>
     </tr>
-    <!--  Arrays for tooltip, name rating-category and column name -->
-    <%tooltip = [ 
-         "Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen",     
-         "Der Anspruch der Veranstaltung: 1 - 5 Sterne | hardcore - easy",
-         "Arbeitsaufwand der gesamten Verstaltung (z.B. für Übung, Tutorium, Vor- und Nacharbeiten): 1 - 5 Sterne | viel - wenig", 
-         "Die praktische Anwendung der in der Vorlesung vermittelten Theorien: 1 - 5 Sterne | reine Theorie - viel Anwendungen", 
-         "Nutzen des Arbeitsmateriales (z.B. Skript, Aufzeichnung): 1 - 5 Sterne | nicht hilfreich - hilfreich"]%>
-    <%rating_category = ["Teilnahme", "Schwierigkeit", "Arbeitsaufwand","Verhältnis Theorie/Praxis", "Arbeitsmaterial"]%>
-    <%column_name = ["attend", "tough", "effort" , "share", "material"]%>
+      <!--  Arrays for tooltip, name rating-category and column name -->
+      <%tooltip = [ 
+           "Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen",     
+           "Der Anspruch der Veranstaltung: 1 - 5 Sterne | hardcore - easy",
+           "Arbeitsaufwand der gesamten Verstaltung (z.B. für Übung, Tutorium, Vor- und Nacharbeiten): 1 - 5 Sterne | viel - wenig", 
+           "Die praktische Anwendung der in der Vorlesung vermittelten Theorien: 1 - 5 Sterne | reine Theorie - viel Anwendungen", 
+           "Nutzen des Arbeitsmateriales (z.B. Skript, Aufzeichnung): 1 - 5 Sterne | nicht hilfreich - hilfreich"]%>
+      <%rating_category = ["Teilnahme", "Schwierigkeit", "Arbeitsaufwand","Verhältnis Theorie/Praxis", "Arbeitsmaterial"]%>
+      <%column_name = ["attend", "tough", "effort" , "share", "material"]%>
 
-    <% (0..4).each do |a|%>
+  <% (0..4).each do |a|%>
     <tr>
       <th>
         <span class="has-tooltip" data-toggle="tooltip" title="<%=tooltip[a]%>"><%=rating_category[a]%></span>
@@ -103,10 +100,20 @@
           <% end %>
         </div2>
       </td>
-    </tr>
   <%end%>
+    </tr>
+    <tr>
+      <td/>
+      <td/>
+      <td/>
+      <td/>
+      <td/>
+      <td>
+        <div2>
+          <%= link_to 'Abstimmen', "/ratings/" + @rating.id.to_s, class: 'btn btn-success' %>
+        </div2>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
-<div2>
-  <%= link_to 'Bewerten', "/ratings/" + @rating.id.to_s, class: 'btn btn-success' %>
-</div2>
