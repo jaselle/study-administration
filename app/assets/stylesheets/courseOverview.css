@@ -120,11 +120,6 @@ li.course input:checked + ol > li{
     display: block; 
 }
 
-#myDiv {
-    color: magenta;
-}
-
-
 .legend {
     overflow: hidden;
 }
