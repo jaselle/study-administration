@@ -18,7 +18,7 @@ class Block < ActiveRecord::Base
 	      #course = Course.find_by(degree: course[0], name: course[1])
 	      #unless course.nil? && !course.blocks.find_by_name(row_hash["name"]).nil?
 	      #  course.blocks << block
-	      end
+	     #end
 	    end
 	    return true
 	  else
