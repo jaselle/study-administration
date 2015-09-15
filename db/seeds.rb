@@ -12,4 +12,4 @@ unless User.find_by_email("mbeutel@uos.de")
 	admin.save!
 end
 
-Course.import("Courses.csv")
+puts Course.import("Courses.csv")

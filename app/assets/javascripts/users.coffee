@@ -11,7 +11,6 @@ $ ->
   	  dataType: 'Script'
 
   $('body').on 'click', '.pagination a', (e) ->
-    alert "hi"
     e.preventDefault()
     $.ajax
   	  type: 'GET',

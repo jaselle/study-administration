@@ -34,7 +34,7 @@ class EventsController < ApplicationController
         cu.save!
         end
 
-      redirect_to event_path(event), notice: "Veranstaltung belegt!"
+      redirect_to event_path(event)
     else
       redirect_to event_path(event), alert: "Nicht eingeloggt"
     end
@@ -72,9 +72,10 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         schedules = event_params[:schedules]
-
         event_params[:schedules].each do |sched|
-          Schedule.create!(date: sched, event_id: @event.id)
+          if @event.cycle == "Nicht regelmäßig"
+            Schedule.create!(date: sched, event_id: @event.id)
+          end
         end
         format.html { redirect_to @event, notice: 'Veranstaltung wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @event }
