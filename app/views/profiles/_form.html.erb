@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "doneEventsOverview.css" %>
+<%= stylesheet_link_tag "courseOverview.css" %>
 
 <%= form_for(@profile) do |f| %>
   <% if @profile.errors.any? %>
@@ -48,7 +49,7 @@
     <%= f.text_area :bio %>
   </div>
 
-
+  <!-- Makes one Checkbox per event and markes it green if it is already passed   -->
   <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4> 
   <ol class = "tree1">
     <li class = "profile">
@@ -56,8 +57,22 @@
       <input type="checkbox" id="tolle_checkbox"  />
       <ol>
         <li class="profile">
-          <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
-            <%= b.label { b.check_box + b.text } %><br>
+          <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %> 
+            <% bevent = Event.find(b.value) %>
+            <ol id="inner"> 
+              <%if current_user.events_users.map(&:event_id).include?(bevent.id) %>
+                <%if convert_date_to_number(bevent.events_users.find_by_user_id(current_user.id).semester) == "bestanden" %>
+                  <li class="passedfile <%= bevent.cycle %>">   
+                    <%= b.label { b.check_box + b.text } %>
+                  </li>                               
+                <% end %>
+                <% else %>
+                  <li class="file <%= bevent.cycle %>">                   
+                    <%= b.label { b.check_box + b.text } %>
+                  </li>
+              <% end %>
+            </ol> 
+            <!-- creating Select Box options by calculating the last 13 Semester -->
             <select name="semester<%= b.value %>" >
               <option selected="true" disabled="disabled">Bitte wählen</option>
               <option><%= get_current_semester_and_year_from_date(Time.now-6.month.to_i) %></option>
@@ -72,7 +87,7 @@
               <option><%= get_current_semester_and_year_from_date(Time.now-(6*11).month.to_i) %></option> 
               <option><%= get_current_semester_and_year_from_date(Time.now-(6*12).month.to_i) %></option> 
               <option><%= get_current_semester_and_year_from_date(Time.now-(6*13).month.to_i) %></option> 
-            </select>    
+            </select> 
             <br>
           <% end %>
         </li>

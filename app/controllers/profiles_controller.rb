@@ -40,7 +40,7 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
-    @profile.user = User.update(@profile.user.id, profile_params[:user_attributes])
+    @profile.user = User.update(@profile.user.id, profile_params[:user_attributes]) # updates the user by updating the given params
     if !current_user.nil?
       if current_user.role == "admin" || current_user.id == @profile.user.id 
         valid = true
@@ -51,6 +51,7 @@ class ProfilesController < ApplicationController
             end
           end
         end
+        # Passed events are delivered in the join table events_users, while the profil is updated.
         params[:profile][:id].each do |i| 
           unless i.blank? or i.nil?
             event = Event.find(i)
