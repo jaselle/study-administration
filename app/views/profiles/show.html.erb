@@ -45,7 +45,7 @@
       <!-- All events the user has selected -->
       <% @profile.user.events.each do |eventCondition| %>      
         <!-- If they have a condition -->
-        <% if !eventCondition.condition.blank? %>
+        <% if !eventCondition.condition.blank? && !eventCondition.nil?%>
           <% @cSplit = eventCondition.condition.split('; ') %>
           <!-- Check all conditions of user selected events -->
           <% @cSplit.each do |cSplitted| %>
