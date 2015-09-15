@@ -5,7 +5,5 @@ class Profile < ActiveRecord::Base
 	accepts_nested_attributes_for :user
 	# accepts_nested_attributes_for :events_users
 
-	def name_with_degree
-		"#{degree} #{name}"
-	end
+
 end

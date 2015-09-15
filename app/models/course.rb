@@ -21,4 +21,8 @@ class Course < ActiveRecord::Base
 	  end
 	end
 
+	def name_with_degree
+		"#{degree} #{name}"
+	end
+
 end
