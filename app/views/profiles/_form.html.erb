@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "doneEventsOverview.css" %>
+<%= stylesheet_link_tag "courseOverview.css" %>
 
 <%= form_for(@profile) do |f| %>
   <% if @profile.errors.any? %>
@@ -12,78 +13,106 @@
       </ul>
     </div>
   <% end %>
-
-   
+<div class="event_container">
+  <div class="left-side" style="width: 25%; display: inline-block;">
   
-
+  <br/>
   <div class="field">
-    <%= f.label :family_name,"Name" %><br>
-    <%= f.text_field :family_name %>
+    <%= f.label :family_name,"Name", :class => "our_form_fields"%><br/>
+    <%= f.text_field :family_name ,{class: "our_profile_fields"} %>
   </div>
 
   <div class="field">
-    <%= f.label :name,"Vorname" %><br>
-    <%= f.text_field :name %>
+    <%= f.label :name,"Vorname", :class => "our_form_fields" %><br/>
+    <%= f.text_field :name ,{class: "our_profile_fields"}%>
   </div>
 
-  <div class="field">
-    <%= f.label :birth_date,"Geburtsdatum" %><br>
+  <div class="form-group">
+    <%= f.label :birth_date,"Geburtsdatum", :class => "our_form_fields" %><br/>
     <%= f.date_select :birth_date, :start_year => getBirthDateStart(), :end_year => getBirthDateEnd() %>
   </div>
 
   <%= f.fields_for :user do |ff| %>
     <div class="field">
-      <%= ff.label :course, 'Studiengang' %>
-      <%= ff.collection_select :course_id, Course.order(:name), :id, :name_with_degree, class: "same_width1_input" %>
+      <%= ff.label :course, 'Studiengang', :class => "our_form_fields" %><br/>
+      <%= ff.collection_select :course_id, Course.order(:name), :id, :name_with_degree, {prompt: ""},{class: "form-control our_profile_fields"} %>
     </div>
     <% if current_user != nil && current_user.role == "admin" %>
       <div class="field">
-      <%= ff.label :role%> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}) %> 
+      <%= ff.label :role, "Status", :class => "our_form_fields"%><br/> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}, {prompt: ""},{class: "form-control our_profile_fields"}) %> 
       </div>
     <% end %> 
   <% end %>
 
   <div class="field">
-    <%= f.label :bio, "Über mich:" %><br>
-    <%= f.text_area :bio %>
+    <%= f.label :bio, "Notizen:" , :class => "our_form_fields"%><br/>
+    <%= f.text_area :bio , :class => "our_profile_fields"%>
   </div>
 
-
-  <h4><%= f.label :event , 'Bestandene Module wählen:' %><br /></h4> 
-  <ol class = "tree1">
-    <li class = "profile">
-      <label for="Module">Module</label>
-      <input type="checkbox" id="tolle_checkbox"  />
-      <ol>
-        <li class="profile">
-          <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
-            <%= b.label { b.check_box + b.text } %><br>
-            <select name="semester<%= b.value %>" >
-              <option selected="true" disabled="disabled">Bitte wählen</option>
-              <option><%= get_current_semester_and_year_from_date(Time.now-6.month.to_i) %></option>
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*2).month.to_i) %></option>
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*3).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*4).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*5).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*6).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*8).month.to_i) %></option>
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*9).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*10).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*11).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*12).month.to_i) %></option> 
-              <option><%= get_current_semester_and_year_from_date(Time.now-(6*13).month.to_i) %></option> 
-            </select>    
-            <br>
-          <% end %>
+  </div>
+  <div style="display:inline-block; width:7%;"></div>
+  <div class="right_side" style="vertical-align:top !important; float:none; width:60%;">
+    <h3><%= f.label :event , 'Bestandene Module wählen:' %></h3> 
+    <div class="overflow_to_scroll" style="height: 30vw; ">
+      <!-- Makes one Checkbox per event and markes it green if it is already passed   -->
+      <ol class = "tree1">
+        <li class = "profile" style="list-style:none">
+          <label id="myModule" for="Module">Module</label>
+          <input type="checkbox" id="check_modul"  />
+          <ol>
+            <li class="profile" >
+              <table>       
+                <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
+                  <% doneEv = false %>
+                  <% bevent = Event.find(b.value) %>
+                  <tr>
+                    <td class='profile_mod'>
+                      <%if current_user.events_users.map(&:event_id).include?(bevent.id) %>
+                        <%if convert_date_to_number(bevent.events_users.find_by_user_id(current_user.id).semester) == "bestanden" %>
+                          <% doneEv = true %>
+                        <% else %>
+                          <li class="file <%= bevent.cycle %>" style="list-style:none; width: 29vw;">   
+                            <%= b.label { b.check_box + " " + b.text } %>
+                          </li>
+                        <%end%>
+                      <% else %>
+                        <li class="file <%= bevent.cycle %>" style="list-style:none; width: 29vw;">                   
+                          <%= b.label { b.check_box + " " + b.text } %>
+                        </li>
+                      <% end %>
+                    </td>
+                    <% if doneEv == false %>
+                      <td>
+                        <select class="form-control" name="semester<%= b.value %>" style="width: 11vw;" >
+                          <!-- creating Select Box options by calculating the last 13 Semester -->
+                          <option selected="true" disabled="disabled">Bitte wählen</option>
+                          <option><%= get_current_semester_and_year_from_date(Time.now-6.month.to_i) %></option>
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*2).month.to_i) %></option>
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*3).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*4).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*5).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*6).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*8).month.to_i) %></option>
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*9).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*10).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*11).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*12).month.to_i) %></option> 
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*13).month.to_i) %></option> 
+                        </select>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </table>
+            </li>
+          </ol>
         </li>
       </ol>
-    </li>
-  </ol>
-
+    </div>   
+  </div>
   <div class="actions">
     <%= f.submit "Abschicken", class: "btn btn-success" %>
   </div>
-
 <% end %>
 
 

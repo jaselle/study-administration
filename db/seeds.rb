@@ -12,4 +12,6 @@ unless User.find_by_email("mbeutel@uos.de")
 	admin.save!
 end
 
-puts Course.import("Courses.csv")
+Course.import("Courses.csv")
+Block.import("Blocks.csv")
+Event.import("Events.csv")
