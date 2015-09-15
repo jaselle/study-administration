@@ -155,6 +155,14 @@
           <% end %>
         <% end %>
       <% end %>
+      <% if !isWritten %>
+          <div class="box" style="padding-left: 2%;" >
+            <br/>
+            <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+               Es existieren im Moment keine belegbaren Veranstaltungen für Sie!</br>
+            </u></strong>
+          </div>
+        <% end %>
       </br>
     </div>
   </p>
@@ -216,6 +224,14 @@
           <% end %>
         <% end %>
       <% end %> 
+      <% if !isWritten %>
+          <div class="box" style="padding-left: 2%;" >
+            <br/>
+            <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+               Es existieren im Moment keine durch Belegung verfügbar werdende Veranstaltungen für Sie!</br>
+            </u></strong>
+          </div>
+        <% end %>
       <br/>
     </div>
   </p>
