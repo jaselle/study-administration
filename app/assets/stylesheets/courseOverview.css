@@ -2,7 +2,7 @@
 /* CSS Tree menu styles */
 ol.tree {   
 padding: 0 0 0 2%;
-width: 100%;
+width: 70%;
 }
 
 ol.tree a:hover {
@@ -82,12 +82,12 @@ input:not(:checked) + ol > li.passedfile{
 
 li.plannedfile a:before {
     font-family: 'Glyphicons Halflings';
-    content: "\e022  ";
+    content: "\e142  ";
 }
 
 li.passedfile a:before {
     font-family: 'Glyphicons Halflings';
-    content: "\e022  ";
+    content: "\e013  ";
 }
 
 li.file a:before {

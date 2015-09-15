@@ -77,11 +77,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Veranstaltung belegen</h4>
+        <h3 class="modal-title">Veranstaltung belegen</h3>
       </div>
       <div class="modal-body">
       <p>
-      <label>Angebot: <%=  @event.cycle  %></label>
+      <h4>Angebot: <%=  @event.cycle  %></h4>
       <!-- Saves the cycle of the event into variable a -->
       <% curr_cycle = @event.cycle.split(" ")[1] %>
       <% curr_cycle_year = @event.cycle.split(" ")[2] %>
@@ -113,7 +113,7 @@
       <% end %>
 
         <form method="POST" action="/courses" id="23" >
-          <select name="semesters" id = "24" >
+          <select name="semesters" id = "24" class="form-control" style="width:50%;">
           <% if @event.cycle != "Nicht regelmäßig" %>
             <option><%= get_current_semester_and_year_from_date(Time.now+b.month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*a+b).month.to_i) %></option>
@@ -132,12 +132,16 @@
           <%= button_to("Veranstaltung belegen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
         </div>
         <%else%>
-        
-          <div id="selector">
-          <%= button_to("Veranstaltung belegen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
-         </div>
+          <div class="my_div_container">
+            <div id="selector" class="my_div_2">
+            <%= button_to("Veranstaltung belegen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
+            </div>
+          <div class="my_div_2">  
           <%= button_to("Veranstaltung abwählen", {:action => "demark_event", :id => @id}, :class => "btn btn-danger") %>
+          </div>
+          </div>
           <%end%>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Zurück</button>
