@@ -89,6 +89,7 @@
   <p>
     <div class="box" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; height:auto; " >
       <% isWritten=false %>
+      <% isUsed1=false %>
       <!-- All conditions for all events -->
       <% @eventAll = Event.all %>
       <% @eventAll.each do |events| %>
@@ -124,13 +125,9 @@
                           <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
                         </u></strong>
                         <% isWritten=true %>
+                        <% isUsed1 = true %>
                       <% end %>
                       <u style="line-height:1.5vw; text-decoration:none;"><%= link_to events.title,event_path(events), :class=>'our_link' %> </u>
-                      <% if !isWritten %>
-                        <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
-                        Keine Veranstaltungsvorschläge vorhanden.</br>
-                        </u></strong>
-                      <%end%>
                     </div>
                   <% end %>
                 <% end %>
@@ -144,13 +141,9 @@
                         <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
                       </u></strong>
                       <% isWritten=true %>
+                      <% isUsed1 = true %>
                     <% end %>
                     <u style="line-height:1.5vw; text-decoration:none;"><%= link_to events.title,event_path(events), :class=>'our_link' %> </u>
-                      <% if !isWritten %>
-                        <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
-                        Keine Veranstaltungsvorschläge vorhanden.</br>
-                        </u></strong>
-                      <%end%>
                   </div>
                 <% end %>
               <% end %>
@@ -158,6 +151,14 @@
           <% end %>
         <% end %>
       <% end %>
+      <% if !isUsed1 %>
+        <div class="box" style="padding-left: 2%;" >
+          <br/>
+          <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+          Keine Veranstaltungsvorschläge vorhanden.</br>
+          </u></strong>
+        </div>
+      <%end%>
       </br>
     </div>
   </p>
