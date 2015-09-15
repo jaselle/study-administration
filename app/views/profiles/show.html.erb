@@ -89,7 +89,6 @@
   <p>
     <div class="box" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; height:auto; " >
       <% isWritten=false %>
-      <% isUsed1=false %>
       <!-- All conditions for all events -->
       <% @eventAll = Event.all %>
       <% @eventAll.each do |events| %>
@@ -151,7 +150,6 @@
           <% end %>
         <% end %>
       <% end %>
-<<<<<<< HEAD
       <% if !isWritten %>
           <div class="box" style="padding-left: 2%;" >
             <br/>
@@ -160,23 +158,13 @@
             </u></strong>
           </div>
         <% end %>
-=======
-      <% if !isUsed1 %>
-        <div class="box" style="padding-left: 2%;" >
-          <br/>
-          <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
-          Keine Veranstaltungsvorschläge vorhanden.</br>
-          </u></strong>
-        </div>
-      <%end%>
->>>>>>> 514c7cf19f2ca262deaaf02c493548b7be7b9abe
       </br>
     </div>
   </p>
 
   <!-- Conditional suggestions -->
   <p>
-    <div class="box" style="background-color: rgba(173,216,230,0.5); height:auto;width: 100%; border-radius: 5px;" >
+    <div class="box" style="background-color: rgba(173,216,230,0.5); height:auto;width: 100%; border-radius: 5px;" >s
       <% isUsed = false %>
       <!-- All user selected events -->
       <% @profile.user.events.each do |eventIdent| %>
