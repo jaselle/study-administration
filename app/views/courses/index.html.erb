@@ -1,13 +1,13 @@
 <%= stylesheet_link_tag "courseOverview.css" %>
 
-
-<ol class = "legend" >
-  <li style="list-style: square; color:#8DE28D;">Veranstaltung absolviert</li>
-  <li style="list-style: square; color:#ADD8E6;">Veranstaltung eingeplant </li>
-  <li style="list-style: square;">Veranstaltung noch nicht belegt</li>
-
-
-</ol>
+<!-- make this nice -->
+<div class="legend_container"
+  <ol class="legend">
+    <li class="legend_square" style=" color:#8DE28D;">Veranstaltung absolviert</li>
+    <li class="legend_square" style=" color:#ADD8E6;">Veranstaltung eingeplant </li>
+    <li class="legend_square" style=" ">Veranstaltung noch nicht belegt</li>
+  </ol>
+</div>
 
 
 <p>
@@ -34,26 +34,21 @@
 
     <!-- Ebene 1: Courses -->
     <!-- get_current_semester calculates and displays the current Semester.-->
-    <label for="Studiengang">Mein persönlicher Studiengang</label>
-  
+ 
       <ol class = "tree">
       <%course = @courses.find_by_id(current_user.course_id) %>
       <% unless course.nil? %>
         <li class = "course">
-          <label for="course"><%= link_to course.name,  course %></label>
-          <input type="checkbox"  id="course" style="width: 20px; height: 20px;"/>
+          <label id="myCourse" for="course"><%= course.name %></label>
+          <input type="checkbox"  id="check_course"/>
             <ol id="outer">
               <!-- Ebene 2: Blocks -->
               <% e = course.blocks.order("name").map %>
-              <% e.each do |blocks| %>
-                <li class = "course">
-                    <!-- <span class="glyphicon glyphicon-folder-close"></span> -->
-                    <label for="blocks"><%= link_to blocks.name, blocks %></label>
-                    <input style="border: solid green 1px !important;" type="checkbox"  id="blocks"/>
+              <% e.each_with_index  do |blocks, index| %>
+                <li class = "course our_list_item">
+                    <label id="myDiv<%= index%>" for="blocks"><%= blocks.name %></label>
+                    <input type="checkbox" id="<%= index%>"/>
                       <ol id="inner">
-
-                          
-
                           <% f = blocks.events.order("title").map %>
                           <% f.each do |event| %>
                           <% if current_user.events_users.map(&:event_id).include?(event.id) %>                              
@@ -61,8 +56,7 @@
                             <%when "geplant" %>
                               <li class="plannedfile <%= event.cycle %>">
                                <%= link_to event.title, event  %>
-
-                                <%when "bestanden"%>
+                               <%when "bestanden"%>
                                   <li class="passedfile <%= event.cycle %>">
                                   <%= link_to event.title, event  %>
 

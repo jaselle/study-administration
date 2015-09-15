@@ -613,6 +613,7 @@ border-collapse: separate;
   padding-left: 1%;
 }
 
+/*change size when window is getting to small*/
 @media (max-width: 1000px) {
   .content {
     margin-top: 10%;
@@ -624,7 +625,3 @@ border-collapse: separate;
     font-size: 2vw;
   }
 }
-
-
-
-
