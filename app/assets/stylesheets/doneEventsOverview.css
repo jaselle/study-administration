@@ -1,10 +1,4 @@
 /* Just some base styles not needed for example to function */
-
-
-html { font-size: 100%; /* IE hack */ }
-body { font-size: 1em; /* Sets base font size to 16px */ }
-table { font-size: 100%; /* IE hack */ }
-input, select, textarea, th, td { font-size: 1em; }
     
 /* CSS Tree menu styles */
 ol.tree1
