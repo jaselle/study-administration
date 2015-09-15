@@ -51,7 +51,6 @@ class Event < ActiveRecord::Base
           block = Block.find_by_name(rel)
           if (!block.nil? && block.events.find_by_identifier(row_hash["identifier"]).nil?)
             block.events << event
-            puts "yay"
           end
         end
       end
