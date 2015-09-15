@@ -12,9 +12,7 @@ class Block < ActiveRecord::Base
 	  if csv.headers == ["name","gesamtects","credits_min","relation"] #header check
 	    csv.each do |row|
 	      row_hash = row.to_hash
-	      if Block.find_by_name(row_hash["name"]).nil?
-	        block = Block.create! row_hash.except!("relation")
-	      end
+	      block = Block.create! row_hash.except!("relation")
 	      course = row_hash["relation"].split(";")
 
 	      course = Course.find_by(degree: course[0], name: course[1])
