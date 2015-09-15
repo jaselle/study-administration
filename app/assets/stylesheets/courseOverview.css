@@ -186,3 +186,8 @@ li.course input:checked + ol > li{
     content: "\2601 ";
     margin-right: 1%;
 }
+
+li.passedfile_profile
+{
+    color: #44E444;
+}
