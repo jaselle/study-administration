@@ -65,7 +65,7 @@
                   </u></strong>
                   <% isWritten = true %>
                 <% end %>
-                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
+                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
               </div>
             <% end %>
           <% end %>
@@ -151,6 +151,16 @@
           <% end %>
         <% end %>
       <% end %>
+<<<<<<< HEAD
+      <% if !isWritten %>
+          <div class="box" style="padding-left: 2%;" >
+            <br/>
+            <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+               Es existieren im Moment keine belegbaren Veranstaltungen für Sie!</br>
+            </u></strong>
+          </div>
+        <% end %>
+=======
       <% if !isUsed1 %>
         <div class="box" style="padding-left: 2%;" >
           <br/>
@@ -159,6 +169,7 @@
           </u></strong>
         </div>
       <%end%>
+>>>>>>> 514c7cf19f2ca262deaaf02c493548b7be7b9abe
       </br>
     </div>
   </p>
