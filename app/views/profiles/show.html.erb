@@ -44,13 +44,17 @@
       <% isWritten = false %>
       <!-- All events the user has selected -->
       <% @profile.user.events.each do |eventCondition| %>
+      
         <!-- If they have a condition -->
         <% if !eventCondition.condition.blank? %>
+        
           <% @cSplit = eventCondition.condition.split('; ') %>
           <!-- Check all conditions of user selected events -->
           <% @cSplit.each do |cSplitted| %>
+          
             <% b = false %>
             <% @profile.user.events.each do |events| %>
+            
               <% if cSplitted.eql? events.identifier %>
                 <% b = true %>
               <% end %>
@@ -67,8 +71,16 @@
                 <% end %>
                 <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
               </div>
+            <%else%>
             <% end %>
           <% end %>
+          <%else%>
+          <div class="box" style="padding-left: 2%;" >
+            <br/>
+            <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+               Sie erfüllen die Vorraussetzungen für alle von Ihnen hinzugefügten Veranstaltungen!</br>
+            </u></strong>
+          </div>
         <% end %>
       <% end %>
       <br/>
@@ -116,6 +128,11 @@
                         <% isWritten=true %>
                       <% end %>
                       <u style="line-height:1.5vw; text-decoration:none;"><%= link_to events.title,event_path(events), :class=>'our_link' %> </u>
+                      <% if !isWritten %>
+                        <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+                        "Keine Veranstaltungsvorschläge vorhanden."</br>
+                        </u></strong>
+                      <%end%>
                     </div>
                   <% end %>
                 <% end %>
@@ -130,6 +147,11 @@
                       <% isWritten=true %>
                     <% end %>
                     <u style="line-height:1.5vw; text-decoration:none;"><%= link_to events.title,event_path(events), :class=>'our_link' %> </u>
+                      <% if !isWritten %>
+                        <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+                        "Keine Veranstaltungsvorschläge vorhanden."</br>
+                        </u></strong>
+                      <%end%>
                   </div>
                 <% end %>
               <% end %>
@@ -179,6 +201,11 @@
                                     </u></strong>
                                   <% end %>
                                   <%= link_to "Können Sie  " + events2.title + " belegen. ", event_path(events2), :class=>'our_link' %> </br>
+                                  <% if !isWritten %>
+                                    <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+                                    "Keine Veranstaltungsvorschläge vorhanden."</br>
+                                    </u></strong>
+                                  <%end%>
                                 </div>
                               <% end %>
                             <% end %>

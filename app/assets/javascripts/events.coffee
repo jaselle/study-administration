@@ -6,7 +6,7 @@
 #
 #
 
-
+$ ->
   $("#event_cycle").change -> 
     if $("#event_cycle").val() == "Nicht regelmäßig"
       $("#nextDate").show()
@@ -35,15 +35,6 @@
      
   $('#search input').keyup ->
     $.get $('#events_search').attr('action'), $('#events_search').serialize(), null, 'script'
-    
-  $('.our_list_item').each (index) ->
-    $('#myDiv' + index).click ->
-      if $('#' + index).prop('checked')
-        $('#' + index).prop 'checked', false
-      else
-        $('#' + index).prop 'checked', true
-      return
-    return
 
   $('#myCourse').click ->
     if $('#check_course').prop('checked')
@@ -52,3 +43,11 @@
       $('#check_course').prop 'checked', true
     return
 
+  $('.our_list_item').each (index) ->
+    $('#myDiv' + index).click ->
+      if $('#' + index).prop('checked')
+        $('#' + index).prop 'checked', false
+      else
+        $('#' + index).prop 'checked', true
+      return
+    return

@@ -1,6 +1,4 @@
 /* Just some base styles not needed for example to function */
-
-
 /* CSS Tree menu styles */
 ol.tree {   
 padding: 0 0 0 2%;
@@ -42,12 +40,44 @@ li.passedfile a{
     line-height: 1.43vw;
 }
 
-
 li.plannedfile a{
     text-decoration: none;
     display: block;
     font-size: 1.3vw;
     line-height: 1.43vw;
+}
+
+
+/*lists courses of one block and assigns picture*/
+li.file a{
+    text-decoration: none;
+    display: block;
+    font-size: 1.3vw;
+    line-height: 1.43vw;
+}
+
+
+
+li.file input + ol > li{
+    display: none;
+}
+
+
+input:checked + ol > li.file { 
+    display: block; 
+}
+
+input:not(:checked) + ol > li.file{ 
+    display: none !important; 
+}
+
+/* Has to be added so that planned and passed files are hidden when parent folder is closed*/
+input:checked + ol > li.passedfile { 
+    display: block; 
+}
+input:not(:checked) + ol > li.passedfile{ 
+    display: none !important; 
+    margin: 0 0 0.125em ;  
 }
 
 li.plannedfile a:before {
@@ -65,19 +95,13 @@ li.file a:before {
     content: "\e022  ";
 }
 
-/*lists courses of one block and assigns picture*/
-li.file a{
-    text-decoration: none;
-    display: block;
-    font-size: 1.3vw;
-    line-height: 1.43vw;
-}
-
-
-
-input:checked + ol > li.file { 
+input:checked + ol > li.plannedfile { 
     display: block; 
-
+    margin: 0 0 0.125em ; 
+}
+input:not(:checked) + ol > li.plannedfile{ 
+    display: none !important; 
+    margin: 0 0 0.125em ;  
 }
 
 li.course input
@@ -108,9 +132,11 @@ li.course input:checked + ol
     height: auto;
 }
 
+/*maybe not needed at all...*/
 li.course input:checked + ol > li:last-child { 
-    /*margin: 0 0 0.063em ; */
+    /*margin: 0 0 0.063em ;*/
 }
+
 
 li.course input + ol > li { 
     display: none;
@@ -119,11 +145,6 @@ li.course input + ol > li {
 li.course input:checked + ol > li{ 
     display: block; 
 }
-
-#myDiv {
-    color: magenta;
-}
-
 
 .legend {
     overflow: hidden;
@@ -146,4 +167,3 @@ li.course input:checked + ol > li{
     content: "\2601 ";
     margin-right: 1%;
 }
-
