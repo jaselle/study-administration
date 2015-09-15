@@ -12,7 +12,7 @@ class Course < ActiveRecord::Base
 	    csv.each do |row|
 	      row_hash = row.to_hash
 	      if Course.find_by(name: row_hash["name"], degree: row_hash["degree"]).nil?
-	      	Block.create! row_hash
+	      	Course.create! row_hash
 	      end
 	    end
 	    return true
