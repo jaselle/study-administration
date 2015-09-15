@@ -40,21 +40,17 @@
 
   <!-- Warnings in case the conditions aren't met -->
   <p>
-    <div class="box" style="background-color: rgba(255,128,128,0.5); width: 100%; border-radius: 5px; height:auto;" >
-      <% isWritten=false %>
+    <div class="box" style="background-color: rgba(255,128,128,0.5); width: 100%; border-radius: 5px; " >
+      <% isWritten = false %>
       <!-- All events the user has selected -->
-      <% @profile.user.events.each do |eventCondition| %>
-      
+      <% @profile.user.events.each do |eventCondition| %>      
         <!-- If they have a condition -->
         <% if !eventCondition.condition.blank? %>
-        
           <% @cSplit = eventCondition.condition.split('; ') %>
           <!-- Check all conditions of user selected events -->
           <% @cSplit.each do |cSplitted| %>
-          
             <% b = false %>
             <% @profile.user.events.each do |events| %>
-            
               <% if cSplitted.eql? events.identifier %>
                 <% b = true %>
               <% end %>
@@ -67,20 +63,15 @@
                   <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
                     <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen nicht:" %> </br>
                   </u></strong>
-                  <% isWritten=true %>
+                  <% isWritten = true %>
                 <% end %>
-<!--               <% if Event.find_by_identifier(cSplitted) != nil %>
-                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_identifier(cSplitted)), :class =>'our_link' %>
-               <% else %> -->
-
-               <!-- removed link to needed event, now only the event which was wrongly added to your plan is linked -->
-                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
-              <!-- <% end %> -->
+                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
               </div>
-            <%else%>
             <% end %>
           <% end %>
-          <%else%>
+        <% end %>
+      <% end %>
+      <% if !isWritten %>
           <div class="box" style="padding-left: 2%;" >
             <br/>
             <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
@@ -88,7 +79,6 @@
             </u></strong>
           </div>
         <% end %>
-      <% end %>
       <br/>
     </div>
   </p>
@@ -189,7 +179,7 @@
                     <% if cSplitted.eql? eventIdent.identifier %>
                       <% @eventAll2 = Event.all %>
                       <% @eventAll2.each do |events2| %>
-                        <% if events2.condition != nil%>
+                        <% if !events2.condition.blank? %>
                           <!-- All conditions of events, second time -->
                           <% @cSplit2=events2.condition.split('; ') %>
                           <% @cSplit2.each do |cSplitted2| %>
