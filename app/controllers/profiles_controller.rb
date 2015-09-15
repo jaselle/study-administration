@@ -28,7 +28,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        format.html { redirect_to @profile, notice: 'Profil wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }
@@ -90,7 +90,7 @@ class ProfilesController < ApplicationController
   def destroy
     @profile.destroy
     respond_to do |format|
-      format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
+      format.html { redirect_to profiles_url, notice: 'Profil wurde erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
   end
