@@ -11,3 +11,5 @@ unless User.find_by_email("mbeutel@uos.de")
 	admin.profile = Profile.create!(family_name: "Beutel", name: "Miriam")
 	admin.save!
 end
+
+Course.import("Courses.csv")
