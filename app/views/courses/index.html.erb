@@ -1,13 +1,13 @@
 <%= stylesheet_link_tag "courseOverview.css" %>
 
-
-<ol class = "legend" >
-  <li style="list-style: square; color:#8DE28D;">Veranstaltung absolviert</li>
-  <li style="list-style: square; color:#ADD8E6;">Veranstaltung eingeplant </li>
-  <li style="list-style: square;">Veranstaltung noch nicht belegt</li>
-
-
-</ol>
+<!-- make this nice -->
+<div class="legend_container"
+  <ol class="legend">
+    <li class="legend_square" style=" color:#44E444;">Veranstaltung absolviert</li>
+    <li class="legend_square" style=" color:#45C3E6;">Veranstaltung eingeplant </li>
+    <li class="legend_square" style=" ">Veranstaltung noch nicht belegt</li>
+  </ol>
+</div>
 
 
 <p>
@@ -17,11 +17,12 @@
 </p>
 
 <form method="POST" action="/courses">
-   <select name="semesters" id = "42" >
+   <select class="form-control" name="semesters" id = "42" style="width: 20%;" >
       <option>Alle</option> 
-      <option>Sommersemester</option>
-      <option>Wintersemester</option>
-      <option>Unregelmäßig</option> 
+      <option><%= get_current_semester_and_year_from_date(Time.now) %></option>
+      <option><%= get_current_semester_and_year_from_date(Time.now+6.month.to_i) %></option>
+      <option><%= get_current_semester_and_year_from_date(Time.now+12.month.to_i) %></option>
+      <option><%= get_current_semester_and_year_from_date(Time.now+18.month.to_i) %></option> 
       
    </select>
 
@@ -34,61 +35,53 @@
 
     <!-- Ebene 1: Courses -->
     <!-- get_current_semester calculates and displays the current Semester.-->
-    <label for="Studiengang">Mein persönlicher Studiengang</label>
-  
+ 
       <ol class = "tree">
       <%course = @courses.find_by_id(current_user.course_id) %>
       <% unless course.nil? %>
         <li class = "course">
-          <label for="course"><%=    link_to course.name,  course %></label>
-          <input type="checkbox"  id="course" style="width: 20px; height: 20px;"/>
+          <label id="myCourse" for="course"><%= course.name %></label>
+          <input type="checkbox"  id="check_course"/>
             <ol id="outer">
               <!-- Ebene 2: Blocks -->
               <% e = course.blocks.order("name").map %>
-              <% e.each do |blocks| %>
-                <li class = "course">
-                    <!-- <span class="glyphicon glyphicon-folder-close"></span> -->
-                    <label for="blocks"><%= link_to blocks.name, blocks %></label>
-                    <input style="border: solid green 1px !important;" type="checkbox"  id="blocks"/>
+              <% e.each_with_index  do |blocks, index| %>
+                <li class = "course our_list_item">
+                    <label id="myDiv<%= index%>" for="blocks"><%= blocks.name %></label>
+                    <input type="checkbox" id="<%= index%>"/>
                       <ol id="inner">
-
-                          
-
                           <% f = blocks.events.order("title").map %>
                           <% f.each do |event| %>
-                          <% if current_user.events_users.map(&:event_id).include?(event.id) %>                              
-                            <%case convert_date_to_number(event.events_users.find_by_user_id(current_user.id).semester) %>
-                            <%when "geplant" %>
-                              <li class="plannedfile <%= event.cycle %>">
-                               <%= link_to event.title, event  %>
-
+                            <!-- variable temp is necessary to the filter fuction used in 'courses.coffeee' -->
+                            <% temp = event.cycle.sub('(','').sub(')','') %>
+                            <% event.schedules.each do |schedule| %>
+                              <% temp=temp+' '+schedule.date.sub(%r{/.*},'') %>
+                            <% end %>       
+                            <% if current_user.events_users.map(&:event_id).include?(event.id) %>
+                            <% semester = event.events_users.find_by_user_id(current_user.id).semester %>
+                              <% unless semester.nil? %>
+                                <%case convert_date_to_number(semester) %>
+                                <%when "geplant" %>
+                                  <li class="plannedfile <%= temp %>">
+                                   <%= link_to event.title, event  %>
                                 <%when "bestanden"%>
-                                  <li class="passedfile <%= event.cycle %>">
+                                  <li class="passedfile <%= temp %>">
                                   <%= link_to event.title, event  %>
-
-                            <%end%>
-
-                           <%else%>
-                           <li class="file <%= event.cycle %>">
-                                
-                           <%= link_to event.title, event  %>
-
+                                <%end %>
                               <% end %>
-                              </li>
+                            <%else%>
+                              <li class="file <%= temp %>"> 
+                              <%= link_to event.title, event  %>
+                            <% end %>
                           <% end %>
                       </ol>
-              </li>
+                  </li>
               <% end %>
             </ol>
-
-
         </li>
       <% end %>
     </ol>
- 
-
 <%end%>
-
 
 <%= link_to 'Neuer Studiengang', new_course_path, class: 'btn btn-success' %>
 

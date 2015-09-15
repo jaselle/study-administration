@@ -41,9 +41,9 @@
   <!-- Warnings in case the conditions aren't met -->
   <p>
     <div class="box" style="background-color: rgba(255,128,128,0.5); width: 100%; border-radius: 5px; " >
-      <% isWritten=false %>
+      <% isWritten = false %>
       <!-- All events the user has selected -->
-      <% @profile.user.events.each do |eventCondition| %>
+      <% @profile.user.events.each do |eventCondition| %>      
         <!-- If they have a condition -->
         <% if !eventCondition.condition.blank? %>
           <% @cSplit = eventCondition.condition.split('; ') %>
@@ -63,27 +63,31 @@
                   <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
                     <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen nicht:" %> </br>
                   </u></strong>
-                  <% isWritten=true %>
+                  <% isWritten = true %>
                 <% end %>
-<!--               <% if Event.find_by_identifier(cSplitted) != nil %>
-                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_identifier(cSplitted)), :class =>'our_link' %>
-               <% else %> -->
-
-               <!-- removed link to needed event, now only the event which was wrongly added to your plan is linked -->
                 <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
-              <!-- <% end %> -->
               </div>
             <% end %>
           <% end %>
         <% end %>
       <% end %>
+      <% if !isWritten %>
+          <div class="box" style="padding-left: 2%;" >
+            <% if !isWritten %>
+            <br/>
+            <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+               Sie erfüllen die Vorraussetzungen für alle von Ihnen hinzugefügten Veranstaltungen!</br>
+            </u></strong>
+            <% end %>
+          </div>
+        <% end %>
       <br/>
     </div>
   </p>
 
   <!-- Immediate suggestions -->
   <p>
-    <div class="box" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; " >
+    <div class="box" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; height:auto; " >
       <% isWritten=false %>
       <!-- All conditions for all events -->
       <% @eventAll = Event.all %>
@@ -120,6 +124,7 @@
                           <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
                         </u></strong>
                         <% isWritten=true %>
+                        <% isUsed1 = true %>
                       <% end %>
                       <u style="line-height:1.5vw; text-decoration:none;"><%= link_to events.title,event_path(events), :class=>'our_link' %> </u>
                     </div>
@@ -130,10 +135,12 @@
                 <% if @profile.user.events.find_by_identifier(events.identifier) == nil %>
                   <div class="box" style="padding-left: 2%;" >
                     <% if !isWritten %>
+                      <br/>
                       <u style="line-height:1.5vw; font-size: 1.25vw; text-decoration:none;"><strong>
                         <%= "Sie erfüllen die Vorraussetzungen für folgende Veranstaltungen:" %> </br>
                       </u></strong>
                       <% isWritten=true %>
+                      <% isUsed1 = true %>
                     <% end %>
                     <u style="line-height:1.5vw; text-decoration:none;"><%= link_to events.title,event_path(events), :class=>'our_link' %> </u>
                   </div>
@@ -143,6 +150,14 @@
           <% end %>
         <% end %>
       <% end %>
+      <% if !isWritten %>
+          <div class="box" style="padding-left: 2%;" >
+            <br/>
+            <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+               Es existieren im Moment keine belegbaren Veranstaltungen für Sie!</br>
+            </u></strong>
+          </div>
+        <% end %>
       </br>
     </div>
   </p>
@@ -150,6 +165,7 @@
   <!-- Conditional suggestions -->
   <p>
     <div class="box" style="background-color: rgba(173,216,230,0.5); height:auto;width: 100%; border-radius: 5px;" >
+      <% isUsed = false %>
       <!-- All user selected events -->
       <% @profile.user.events.each do |eventIdent| %>
         <% @eventAll = Event.all %>
@@ -167,7 +183,7 @@
                     <% if cSplitted.eql? eventIdent.identifier %>
                       <% @eventAll2 = Event.all %>
                       <% @eventAll2.each do |events2| %>
-                        <% if events2.condition != nil%>
+                        <% if !events2.condition.blank? %>
                           <!-- All conditions of events, second time -->
                           <% @cSplit2=events2.condition.split('; ') %>
                           <% @cSplit2.each do |cSplitted2| %>
@@ -179,6 +195,7 @@
                                 <div class="box" style="padding-left: 2%;" >
                                   <% if !isWritten %>
                                     <% isWritten = true %>
+                                    <% isUsed = true %>
                                     </br>
                                     <u style="line-height:1.5vw; font-size: 1.25vw; text-decoration:none;"><strong>
                                       <%= link_to "Wenn Sie " + events.title + " belegen:", event_path(events), :class=>'our_link_head' %> </br>
@@ -199,6 +216,14 @@
           <% end %>
         <% end %>
       <% end %> 
+      <% if !isUsed %>
+        <div class="box" style="padding-left: 2%;" >
+          <br/>
+          <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+          Es existieren im Moment keine durch Belegung verfügbar werdende Veranstaltungen für Sie!</br>
+          </u></strong>
+        </div>
+      <%end%>
       <br/>
     </div>
   </p>

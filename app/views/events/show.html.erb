@@ -77,11 +77,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Veranstaltung belegen</h4>
+        <h3 class="modal-title">Veranstaltung belegen</h3>
       </div>
       <div class="modal-body">
       <p>
-      <label>Angebot: <%=  @event.cycle  %></label>
+      <h4>Angebot: <%=  @event.cycle  %></h4>
       <!-- Saves the cycle of the event into variable a -->
       <% curr_cycle = @event.cycle.split(" ")[1] %>
       <% curr_cycle_year = @event.cycle.split(" ")[2] %>
@@ -113,24 +113,34 @@
       <% end %>
 
         <form method="POST" action="/courses" id="23" >
-          <select name="semesters" id = "24" >
+          <select name="semesters" id = "24" class="form-control" style="width:50%;">
           <% if @event.cycle != "Nicht regelmäßig" %>
             <option><%= get_current_semester_and_year_from_date(Time.now+b.month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*a+b).month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*2*a+b).month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*3*a+b).month.to_i) %></option> 
           <% elsif %>
-            <% @event.schedules.each do |s| %>
+            <% @event.schedules.where.not(date: '').each do |s| %>
               <option><%= s.date %></option>
             <% end %>
           <% end %>
           </select>    
         </form>
         </p>
+        <% unless @event.users.find_by(id: current_user.id) %>
         <div id="selector">
-          <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id, :semester => "" %>
+          <%= button_to("Veranstaltung belegen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
         </div>
-          <%= button_to "Veranstaltung abwählen", :action => "demark_event" ,:id => @id%>
+        <%else%>
+          <div class="my_div_container">
+            <div id="selector" class="my_div_2">
+            <%= button_to("Veranstaltung belegen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
+            </div>
+          <div class="my_div_2">  
+          <%= button_to("Veranstaltung abwählen", {:action => "demark_event", :id => @id}, :class => "btn btn-danger") %>
+          </div>
+          </div>
+          <%end%>
 
       </div>
       <div class="modal-footer">
@@ -146,9 +156,6 @@
 <!-- Displays the single stars for Average Rating -->
  <% query = "SELECT (avg(attend) + avg(tough) + avg(effort) + avg(share) + avg(material)) / 5 FROM ratings WHERE attend != 0 AND tough != 0 AND effort != 0 AND share != 0 AND material != 0 AND event_id = " + @event.id.to_s + ";" %>
  <% records_result = ActiveRecord::Base.connection.execute(query) %>
- <% records_array = records_result.values %>
- <% puts records_array %>
-
  <% result = records_result.getvalue(0, 0) %>
   <% (1..5).each do |i| %>
     <%if i <= (result.to_f + 0.5) %>

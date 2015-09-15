@@ -1,5 +1,5 @@
 class Block < ActiveRecord::Base
- validates_presence_of :name, :events
+ validates_presence_of :name
  validates :credits_min, :numericality => { :greater_than_or_equal_to => 0 }
  has_and_belongs_to_many :events
  has_and_belongs_to_many :courses
@@ -12,11 +12,8 @@ class Block < ActiveRecord::Base
 	  if csv.headers == ["name","gesamtects","credits_min","relation"] #header check
 	    csv.each do |row|
 	      row_hash = row.to_hash
-	      if Block.find_by_name(row_hash["name"]).nil?
-	        block = Block.create! row_hash.except!("relation")
-	      end
+	      block = Block.create! row_hash.except!("relation")
 	      course = row_hash["relation"].split(";")
-
 	      course = Course.find_by(degree: course[0], name: course[1])
 	      unless course.nil? && !course.blocks.find_by_name(row_hash["name"]).nil?
 	        course.blocks << block

@@ -35,7 +35,7 @@
   <%= f.fields_for :user do |ff| %>
     <div class="field">
       <%= ff.label :course, 'Studiengang' %>
-      <%= ff.collection_select :course_id, Course.order(:name), :id, :name, class: "same_width1_input" %>
+      <%= ff.collection_select :course_id, Course.order(:name), :id, :name_with_degree, class: "same_width1_input" %>
     </div>
     <% if current_user != nil && current_user.role == "admin" %>
       <div class="field">

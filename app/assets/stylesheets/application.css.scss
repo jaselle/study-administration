@@ -613,6 +613,7 @@ border-collapse: separate;
   padding-left: 1%;
 }
 
+/*change size when window is getting to small*/
 @media (max-width: 1000px) {
   .content {
     margin-top: 10%;
@@ -625,6 +626,14 @@ border-collapse: separate;
   }
 }
 
+.my_div_container {
+  overflow: hidden;
+}
 
+.my_div_2 {
+  display: inline-block;
+}
 
-
+.text_colum {
+  width: 50%;
+}
