@@ -9,8 +9,8 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :events_users
 
 	validates_inclusion_of :cycle, :in => ['Jedes Wintersemester','Jedes Sommersemester','Jedes Semester', 'Jedes Wintersemester (ungerade)', 'Jedes Wintersemester (gerade)', 'Jedes Sommersemester (ungerade)', 'Jedes Sommersemester (gerade)', 'Nicht regelmäßig' ]
-	validates_inclusion_of :credits, :in => 0..20
-	validates_inclusion_of :sws, :in => 0..20
+	validates_inclusion_of :credits, :in => 0..30
+	validates_inclusion_of :sws, :in => 0..30
 	validates_presence_of :prof, :title, :identifier
 
   #method to calculate the average-rating. 
