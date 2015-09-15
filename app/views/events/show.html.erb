@@ -127,11 +127,17 @@
           </select>    
         </form>
         </p>
+        <% unless @event.users.find_by(id: current_user.id) %>
         <div id="selector">
-          <%= button_to "Veranstaltung belegen", :action => "mark_event", :id => @id, :semester => "" %>
+          <%= button_to("Veranstaltung belegen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
         </div>
-          <%= button_to "Veranstaltung abwählen", :action => "demark_event" ,:id => @id%>
-
+        <%else%>
+        
+          <div id="selector">
+          <%= button_to("Veranstaltung belegen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
+         </div>
+          <%= button_to("Veranstaltung abwählen", {:action => "demark_event", :id => @id}, :class => "btn btn-danger") %>
+          <%end%>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Zurück</button>
@@ -146,9 +152,6 @@
 <!-- Displays the single stars for Average Rating -->
  <% query = "SELECT (avg(attend) + avg(tough) + avg(effort) + avg(share) + avg(material)) / 5 FROM ratings WHERE attend != 0 AND tough != 0 AND effort != 0 AND share != 0 AND material != 0 AND event_id = " + @event.id.to_s + ";" %>
  <% records_result = ActiveRecord::Base.connection.execute(query) %>
- <% records_array = records_result.values %>
- <% puts records_array %>
-
  <% result = records_result.getvalue(0, 0) %>
   <% (1..5).each do |i| %>
     <%if i <= (result.to_f + 0.5) %>
