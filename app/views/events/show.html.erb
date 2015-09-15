@@ -159,4 +159,4 @@
   <% end %>
 </p>
 
-<%= link_to 'Detailsbewertung ansehen', rating_path(@event.ratings.find_by_user_id(current_user.id)), class: 'btn btn-default' %>
+<%= link_to 'Detailsbewertung ansehen', rating_path(@event.ratings.find_or_create_by(user_id: current_user.id)), class: 'btn btn-default' %>
