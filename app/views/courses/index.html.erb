@@ -3,8 +3,8 @@
 <!-- make this nice -->
 <div class="legend_container"
   <ol class="legend">
-    <li class="legend_square" style=" color:#8DE28D;">Veranstaltung absolviert</li>
-    <li class="legend_square" style=" color:#ADD8E6;">Veranstaltung eingeplant </li>
+    <li class="legend_square" style=" color:#44E444;">Veranstaltung absolviert</li>
+    <li class="legend_square" style=" color:#45C3E6;">Veranstaltung eingeplant </li>
     <li class="legend_square" style=" ">Veranstaltung noch nicht belegt</li>
   </ol>
 </div>
@@ -17,7 +17,7 @@
 </p>
 
 <form method="POST" action="/courses">
-   <select name="semesters" id = "42" >
+   <select class="form-control" name="semesters" id = "42" style="width: 20%;" >
       <option>Alle</option> 
       <option><%= get_current_semester_and_year_from_date(Time.now) %></option>
       <option><%= get_current_semester_and_year_from_date(Time.now+6.month.to_i) %></option>
