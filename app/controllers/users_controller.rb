@@ -39,6 +39,8 @@ class UsersController < ApplicationController
         # Send email to user
         UserMailer.welcome_email(@user).deliver_now
 
+        login(user_params[:email], user_params[:password], false)
+
         format.html { redirect_to @user.profile}
         format.json { render :show, status: :created, location: @user }
       else
@@ -81,7 +83,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :crypted_password,:password, :password_confirmation, :role, :course_id, profiles: [:name, :family_name])
+      params.require(:user).permit(:email, :crypted_password, :password, :password_confirmation, :role, :course_id, profiles: [:name, :family_name])
     end
 
     def sort_column
