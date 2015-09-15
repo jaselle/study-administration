@@ -42,7 +42,6 @@
   <p>
     <div class="box" style="background-color: rgba(255,128,128,0.5); width: 100%; border-radius: 5px; " >
       <% isWritten = false %>
-      <% problems = false %>
       <!-- All events the user has selected -->
       <% @profile.user.events.each do |eventCondition| %>      
         <!-- If they have a condition -->
@@ -73,7 +72,7 @@
           <% end %>
         <% end %>
       <% end %>
-      <% if !problems %>
+      <% if !isWritten %>
           <div class="box" style="padding-left: 2%;" >
             <br/>
             <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
