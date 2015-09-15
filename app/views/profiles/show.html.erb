@@ -65,7 +65,7 @@
                   </u></strong>
                   <% isWritten = true %>
                 <% end %>
-                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
+                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
               </div>
             <% end %>
           <% end %>
