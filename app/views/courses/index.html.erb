@@ -58,14 +58,17 @@
                               <% temp=temp+' '+schedule.date.sub(%r{/.*},'') %>
                             <% end %>       
                             <% if current_user.events_users.map(&:event_id).include?(event.id) %>
-                              <%case convert_date_to_number(event.events_users.find_by_user_id(current_user.id).semester) %>
-                              <%when "geplant" %>
-                                <li class="plannedfile <%= temp %>">
-                                 <%= link_to event.title, event  %>
-                              <%when "bestanden"%>
-                                <li class="passedfile <%= temp %>">
-                                <%= link_to event.title, event  %>
-                              <%end%>
+                            <% semester = event.events_users.find_by_user_id(current_user.id).semester %>
+                              <% unless semester.nil? %>
+                                <%case convert_date_to_number(semester) %>
+                                <%when "geplant" %>
+                                  <li class="plannedfile <%= temp %>">
+                                   <%= link_to event.title, event  %>
+                                <%when "bestanden"%>
+                                  <li class="passedfile <%= temp %>">
+                                  <%= link_to event.title, event  %>
+                                <%end %>
+                              <% end %>
                             <%else%>
                               <li class="file <%= temp %>"> 
                               <%= link_to event.title, event  %>
