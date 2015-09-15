@@ -4,7 +4,7 @@
 
     $(".Bewertung").click(function(event) {
       event.preventDefault();
-      $("div2").toggle(); 
+      $("div2").toggle();
     });
   });
 </script>
@@ -106,3 +106,7 @@
     </tr>
   <%end%>
 </table>
+
+<div2>
+  <%= link_to 'Bewerten', "/ratings/" + @rating.id.to_s, class: 'btn btn-success' %>
+</div2>
