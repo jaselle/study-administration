@@ -104,6 +104,24 @@ input:not(:checked) + ol > li.plannedfile{
     margin: 0 0 0.125em ;  
 }
 
+input:checked + ol > li.plannedfile { 
+    display: block; 
+    margin: 0 0 0.125em ;  /* 2px */
+}
+input:not(:checked) + ol > li.plannedfile{ 
+    display: none !important; 
+    margin: 0 0 0.125em ;  /* 2px */
+}
+
+input:checked + ol > li.passedfile { 
+    display: block; 
+    margin: 0 0 0.125em ;  /* 2px */
+}
+input:not(:checked) + ol > li.passedfile{ 
+    display: none !important; 
+    margin: 0 0 0.125em ;  /* 2px */
+}
+
 li.course input
 {
     transform: scale(1);
