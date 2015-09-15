@@ -65,7 +65,7 @@
                   </u></strong>
                   <% isWritten = true %>
                 <% end %>
-                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + Event.find_by_identifier(cSplitted).title + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
+                <%= link_to "Für " + eventCondition.title + " ist die Vorraussetzung " + cSplitted + " nicht erfüllt. ", event_path(Event.find_by_title(eventCondition.title)), :class => 'our_link' %> </p>
               </div>
             <% end %>
           <% end %>
@@ -89,7 +89,6 @@
   <p>
     <div class="box" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; height:auto; " >
       <% isWritten=false %>
-      <% isUsed1=false %>
       <!-- All conditions for all events -->
       <% @eventAll = Event.all %>
       <% @eventAll.each do |events| %>
@@ -151,14 +150,14 @@
           <% end %>
         <% end %>
       <% end %>
-      <% if !isUsed1 %>
-        <div class="box" style="padding-left: 2%;" >
-          <br/>
-          <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
-          Keine Veranstaltungsvorschläge vorhanden.</br>
-          </u></strong>
-        </div>
-      <%end%>
+      <% if !isWritten %>
+          <div class="box" style="padding-left: 2%;" >
+            <br/>
+            <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
+               Es existieren im Moment keine belegbaren Veranstaltungen für Sie!</br>
+            </u></strong>
+          </div>
+        <% end %>
       </br>
     </div>
   </p>
@@ -221,7 +220,7 @@
         <div class="box" style="padding-left: 2%;" >
           <br/>
           <u style="line-height:1.5vw;  font-size: 1.25vw; text-decoration:none;"><strong>
-          Keine Veranstaltungsvorschläge vorhanden.</br>
+          Es existieren im Moment keine durch Belegung verfügbar werdende Veranstaltungen für Sie!</br>
           </u></strong>
         </div>
       <%end%>
