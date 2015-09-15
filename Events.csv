@@ -76,17 +76,17 @@ WIWI-B-01006-EC,Grundlagen der Mikroökonomik,Grundlagen der Mikroökonomik; ins
 WIWI-B-01011-EC,Grundlagen der Makroökonomik,Vermittelt Grundlagen der Makroökonomik,Dinger,10,4,Jedes Wintersemester,Klausur (120-150 Minuten),,Volkswirtschaftslehre (B.Sc.)
 WIWI-B-01013-EC,Wirtschafts-und Finanzpolitik,Grundlagen der Wirtschafts-und Finanzpolitik; z.B. der  Allokations-; Steuer-; und Sozialpolitik sowie der Stabilisierungs-und der internationalen Wirtschaftspolitik.,Gaube,5,3,Jedes Sommersemester,Klausur (60-90 Minuten),,Volkswirtschaftslehre (B.Sc.)
 WIWI-B-01014-ME,Einführung in die Ökonometrie,Grundlagen der Ökonometrie; insbesondere Regressionsanalyse.,Wilde,5,3,Jedes Sommersemester,Klausur (60-90 Minuten),,Volkswirtschaftslehre (B.Sc.)
-BPPR,Programmierpraktikum,Je nach Angebot.,,4,6,,,INFA,Pflichtbereich 2 (B.Sc.);
-BAS1,Seminar 1,Je nach Angebot.,,2,3,,,INFA,Pflichtbereich 2 (B.Sc.);
-BAS2,Seminar 2,Je nach Angebot.,,2,3,,,INFA,Pflichtbereich 2 (B.Sc.);
-INDP,Industriepraktikum,Je nach Angebot.,,6,9,,,INFA,Wahlpflichtbereich (B.Sc)
-BPPR2,Programmierpraktikum (Bachelor Vertiefung),Je nach Angebot.,,4,6,,,INFA,Wahlpflichtbereich (B.Sc)
-BAS3,Seminar 3,Je nach Angebot.,,2,3,,,INFA,Wahlpflichtbereich (B.Sc)
-E3,Ergänzung 3,Je nach Angebot.,,2,3,,,,Wahlpflichtbereich (B.Sc);Wahlpflichtbereich (M.Sc)
-E6,Ergänzung 6,Je nach Angebot.,,4,6,,,,Wahlpflichtbereich (B.Sc);Wahlpflichtbereich (M.Sc)
-E9,Ergänzung 9,,,6,9,,,,Wahlpflichtbereich (B.Sc);Wahlpflichtbereich (M.Sc)
-MATH-101,Grundlagen der Algebra (Bachelor),,,12,18,,,,Mathematik Pflichtbereich 2 (B.Sc.)
-MATH-141,Ergänung Mathematik (Bachelor),,,6,9,,,,Mathematik Anwendungsfach Pflichtbereich (B.Sc.)
-PG,Projektgruppe,,,16,24,,,,Pflichtbereich (M.Sc.)
-MAS1,Masterseminar 1,,,2,3,,,,Pflichtbereich (M.Sc.)
-MAS2,Masterseminar 2,,,2,3,,,,Wahlpflichtbereich (M.Sc)
+BPPR,Programmierpraktikum,Je nach Angebot.,wechselnd,4,6,Nicht regelmäßig,,INFA,Pflichtbereich 2 (B.Sc.);
+BAS1,Seminar 1,Je nach Angebot.,wechselnd,2,3,Nicht regelmäßig,,INFA,Pflichtbereich 2 (B.Sc.);
+BAS2,Seminar 2,Je nach Angebot.,wechselnd,2,3,Nicht regelmäßig,,INFA,Pflichtbereich 2 (B.Sc.);
+INDP,Industriepraktikum,Je nach Angebot.,wechselnd,6,9,Nicht regelmäßig,,INFA,Wahlpflichtbereich (B.Sc)
+BPPR2,Programmierpraktikum (Bachelor Vertiefung),Je nach Angebot.,wechselnd,4,6,Nicht regelmäßig,,INFA,Wahlpflichtbereich (B.Sc)
+BAS3,Seminar 3,Je nach Angebot.,wechselnd,2,3,Nicht regelmäßig,,INFA,Wahlpflichtbereich (B.Sc)
+E3,Ergänzung 3,Je nach Angebot.,wechselnd,2,3,Nicht regelmäßig,,,Wahlpflichtbereich (B.Sc);Wahlpflichtbereich (M.Sc)
+E6,Ergänzung 6,Je nach Angebot.,wechselnd,4,6,Nicht regelmäßig,,,Wahlpflichtbereich (B.Sc);Wahlpflichtbereich (M.Sc)
+E9,Ergänzung 9,Je nach Angebot.,wechselnd,6,9,Nicht regelmäßig,,,Wahlpflichtbereich (B.Sc);Wahlpflichtbereich (M.Sc)
+MATH-101,Grundlagen der Algebra (Bachelor),,wechselnd,12,18,Nicht regelmäßig,,,Mathematik Pflichtbereich 2 (B.Sc.)
+MATH-141,Ergänung Mathematik (Bachelor),,wechselnd,6,9,Nicht regelmäßig,,,Mathematik Anwendungsfach Pflichtbereich (B.Sc.)
+PG,Projektgruppe,,wechselnd,16,24,Nicht regelmäßig,,,Pflichtbereich (M.Sc.)
+MAS1,Masterseminar 1,,wechselnd,2,3,Nicht regelmäßig,,,Pflichtbereich (M.Sc.)
+MAS2,Masterseminar 2,,wechselnd,2,3,Nicht regelmäßig,,,Wahlpflichtbereich (M.Sc)

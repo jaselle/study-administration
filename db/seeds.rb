@@ -14,3 +14,4 @@ end
 
 Course.import("Courses.csv")
 Block.import("Blocks.csv")
+Event.import("Events.csv")
