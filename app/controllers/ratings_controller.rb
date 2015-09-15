@@ -4,6 +4,11 @@
 
 class RatingsController < ApplicationController
   #creates the rating for the event, and response in Json-Format
+  
+  def index
+    @event = Event.all
+  end
+
   def create
   
     @rating = Rating.new(params[:rating])
@@ -23,7 +28,7 @@ class RatingsController < ApplicationController
     @rating = Rating.find(params[:id])
     @event = Event.find(params[:rating][:event_id])
 
-    @rating.stars =  params[:rating][:stars]
+    @rating.send(params[:column].to_sym, params[:rating])
     respond_to do |format|
       if @rating.save
         format.json { render :json => { :avg_rating => @event.avg_rating } }
@@ -33,9 +38,28 @@ class RatingsController < ApplicationController
     end
   end
 
-  private
-    def ratings_params
-      params.require(:rating).permit(:stars, :user_id, :event_id)
+  def rating
+    @rating = Rating.find(params[:rating_id])
+    @rating.send("#{params[:column]}=", params[:stars])
+ 
+    respond_to do |format|
+      if @rating.save
+      format.json { 
+        render :json => {
+          success: true
+        }
+      }
     end
 end
+  end
 
+  def show
+   @rating = Rating.find(params[:id])
+   @event = Rating.find(params[:id]).event
+  end
+
+  private
+    def ratings_params
+      params.require(:rating).permit(:column,:user_id, :event_id)
+    end
+end
