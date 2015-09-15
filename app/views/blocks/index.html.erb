@@ -31,21 +31,24 @@
             <% e = block.events.order("title").map %>
               <% e.each do |event| %>
                 <% if current_user && current_user.events_users.map(&:event_id).include?(event.id) %>
-                  <%case convert_date_to_number(event.events_users.find_by_user_id(current_user.id).semester) %>
-                    <% when "bestanden" %>
-                      <tr>
-                        <td style="color:#8DE28D">
-                          <%= event.title + " (" + event.credits.to_s + ")" %>
-                          <br/>
-                        </td>
-                      </tr>
-                    <%when "geplant"%>
-                      <tr>
-                        <td style="color:#ADD8E6">
-                          <%= event.title + " (" + event.credits.to_s + ")" %>
-                          <br/>
-                        </td>
-                      </tr>
+                  <% semester = event.events_users.find_by_user_id(current_user.id).semester %>
+                  <% unless semester.nil? %>
+                    <% case convert_date_to_number(semester) %>
+                      <% when "bestanden" %>
+                        <tr>
+                          <td style="color:#8DE28D">
+                            <%= event.title + " (" + event.credits.to_s + ")" %>
+                            <br/>
+                          </td>
+                        </tr>
+                      <%when "geplant"%>
+                        <tr>
+                          <td style="color:#ADD8E6">
+                            <%= event.title + " (" + event.credits.to_s + ")" %>
+                            <br/>
+                          </td>
+                        </tr>
+                    <% end %>
                   <% end %>
                 <% else %>
                   <tr>
