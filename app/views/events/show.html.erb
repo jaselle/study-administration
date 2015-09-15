@@ -120,7 +120,7 @@
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*2*a+b).month.to_i) %></option>
             <option><%= get_current_semester_and_year_from_date(Time.now+(6*3*a+b).month.to_i) %></option> 
           <% elsif %>
-            <% @event.schedules.each do |s| %>
+            <% @event.schedules.where.not(date: '').each do |s| %>
               <option><%= s.date %></option>
             <% end %>
           <% end %>
