@@ -66,7 +66,7 @@
   <div class="right_side" style="vertical-align:top !important; float:none; width:60%;">
     <h3><%= f.label :event , 'Bestandene Module wählen:' %></h3> 
     <div class="overflow_to_scroll" style="height: 30vw; ">
-      <!-- Makes one Checkbox per event and markes it green if it is already passed   -->
+      <!-- Makes one Checkbox per event and hides done events   -->
       <ol class = "tree1">
         <li class = "profile" style="list-style:none">
           <label id="myModule" for="Module">Module</label>
@@ -103,7 +103,7 @@
                           <option><%= get_current_semester_and_year_from_date(Time.now-(6*3).month.to_i) %></option> 
                           <option><%= get_current_semester_and_year_from_date(Time.now-(6*4).month.to_i) %></option> 
                           <!-- <option><%= get_current_semester_and_year_from_date(Time.now-(6*5).month.to_i) %></option>  -->
-                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*6).month.to_i) %></option>
+                          <option><%= get_current_semester_and_year_from_date(Time.now-(6*6).month.to_i) %></option> 
                           <option><%= get_current_semester_and_year_from_date(Time.now-(6*7).month.to_i) %></option> 
                           <option><%= get_current_semester_and_year_from_date(Time.now-(6*8).month.to_i) %></option>
                           <option><%= get_current_semester_and_year_from_date(Time.now-(6*9).month.to_i) %></option> 
