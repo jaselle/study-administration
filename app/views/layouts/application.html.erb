@@ -11,54 +11,27 @@
 </head>
 <body>
 
-  <div class="overlay"><div class="leftbox"></div><div class="frame1"></div></div>
 <header>
 	<div class="bar-container">
 	<!--Bar containing the important navigation items-->
-	<div class="nav">
+	<div class="nav">  
       <ul>
         <!-- Logo on upper left corner -->
         <li class="topmenu"><a class="active logo" href="/">Home</a></li>
-
+        <% if current_user %>
         <!-- Navigation bar items -->
-        <li class="topmenu"><a href="/courses"><center>Studiengänge</center></a>
-          <ul>
-            <li class="submenu"><a href="/profiles">Profiles</a></li>
-            <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
-          </ul>
-        </li>
-      
-        <li class="topmenu"><a href="/blocks"><center>Blöcke</center></a>
-          <ul>
-            <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
-            <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
-          </ul>
-        </li>
-
-        <li class="topmenu"><a href="/events"><center>Veranstaltungen</center></a>
-          <ul>
-            <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
-            <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
-          </ul>
-        </li>
-
-        <% if current_user && current_user.role == "admin"%>
-          <li class="topmenu"><a href="/users"><center>Benutzer</center></a>
+          <li class="topmenu"><a href="/courses"><center>Meine Übersicht</center></a>
             <ul>
-              <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
-              <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
+              <li class="submenu"><a href="/semester/index">Semesterübersicht</a></li>
+              <li class="submenu"><a href="/blocks">Modulübersicht</a></li>
+              <li class="submenu"><a href="/charts/index">Statistiken</a></li>
             </ul>
           </li>
-
-          <li class="topmenu"><a href="/profiles"><center>Profile</center></a>
-            <ul>
-              <li class="submenu"><a href="">Unterpunkt 1.1</a></li>
-              <li class="submenu"><a href="">Unterpunkt 1.2</a></li>
-            </ul>
+        
+          <li class="topmenu"><a href="/events"><center>Veranstaltungsübersicht</center></a>
           </li>
         <% end %>
-
-      </ul>
+      </ul>   
     </div>
     <!--Bar containing the login and signup buttons-->
     <div class="login">
@@ -69,34 +42,16 @@
         <!-- change .id to .role when role is updated from other group -->
         <li class="topmenu active_user">
           
-          <a href="#"><center><span class="glyphicon glyphicon-user"></span>  <%= current_user.role.capitalize %></center></a>
+          <a href="/profiles/<%=current_user.profile.id%>"><center><span class="glyphicon glyphicon-user"></span> <%= current_user.profile.name %></center></a>
 
           <ul>
           <!-- if else case for different submenues depending on roles -->
           <% if current_user.role.to_s == "admin" %>
-
-            <!-- Prevent from loading non-existent profile -->
-            <% if current_user.profile != nil %>
-              <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>"><span class="glyphicon glyphicon-pushpin"></span> &nbsp Profil</a></li>
-
-            <% else %>
-              <li class="submenu"><a href="">Kein Profil</a></li>
-            <% end %>
-
             <li class="submenu"><a href="/users"><span class="glyphicon glyphicon-list-alt"></span> &nbsp Benutzerliste</a></li>
             <li class="submenu"><%= link_to :logout, method: :post do%> <span class="glyphicon glyphicon-log-out"></span> &nbsp Logout <% end %></li>
 
           <!-- in case not admin -->
           <% else %>
-
-            <!-- redirects to events because profile link not ready -->
-            <% if current_user.profile != nil %>
-              <li class="submenu"><a href="/profiles/<%=current_user.profile.id%>"><span class="glyphicon glyphicon-pushpin"></span> &nbsp Profil</a></li>
-
-            <% else %>
-              <li class="submenu"><a href="">Kein Profil</a></li>
-            <% end %>
-
             <li class="submenu"><%= link_to :logout, method: :post do%> <span class="glyphicon glyphicon-log-out"></span> &nbsp Logout <% end %></li>
           <% end %>
 

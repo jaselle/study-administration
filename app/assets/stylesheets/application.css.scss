@@ -71,7 +71,6 @@ body {
   line-height: 40px;
   height: 40px;
   display: inline-block;
-  /*margin-right: -4px;*/
   width: 15%;
 }
 
@@ -82,7 +81,6 @@ body {
   height: 40px;
   display: inline-block;
   margin-left: 10%;
-/*  margin-right: -4px;*/
   width: 15%;
 }
 
@@ -126,8 +124,7 @@ body {
   height: 40px;
   display: inline-block;
   margin-right: -20px;
-  width: 15%;
-  /*float:left;*/
+  width: 20%;
 }
 
 /*Color of navigation item background when hovered*/
@@ -168,7 +165,6 @@ body {
 /* Layout of menu texts*/
 .topmenu a, .submenu a{
   padding:2px 5px;
-  /*border-collapse:collapse; /*what is this stuff?*/
   font-weight:bold;
   color: #00CC66 !important;
   text-decoration:bold;
@@ -178,10 +174,11 @@ body {
 
 /*Layout of submenu texts*/
 .submenu a{
+  line-height: 2vw;
   font-size:1.0vw;
   width:100;
   position:relative;
-  clear:both; /* special IE6 */
+  clear:both;
 }
 
 .plays_logo {
@@ -267,7 +264,7 @@ body {
   width: 65% !important;
   display: table;
   table-layout: fixed;
-border-collapse: separate;
+  border-collapse: separate;
 }
 
 /* makes content of same_width2 div be filled to that width*/
@@ -288,16 +285,18 @@ border-collapse: separate;
   width: 40% !important;
 }
 
-
+/* For navigations buttons on bottom of pages */
 .btn_group_wide1 {
   width: 100% !important;  
 }
 
+/*aligns icon in middle of button (or div)*/
 .middle_icon {
   vertical-align: middle;
   margin: auto !important;
 }
 
+/* very very small column for tables */
 .col-xs-mini{
   position: relative;
   min-height: 1px;
@@ -307,6 +306,325 @@ border-collapse: separate;
   width: 7.66666666%;
 }
 
+.leftbox{
+  display: inline-block;
+  margin-right: 20px;
+  height: 90vh;
+  width: 300px;
+  background-color: red;
+}
+
+
+/*Format of pagination element*/
+.digg_pagination {
+  cursor: default;
+  /* self-clearing method: */
+}
+.digg_pagination  li.active > a, .digg_pagination li.active > a:focus, .digg_pagination li.active > a:hover, .digg_pagination li.active > span, .digg_pagination li.active > span:focus, .digg_pagination li.active > span:hover{
+  color: #777 !important;
+  background-color: #00CC66 !important;
+  border-color: #00CC66 !important;
+}
+.digg_pagination a, .digg_pagination span, .digg_pagination em {
+  padding: 0.2em 0.5em;
+  display: block;
+  float: left;
+  margin-right: 1px; 
+  color: #777 !important;
+}
+.digg_pagination .current {
+  font-style: normal;
+  font-weight: bold;
+  background: #00CC66;
+  color: white;
+  border: 1px solid #2e6ab1;
+}
+.digg_pagination a {
+  text-decoration: none;
+  color: #00CC66;
+  border: 1px solid #9aafe5;
+}
+.digg_pagination a:hover, .digg_pagination a:focus {
+    color: #00CC66;
+    border-color: #00CC66;
+}
+.digg_pagination .page_info {
+  background: #00CC66;
+  color: white;
+  padding: 0.4em 0.6em;
+  width: 22em;
+  margin-bottom: 0.3em;
+  text-align: center;
+}
+.digg_pagination .page_info b {
+    color: #000033;
+    background: #00CC66;
+    padding: 0.1em 0.25em;
+}
+.digg_pagination:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+* html .digg_pagination {
+  height: 1%;
+}
+*:first-child + html .digg_pagination {
+  overflow: hidden;
+}
+
+/*Sortable Columns with icon*/
+.our_sort:after {
+  margin-left: 1%;
+  font-family: 'Glyphicons Halflings';
+  content: "\e150";
+  font-size: 1vw;
+}
+
+.our_sort {
+  background: none !important;
+  text-decoration: none !important;
+  font-size: 1.5vw;
+}
+
+/* makes links look less dark */
+.our_link {
+  background: none !important;
+  text-decoration: none !important;
+  font-size: 1.15vw;
+  line-height: 1.5vw;
+  padding-left: 2%;
+}
+
+/* makes links look less dark */
+.our_link_head {
+  background: none !important;
+  text-decoration: none !important;
+  font-size: 1.15vw;
+  line-height: 1.5vw;
+  color: black;
+}
+
+/* makes links look less dark */
+.our_link_head:visited {
+  color: black;
+}
+
+/* align searchbar and Title */
+.aligned_search {
+  display: inline-block;
+  width: 33%;
+  vertical-align: bottom;
+}
+
+/* Made searchfield bigger */
+.text_field_r {
+  line-height: 1.73vw;
+  width: 50%;
+}
+
+/* maybe figure out way to do this with % without making your own row be smaller than the others*/
+.fixed_height_table1 tr {
+  height: 50px;
+}
+
+/*flashmessage if incorrect password or email adress*/
+.flash-message {
+  &.error {
+    border: solid 4px #900;
+    background-color: #FF6565;
+  }
+  &.notice {
+    border: solid 4px #26722D;
+    background-color: #A4E7A0;
+  }
+  &.my_flash{
+    color:red;
+  }
+  color: black;
+  font-weight: bold;
+  width: 50%;
+  height: 10%;
+  margin-bottom: 2%;
+  p {
+    font-size: 110%;
+    margin: 15px 0;
+  }
+}
+
+/*beautiful cat as a message*/
+.cat {
+    background-image: asset-data-url("vertippt_b.png");
+    background-size: cover;
+    background-position: right;
+    background-size: 274px 252px;
+    background-repeat: no-repeat;
+    position: fixed;
+    width: 274px;
+    height: 252px;
+    margin-left: 40%;
+}
+
+/*event page container on left side*/
+.left_side {
+  width: 70%;
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  font-size: 1.15vw;
+}
+
+/* change size of headings to be scalable*/
+.left_side h4 {
+  font-size: 1.5vw;
+}
+
+/* change size of headings to be scalable*/
+.left_side h3 {
+  font-size: 2vw ;
+}
+
+/*event page container on right side*/
+.right_side {
+  height: 100%;
+  width: 30%;
+  margin-top: right;
+  display: inline-block;
+  float:right;
+  vertical-align: middle;
+  font-size: 1.15vw;
+}
+
+/* two containers in this one are now next to each other*/
+.event_container {
+  overflow: hidden;
+  position: relative;
+}
+
+/*change background color*/
+.container_events {
+  background: rgba(220, 220, 220, 0.75);
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 1%;
+}
+
+/* align csv import field */
+.aligned_csv_left {
+  display: inline-block !important;
+  width: 65%;
+  vertical-align: top;
+}
+
+/* align csv import field */
+.aligned_csv_right {
+  display: inline-block !important;
+  width: 25%;
+  vertical-align: top;
+  float:right;
+  margin-top: right;
+}
+
+/* align csv import field */
+.import_container {
+  background: rgba(250, 250, 250, 0.75);
+  border-radius: 5px;
+  padding: 0.5%;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  width: 33%;
+  vertical-align: top;
+}
+
+/* Homepage text format */
+.info_txt {
+  font-size: 1.15vw;
+  background-color: #A4E7A0;
+  line-height: 2vw;
+  border-radius: 5px;
+  padding-left: 1%;
+}
+
+/*change size when window is getting to small*/
+@media (max-width: 1000px) {
+  .content {
+    margin-top: 10%;
+  }
+  .login li.topmenu {
+    font-size: 2vw;
+  }
+  .nav li.topmenu {
+    font-size: 2vw;
+  }
+}
+
+
+.my_div_container {
+  overflow: hidden;
+}
+
+.my_div_2 {
+  display: inline-block;
+}
+
+.text_colum {
+  width: 45%;
+}
+
+.profile_mod {
+  line-height: 2vw;
+  font-size: 1.15vw;
+}
+
+#check_modul {
+  position: absolute;
+  left: 250%;
+}
+
+#myModule {
+  cursor: pointer;
+  font-size: 1.5vw;
+  line-height: 2vw;
+}
+
+#myModule:after {
+  font-family: 'Glyphicons Halflings';
+  content: "  \e117  ";
+  font-size: 1vw;
+}
+
+.our_form_fields {
+  font-size: 1.15vw;
+}
+
+.our_profile_fields {
+  width: 100% !important;
+}
+
+.no_link {
+  font-size:1.5vw;
+  line-height:1.5vw;
+  text-decoration:none !important;
+  color:#195995 !important;
+  background-color: rgba(1,1,1,0) !important;
+}
+
+.hand:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e127  ";
+  color:#195995;
+  font-size:1vw;
+}
+
+.overview_head {
+  font-size: 1.6vw;
+}
+
+
+/* Miri's secret stuff*/
 .overlay {
   display: none;
   opacity:0.6;
@@ -326,14 +644,6 @@ border-collapse: separate;
   margin-left: calc(50%-400px);
   margin-top: 5vh;
   display: inline-block;
-}
-
-.leftbox{
-  display: inline-block;
-  margin-right: 20px;
-  height: 90vh;
-  width: 300px;
-  background-color: red;
 }
 
 .splat1{
@@ -392,286 +702,5 @@ border-collapse: separate;
   width: 10vw;
   margin-left: 20vw;
   margin-top: 37vh;
-}
-
-
-/*Format of pagination element*/
-.digg_pagination {
-  cursor: default;
-  /* self-clearing method: */ }
-.digg_pagination  li.active > a, .digg_pagination li.active > a:focus, .digg_pagination li.active > a:hover, .digg_pagination li.active > span, .digg_pagination li.active > span:focus, .digg_pagination li.active > span:hover{
-  color: #777 !important;
-  background-color: #00CC66 !important;
-  border-color: #00CC66 !important;
-}
-.digg_pagination a, .digg_pagination span, .digg_pagination em {
-  padding: 0.2em 0.5em;
-  display: block;
-  float: left;
-  margin-right: 1px; 
-  color: #777 !important;
-}
-.digg_pagination .current {
-  font-style: normal;
-  font-weight: bold;
-  background: #00CC66;
-  color: white;
-  border: 1px solid #2e6ab1; }
-.digg_pagination a {
-  text-decoration: none;
-  color: #00CC66;
-  border: 1px solid #9aafe5; }
-  .digg_pagination a:hover, .digg_pagination a:focus {
-    color: #00CC66;
-    border-color: #00CC66; }
-.digg_pagination .page_info {
-  background: #00CC66;
-  color: white;
-  padding: 0.4em 0.6em;
-  width: 22em;
-  margin-bottom: 0.3em;
-  text-align: center; }
-  .digg_pagination .page_info b {
-    color: #000033;
-    background: #00CC66;
-    padding: 0.1em 0.25em; }
-.digg_pagination:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden; }
-* html .digg_pagination {
-  height: 1%; }
-*:first-child + html .digg_pagination {
-  overflow: hidden; }
-
-/*Sortable Columns with icon*/
-.our_sort:after {
-  margin-left: 1%;
-  font-family: 'Glyphicons Halflings';
-  content: "\e150";
-  font-size: 1vw;
-}
-
-.our_sort {
-  background: none !important;
-  text-decoration: none !important;
-  font-size: 1.5vw;
-}
-
-.our_link {
-  background: none !important;
-  text-decoration: none !important;
-  font-size: 1.15vw;
-  line-height: 1.5vw;
-  padding-left: 2%;
-}
-
-.our_link_head {
-  background: none !important;
-  text-decoration: none !important;
-  font-size: 1.15vw;
-  line-height: 1.5vw;
-  color: black;
-}
-
-.our_link_head:visited {
-  color: black;
-}
-
-/* align searchbar and Title */
-.aligned_search {
-  display: inline-block;
-  width: 33%;
-  vertical-align: bottom;
-}
-
-/* Made searchfield bigger */
-.text_field_r {
-  line-height: 1.73vw;
-  width: 50%;
-}
-
-/* maybe figure out way to do this with % without making your own row be smaller than the others*/
-.fixed_height_table1 tr {
-  height: 50px;
-}
-
-
-/*flashmessage if incorrect password or email adress*/
-.flash-message {
-  &.error {
-    border: solid 4px #900;
-    background-color: #FF6565;
-  }
-  &.notice {
-    border: solid 4px #26722D;
-    background-color: #A4E7A0;
-  }
-  &.my_flash{
-    color:red;
-  }
-  color: black;
-  font-weight: bold;
-  width: 50%;
-  height: 10%;
-  margin-bottom: 2%;
-  p {
-    font-size: 110%;
-    margin: 15px 0;
-  }
-}
-
-/*beautiful cat as a message*/
-.cat {
-    background-image: asset-data-url("vertippt_b.png");
-    background-size: cover;
-    background-position: right;
-    background-size: 274px 252px;
-    background-repeat: no-repeat;
-    position: fixed;
-    width: 274px;
-    height: 252px;
-    margin-left: 40%;
-}
-
-/*event page container on left side*/
-.left_side {
-  width: 70%;
-  display: inline-block;
-  vertical-align: top;
-  height: 100%;
-  font-size: 1.15vw;
-}
-
-/* change size of headings to be scalable*/
-.left_side h4 {
-  font-size: 1.5vw;
-}
-
-.left_side h3 {
-  font-size: 2vw ;
-}
-
-/*event page container on right side*/
-.right_side {
-  height: 100%;
-  width: 30%;
-  margin-top: right;
-  display: inline-block;
-  float:right;
-  vertical-align: middle;
-  font-size: 1.15vw;
-}
-
-/* two containers in this one are now next to each other*/
-.event_container {
-  overflow: hidden;
-  position: relative;
-}
-
-/*change background color*/
-.container_events {
-  background: rgba(220, 220, 220, 0.75);
-  border-radius: 5px;
-  overflow: hidden;
-  padding: 1%;
-}
-
-/* align searchbar and Title */
-.aligned_csv_left {
-  display: inline-block !important;
-  width: 65%;
-  vertical-align: top;
-}
-.aligned_csv_right {
-  display: inline-block !important;
-  width: 25%;
-  vertical-align: top;
-  float:right;
-  margin-top: right;
-}
-
-.import_container {
-  background: rgba(250, 250, 250, 0.75);
-  border-radius: 5px;
-  padding: 0.5%;
-  overflow: hidden;
-  position: relative;
-  display: inline-block;
-  width: 33%;
-  vertical-align: top;
-}
-
-.info_txt {
-  font-size: 1.15vw;
-  background-color: #A4E7A0;
-  line-height: 2vw;
-  border-radius: 5px;
-  padding-left: 1%;
-}
-
-/*change size when window is getting to small*/
-@media (max-width: 1000px) {
-  .content {
-    margin-top: 10%;
-  }
-  .login li.topmenu {
-    font-size: 2vw;
-  }
-  .nav li.topmenu {
-    font-size: 2vw;
-  }
-}
-
-.my_div_container {
-  overflow: hidden;
-}
-
-.my_div_2 {
-  display: inline-block;
-}
-
-.text_colum {
-  width: 45%;
-}
-
-.profile_mod {
-  line-height: 2vw;
-  font-size: 1.15vw;
-}
-
-#check_modul {
-  position: absolute;
-  left: 250%;
-}
-
-#myModule {
-  cursor: pointer;
-  font-size: 1.5vw;
-  line-height: 2vw;
-}
-
-#myModule:after {
-  font-family: 'Glyphicons Halflings';
-  content: "  \e117  ";
-  font-size: 1vw;
-}
-
-.our_form_fields {
-  font-size: 1.15vw;
-}
-
-.our_profile_fields {
-  width: 100% !important;
-}
-
-.no_link {
-  font-size:1.5vw;
-  line-height:1.5vw;
-  text-decoration:none !important;
-  color:black !important;
-  background-color: rgba(1,1,1,0) !important;
 }
 

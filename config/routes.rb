@@ -15,12 +15,14 @@ Rails.application.routes.draw do
 
   resources :courses
   resources :charts
+  resources :chartsprofiles
   resources :events
   resources :blocks
   resources :user_sessions
   resources :users 
   resources :password_resets
   resources :ratings
+  resources :semesters
   root :to => 'home#home'
 
 

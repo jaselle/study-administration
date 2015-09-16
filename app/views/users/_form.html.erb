@@ -19,7 +19,7 @@
 
     <div class="field">
      <%= f.label :course , 'Studiengang wählen' %><br />
-     <%= f.collection_select :course_id, Course.order(:name), :id, :name, class: "same_width1_input" %>
+     <%= f.collection_select :course_id, Course.order(:name), :id, :name_with_degree, {prompt: ""},{class: "form-control our_profile_fields"} %>
     </div>
 
     <!-- virtual field, that will hold the password before it is encrypted into the database -->

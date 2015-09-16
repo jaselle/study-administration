@@ -31,6 +31,7 @@
     <th style="width: 2.5%"/>
     <th style="width: 20%"/>
   </thead>
+  <tbody>  
     <tr>
       <th/>
       <th/>
@@ -40,6 +41,7 @@
       <th/>
       <th style="font-size:1.5vw;line-height:1.5vw; color:black;">
           eigenes Rating
+
       </th>
       <th/>
       <th>
@@ -59,8 +61,7 @@
          "Nutzen des Arbeitsmateriales (z.B. Skript, Aufzeichnung): 1 - 5 Sterne | nicht hilfreich - hilfreich"]%>
     <%rating_category = ["Teilnahme", "Schwierigkeit", "Arbeitsaufwand","Verhältnis Theorie/Praxis", "Arbeitsmaterial"]%>
     <%column_name = ["attend", "tough", "effort" , "share", "material"]%>
-
-    <% (0..4).each do |a|%>
+  <% (0..4).each do |a|%>
     <tr>
       <td>
         <span style="font-size:1.75vw;line-height:2.2vw;" class="has-tooltip" data-toggle="tooltip" title="<%=tooltip[a]%>"><%=rating_category[a]%></span>
@@ -101,14 +102,12 @@
               <% end %>        
               <%= f.hidden_field :"#{column_name[a]}", :id => form_id + "_stars" %>
             <% end %>
-
             <% (1..5).each do |i| %>
-              <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>" data-column="<%=column_name[a]%>" data-rating-id="<%= rating.id %>"></li>
+             <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>" data-column="<%=column_name[a]%>" data-rating-id="<%= rating.id %>"></li>
             <% end %>
           <% end %>
         </div2>
       </td>
-    </tr>
   <%end%>
   <tr style="height: 2vw;">
   </tr>
@@ -121,7 +120,7 @@
     <td/>
     <td>
       <div2>
-        <%= link_to 'Bewerten', "/ratings/" + @rating.id.to_s, class: 'btn btn-success' %>
+        <%= link_to 'Abstimmen', "/ratings/" + @rating.id.to_s, class: 'btn btn-success' %>
       </div2>
     <td/>
   </tr>
