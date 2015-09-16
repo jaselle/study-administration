@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :courses
   resources :charts
+  resources :chartsprofiles
   resources :events
   resources :blocks
   resources :user_sessions
