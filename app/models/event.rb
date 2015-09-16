@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
 	has_many :ratings
   has_and_belongs_to_many :blocks
 
-  has_many  :events_users
+  has_many  :events_users, :dependent => :destroy
   has_many :users, through: :events_users
   has_many :schedules, :dependent => :delete_all
   accepts_nested_attributes_for :events_users

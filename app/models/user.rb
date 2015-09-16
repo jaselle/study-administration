@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   has_many :ratings
 
-  has_many :events_users
+  has_many :events_users, :dependent => :destroy
   has_many :events, through: :events_users
   accepts_nested_attributes_for :events_users
 
