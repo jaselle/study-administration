@@ -1,4 +1,3 @@
-
 <%= form_tag events_path, :method => 'get', :id => "events_search", remote: true do %>
     <h1 class="aligned_search"> Veranstaltungen </h1>
     <p class="aligned_search">
@@ -7,8 +6,5 @@
     </p>
 </br>
 </br>
-
     <div id="events"><%= render 'events' %></div>
 <% end %>
-
-

@@ -13,19 +13,9 @@ class UsersController < ApplicationController
     @users = User.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
   end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-  end
-
   # GET /users/new
   def new
     @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
-
   end
 
   # POST /users

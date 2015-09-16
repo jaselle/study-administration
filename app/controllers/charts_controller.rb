@@ -9,7 +9,6 @@ class ChartsController < ApplicationController
     @events_users = @users.events_users
   end
   
-
   def sumevent(block)
   	sumevent = 0
   		block.events.each do |event|
@@ -17,7 +16,6 @@ class ChartsController < ApplicationController
   		end
   end
    
-
   def block_users
   	sumblock = 0
   	@blocks.each do |block|

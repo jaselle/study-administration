@@ -1,7 +1,3 @@
-#ratings_controller to handle the Rating-system
-#
-#
-
 class RatingsController < ApplicationController
   #creates the rating for the event, and response in Json-Format
   
@@ -10,7 +6,6 @@ class RatingsController < ApplicationController
   end
 
   def create
-  
     @rating = Rating.new(params[:rating])
     @event = Event.find(params[:rating][:event_id])
 
@@ -44,13 +39,13 @@ class RatingsController < ApplicationController
  
     respond_to do |format|
       if @rating.save
-      format.json { 
-        render :json => {
-          success: true
+        format.json {
+          render :json => {
+            success: true
+          }
         }
-      }
+      end
     end
-end
   end
 
   def show

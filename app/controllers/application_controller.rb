@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  helper_method :get_current_semester, :get_current_semester_and_year, :get_next_semester_and_year, :get_current_semester_and_year_from_date, :convert_date_to_number
+  helper_method :get_current_semester_and_year_from_date, :convert_date_to_number
   protect_from_forgery with: :exception
 
 def js_logged_in
@@ -16,10 +16,6 @@ end
  def not_authorized(text)
  	redirect_to root_path, alert: text
  end
-
-def get_current_semester_from_date(time)
-	return get_current_semester_and_year_from_date(time).split(" ")[0]
-end 
 
 def get_current_semester_and_year_from_date(time)
 	#check intervals for winter- or summer-semester
@@ -39,8 +35,7 @@ def get_current_semester_and_year_from_date(time)
 end	
 
 
-def convert_date_to_number(string1)
-	
+def convert_date_to_number(string1)	
 	curr_date = get_current_semester_and_year_from_date(Time.now)
 	curr_sem= curr_date.split(" ")[0]
 	if(curr_sem == "Sommersemester")
@@ -54,8 +49,6 @@ def convert_date_to_number(string1)
 	else 
 		year = string1.split(" ")[1].split("/")[0]
 	end
-
-
 	if (year < curr_year)
 		return "bestanden"
 	elsif ( year == curr_year)
@@ -71,22 +64,12 @@ def convert_date_to_number(string1)
 	elsif(year > curr_year)
 		return "geplant"
 	end 
- 
 
-end	
-
-
+ end	
 
  def redirect_to_profile
  	redirect_to profile_path(@user.profile)
  end
-
-# needed? does not work we assume
-def some_method
-  redirect_to :back
-rescue ActionController::RedirectBackError
-  redirect_to :root
-end
 
 add_flash_types :my_flash
 
