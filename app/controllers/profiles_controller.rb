@@ -18,10 +18,6 @@ class ProfilesController < ApplicationController
     @profile = Profile.new
   end
 
-  # GET /profiles/1/edit
-  def edit
-  end
-
   # POST /profiles
   # POST /profiles.json
   def create

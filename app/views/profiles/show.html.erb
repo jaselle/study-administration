@@ -224,8 +224,10 @@
 <% end %></br>
 
 <!-- check when we know what happens with profile pages. where can user/admin go -->
-<%= link_to 'Profil bearbeiten und bestandene Veranstaltungen hinzufügen', edit_profile_path(@profile), class: 'btn btn-default' %> 
-<%= link_to 'Meine Statistik', '/charts/index', class: 'btn btn-default' %> 
+<%= link_to 'Profil bearbeiten und bestandene Veranstaltungen hinzufügen', edit_profile_path(@profile), class: 'btn btn-default' %>
+<% if @profile.user_id == current_user.id %>
+  <%= link_to 'Meine Statistik', '/charts/index', class: 'btn btn-default' %>
+<% end %>
 <!-- where should back button lead? -->
 <% if can? :manage, @profile %>
 <%= link_to 'Zur Benutzerübersicht', users_path, class: 'btn btn-default' %> 
