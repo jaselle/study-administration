@@ -101,7 +101,7 @@
 
   <!-- Immediate suggestions -->
   <p>
-    <div class="box" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; height:auto; " >
+    <div class="box overflow_to_scroll" style="background-color: rgba(141,226,141,0.5); width: 100%; border-radius: 5px; height:20vw; " >
       <% if @profile.user.course != nil %>
         <% isWritten=false %>
         <!-- All conditions for all events -->
@@ -246,6 +246,7 @@
 <% if @profile.user_id == current_user.id %>
   <%= link_to 'Meine Statistik', '/charts/index', class: 'btn btn-default' %>
 <% end %>
+
 <!-- where should back button lead? -->
 <% if can? :manage, @profile %>
 <%= link_to 'Zur Benutzerübersicht', users_path, class: 'btn btn-default' %> 
