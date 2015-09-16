@@ -4,6 +4,7 @@
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
+<!-- Array of column names used for sql-->
 <%column_name = ["attend", "tough", "effort" , "share", "material"]%>
 
 <script>
@@ -22,7 +23,6 @@ $(function () {
     }
    
     $(document).ready(function() {
-    
         var categories = [
         <% @blocks.each do |block| %>
             '<%=block.name%>',
@@ -70,6 +70,9 @@ $(function () {
                 renderTo: 'container',
                 type: 'column'
             },
+            legend: {
+                enabled: false
+            },
             title: {
                 text: 'Beliebtesten Veranstaltungen'
             },
@@ -116,9 +119,9 @@ $(function () {
                     var point = this.point,
                         s = this.x +':<b> '+ this.y +' ★</b><br/>';
                     if (point.drilldown) {
-                        s += 'Click to view '+ point.category +"'s Veranstaltungen";
+                        s += 'KLick um Veranstaltungen im '+ point.category +" anzusehen";
                     } else {
-                        s += 'Click to return to Blocks';
+                        s += 'Klick um auf Blocks zurück zu kommen';
                     }
                     return s;
                 }
@@ -134,10 +137,6 @@ $(function () {
         });
     });
     
-
-
-
-
     $('.update').on('click', function() {
         var newData = [{
             name: 'MSIE versions',
