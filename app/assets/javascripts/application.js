@@ -16,6 +16,7 @@
 //= require highcharts
 //= require highcharts/highcharts-more
 //= require_tree .
+//= require profiles
 
 
 $(document).ready(function() {
