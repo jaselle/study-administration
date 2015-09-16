@@ -39,8 +39,7 @@ def get_current_semester_and_year_from_date(time)
 end	
 
 
-def convert_date_to_number(string1)
-	
+def convert_date_to_number(string1)	
 	curr_date = get_current_semester_and_year_from_date(Time.now)
 	curr_sem= curr_date.split(" ")[0]
 	if(curr_sem == "Sommersemester")
@@ -54,8 +53,6 @@ def convert_date_to_number(string1)
 	else 
 		year = string1.split(" ")[1].split("/")[0]
 	end
-
-
 	if (year < curr_year)
 		return "bestanden"
 	elsif ( year == curr_year)
@@ -71,9 +68,7 @@ def convert_date_to_number(string1)
 	elsif(year > curr_year)
 		return "geplant"
 	end 
- 
-
-end	
+ end	
 
 
 
