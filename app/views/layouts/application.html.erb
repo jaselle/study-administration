@@ -20,8 +20,9 @@
         <li class="topmenu"><a class="active logo" href="/">Home</a></li>
         <% if current_user %>
         <!-- Navigation bar items -->
-          <li class="topmenu"><a href="/courses"><center>Meine Übersicht</center></a>
+          <li class="topmenu"><a><center>Meine Übersicht</center></a>
             <ul>
+              <li class="submenu"><a href="/courses">Studienplaner</a></li>
               <li class="submenu"><a href="/semester/index">Semesterübersicht</a></li>
               <li class="submenu"><a href="/blocks">Modulübersicht</a></li>
               <li class="submenu"><a href="/charts/index">Statistiken</a></li>
