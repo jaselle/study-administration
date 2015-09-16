@@ -634,7 +634,7 @@ border-collapse: separate;
 }
 
 .text_colum {
-  width: 50%;
+  width: 45%;
 }
 
 .profile_mod {
@@ -666,3 +666,12 @@ border-collapse: separate;
 .our_profile_fields {
   width: 100% !important;
 }
+
+.no_link {
+  font-size:1.5vw;
+  line-height:1.5vw;
+  text-decoration:none !important;
+  color:black !important;
+  background-color: rgba(1,1,1,0) !important;
+}
+
