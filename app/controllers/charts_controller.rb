@@ -1,8 +1,11 @@
 class ChartsController < ApplicationController
-  
+
       helper_method :executesql, :executesqlarray, :encrypt, :min_semester, :decrypt, :max_semester
 
   def index
+
+    authorize! :index, @charts
+
     @course = Course.find(current_user.course_id)
    	@blocks = @course.blocks
     @users = current_user

@@ -1,9 +1,7 @@
-#ratings_controller to handle the Rating-system
-#
-#
-
 class RatingsController < ApplicationController
   #creates the rating for the event, and response in Json-Format
+  
+  load_and_authorize_resource
   
   def index
     @event = Event.all
