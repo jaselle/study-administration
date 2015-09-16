@@ -3,8 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  alert "bla"
   $('#myModule').click ->
+  	alert "bla"
     if $('#check_modul').prop('checked')
       $('#check_modul').prop 'checked', false
     else
