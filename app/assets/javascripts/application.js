@@ -15,8 +15,9 @@
 //= require twitter/bootstrap
 //= require highcharts
 //= require highcharts/highcharts-more
-//= require_tree .
 //= require profiles
+//= require_tree .
+
 
 
 $(document).ready(function() {
