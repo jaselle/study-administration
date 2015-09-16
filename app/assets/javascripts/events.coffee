@@ -7,12 +7,12 @@
 #
 
 $ ->
+  if $("#event_cycle").val() == "Nicht regelmäßig"
+    $("#nextDate").show()
+  else
+    $("#nextDate").hide()
+
   $("#event_cycle").change -> 
-    if $("#event_cycle").val() == "Nicht regelmäßig"
-      $("#nextDate").show()
-    else 
-      $("#nextDate").hide()
-    return   
     if $("#event_cycle").val() == "Nicht regelmäßig"
       $("#nextDate").show()
     else 
