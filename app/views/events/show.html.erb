@@ -62,7 +62,7 @@
     <% end %>
   <% end %>
   </div>
-  <%= link_to 'Detailsbewertung ansehen', rating_path(@event.ratings.find_or_create_by(user_id: current_user.id)), class: 'btn btn-default right_side' %>
+  <%= link_to 'Detailbewertung ansehen', rating_path(@event.ratings.find_or_create_by(user_id: current_user.id)), class: 'btn btn-default right_side' %>
 </div>
 <br/>
 <div class="container_events" style="background-color: rgba(1,1,1,0)">  
