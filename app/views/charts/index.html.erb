@@ -23,12 +23,11 @@ $(function () {
     }
     
     $(document).ready(function() {
-    
         var categories = [
         <% @blocks.each do |block| %>
             '<%=block.name%>',
             <%end%>],
-            name = 'Blocks',
+            name = 'Modul',
             data = [
             <%color_counter = 0%>
                 <%@blocks.each do |block| %>
@@ -107,9 +106,9 @@ $(function () {
                     var point = this.point,
                         s = this.x +':<b> '+ this.y +' ★</b><br/>';
                     if (point.drilldown) {
-                        s += 'Click to view '+ point.category +"'s Veranstaltungen";
+                        s += 'Hier klicken um '+ point.category +" anzusehen";
                     } else {
-                        s += 'Click to return to Blocks';
+                        s += 'Hier klicken um zur Modulübersicht zu gelangen';
                     }
                     return s;
                 }
@@ -122,6 +121,7 @@ $(function () {
             exporting: {
                 enabled: false
             }
+
         });
     });
     

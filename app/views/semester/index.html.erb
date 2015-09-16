@@ -1,17 +1,19 @@
+<h1><i> Semesterübersicht </i></h1>
 <div>
 	<ul>
 		<% lastEvent = [] %>
 
 		<% @userevents.each do |event| %>
 			<% if event[1] == lastEvent[1] && event[2] == lastEvent[2] %>
-				<li><%= link_to event[0], "/events/" + event[3].to_s  %> </li>
+				<li class="hand" style="list-style:none;"><%= link_to event[0], "/events/" + event[3].to_s, {:class => "no_link"}  %> </li>
 			<% else %>
 				</ul>
 				<% credits = ActiveRecord::Base.connection.execute("SELECT sum(credits) FROM events, events_users WHERE events.id = events_users.event_id AND events_users.user_id = " + current_user.id.to_s + " AND events_users.semester = '" + event[1].to_s + ' ' + event[2].to_s + "'").getvalue(0,0) %>
-				<h4> <%= event[1] + ' ' + event[2] %> <i><small><%= "Credits:  "+ credits.to_s %></small></i> </h4>  
+				<br/>
+				<h4 class="overview_head"> <%= event[1] + ' ' + event[2] %> <i><small><%= "Credits:  "+ credits.to_s %></small></i> </h4>  
 				<ul>
-				<li>
-					<%= link_to event[0], "/events/" + event[3].to_s  %>
+				<li class="hand" style="list-style:none;">
+					<%= link_to event[0], "/events/" + event[3].to_s , {:class => "no_link"} %>
 				</li>
 			<% end %>
 
