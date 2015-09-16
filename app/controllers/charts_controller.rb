@@ -7,7 +7,7 @@ class ChartsController < ApplicationController
     authorize! :index, @charts
 
     @course = Course.find(current_user.course_id)
-   	@blocks = @course.blocks
+   	@blocks = @course.blocks.where("name LIKE 'Pflichtbereich%' OR name LIKE 'Wahlpflichtbereich%' OR name LIKE 'Mathematik Pflichtbereich%'")
     @users = current_user
     @events_users = @users.events_users
   end

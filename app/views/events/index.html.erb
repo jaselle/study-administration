@@ -8,7 +8,9 @@
 	</br>
 	</br>
     <div id="events"><%= render 'events' %></div>
-<% end %>
+  <% end %>
+<%end%>
 
 <% if cannot? :read, @event%>
     <%= not_authorized("Keine Rechte um Eventübersicht aufzurufen") %>
+<%end%>
