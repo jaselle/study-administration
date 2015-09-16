@@ -11,41 +11,47 @@
 
 <head>
   <center>
-    <h4>
+    <h3>
+    <strong>
       Bewertung der Veranstaltung: 
       <%=@event.title%> 
-    </h4>
+    </strong>
+    </h3>
   </center>
 </head>
 <br/>
-
+<center>
 <table> 
   <thead>
+    <th style="width: 30%"/>
+    <th style="width: 2.5%"/>
     <th style="width: 20%"/>
+    <th style="width: 2.5%"/>
     <th style="width: 20%"/>
-    <th style="width: 10%"/>
-    <th style="width: 20%"/>
-    <th style="width: 10%"/>
+    <th style="width: 2.5%"/>
     <th style="width: 20%"/>
   </thead>
+  <tbody>  
     <tr>
-      <td/>
-      <th>
-        <center> alle Benutzer</center>
+      <th/>
+      <th/>
+      <th style="font-size:1.5vw;line-height:1.5vw;color:black;">
+        alle Benutzer
       </th>
-      <td/>
-      <th>
-        <center>
-          <%=@rating.user.profile.name.capitalize%>
-        </center>
+      <th/>
+      <th style="font-size:1.5vw;line-height:1.5vw; color:black;">
+          eigenes Rating
+
       </th>
-      <td/>
+      <th/>
       <th>
       <center>
-         <a class="Bewertung" href ="#"> Bewertung abgeben</a>
+         <a class="Bewertung no_link" href ="#"> Bewertung abgeben</a>
       </center>
       </th>
     </tr>
+    <tr style="height: 1vw;">
+  </tr>
     <!--  Arrays for tooltip, name rating-category and column name -->
     <%tooltip = [ 
          "Die Anwesenheit in der Vorlesung wird (nicht) empfohlen: 1 - 5 Sterne | nicht empfohlen - empfohlen",     
@@ -55,12 +61,12 @@
          "Nutzen des Arbeitsmateriales (z.B. Skript, Aufzeichnung): 1 - 5 Sterne | nicht hilfreich - hilfreich"]%>
     <%rating_category = ["Teilnahme", "Schwierigkeit", "Arbeitsaufwand","Verhältnis Theorie/Praxis", "Arbeitsmaterial"]%>
     <%column_name = ["attend", "tough", "effort" , "share", "material"]%>
-
-    <% (0..4).each do |a|%>
+  <% (0..4).each do |a|%>
     <tr>
-      <th>
-        <span class="has-tooltip" data-toggle="tooltip" title="<%=tooltip[a]%>"><%=rating_category[a]%></span>
-      </th>
+      <td>
+        <span style="font-size:1.75vw;line-height:2.2vw;" class="has-tooltip" data-toggle="tooltip" title="<%=tooltip[a]%>"><%=rating_category[a]%></span>
+      </td>
+      <td/>
       <td>
         <% (1..5).each do |i| %>
           <%if i <= @event.avg_rating("#{column_name[a]}") %>
@@ -96,17 +102,27 @@
               <% end %>        
               <%= f.hidden_field :"#{column_name[a]}", :id => form_id + "_stars" %>
             <% end %>
-
             <% (1..5).each do |i| %>
-              <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>" data-column="<%=column_name[a]%>" data-rating-id="<%= rating.id %>"></li>
+             <li class="rating_star" id="<%= form_id %>_<%= i %>" data-stars="<%= i %>" data-form-id="<%= form_id %>" data-column="<%=column_name[a]%>" data-rating-id="<%= rating.id %>"></li>
             <% end %>
           <% end %>
         </div2>
       </td>
-    </tr>
   <%end%>
+  <tr style="height: 2vw;">
+  </tr>
+  <tr>
+    <td/>
+    <td/>
+    <td/>
+    <td/>
+    <td/>
+    <td/>
+    <td>
+      <div2>
+        <%= link_to 'Abstimmen', "/ratings/" + @rating.id.to_s, class: 'btn btn-success' %>
+      </div2>
+    <td/>
+  </tr>
 </table>
-
-<div2>
-  <%= link_to 'Bewerten', "/ratings/" + @rating.id.to_s, class: 'btn btn-success' %>
-</div2>
+</center>

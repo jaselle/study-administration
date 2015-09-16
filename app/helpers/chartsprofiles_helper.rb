@@ -1,0 +1,2 @@
+module ChartsprofilesHelper
+end
