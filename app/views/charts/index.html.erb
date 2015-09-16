@@ -27,7 +27,7 @@ $(function () {
         <% @blocks.each do |block| %>
             '<%=block.name%>',
             <%end%>],
-            name = 'Blocks',
+            name = 'Modul',
             data = [
             <%color_counter = 0%>
                 <%@blocks.each do |block| %>
@@ -119,9 +119,9 @@ $(function () {
                     var point = this.point,
                         s = this.x +':<b> '+ this.y +' ★</b><br/>';
                     if (point.drilldown) {
-                        s += 'KLick um Veranstaltungen im '+ point.category +" anzusehen";
+                        s += 'Hier klicken um '+ point.category +" anzusehen";
                     } else {
-                        s += 'Klick um auf Blocks zurück zu kommen';
+                        s += 'Hier klicken um zur Modulübersicht zu gelangen';
                     }
                     return s;
                 }
@@ -134,6 +134,7 @@ $(function () {
             exporting: {
                 enabled: false
             }
+
         });
     });
     

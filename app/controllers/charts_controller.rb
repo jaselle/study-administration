@@ -15,10 +15,8 @@ class ChartsController < ApplicationController
   		block.events.each do |event|
   			sumevent += event.users.count
   		end
-
   end
    
-  
 
   def block_users
   	sumblock = 0
@@ -27,7 +25,6 @@ class ChartsController < ApplicationController
   		sumblock += sumevent(block)
   	return sumblock
   	end
-
   end
 
 end
