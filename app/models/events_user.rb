@@ -5,8 +5,5 @@ class EventsUser < ActiveRecord::Base
 
 	validates_uniqueness_of :user_id,  :scope => [:event_id] 
 
-
-	#delete-cascade???
-
 end
 
