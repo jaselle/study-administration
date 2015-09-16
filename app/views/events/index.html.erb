@@ -7,11 +7,11 @@
 	<!-- can correct in this place? or rather manage? -->
 	<% if can? :create, @event %>
 		<div class="import_container">
-	 	<!--Some code for creating the first view of our import buttons.-->
-	 	<p style="font-size : 1vw">Neue CSV Datei einbinden:</p>
-	  	<%= form_tag :controller => 'csv_reader', :action => 'import', :class => 'aligned_csv_left btn btn-default', multipart: true do %>
-	  		<%= file_field_tag :file, :class => 'aligned_csv_left' %>
-	  		<%= submit_tag "Importieren",  class: 'btn btn-default aligned_csv_right' %>
+		<!--Some code for creating the first view of our import buttons.-->
+		<p style="font-size : 1vw">Neue CSV Datei einbinden:</p>
+		<%= form_tag :controller => 'csv_reader', :action => 'import', :class => 'aligned_csv_left btn btn-default', multipart: true do %>
+			<%= file_field_tag :file, :class => 'aligned_csv_left' %>
+			<%= submit_tag "Importieren",  class: 'btn btn-default aligned_csv_right' %>
 		<% end %> 
 		</div>
 	<% end %>
