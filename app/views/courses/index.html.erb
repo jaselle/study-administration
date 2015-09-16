@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag "courseOverview.css" %>
-
+<div style="min-height:10vw;">
 <div class="container_leg_menu" style="float:right">
   <div class="legend_container" >
     <ol class="legend">
@@ -31,7 +31,6 @@
 </p>
 
 <br>
-
   <%if logged_in?%>
 
     <!-- Ebene 1: Courses -->
@@ -83,7 +82,10 @@
       <% end %>
     </ol>
 <%end%>
+</div>
+
 <% if can? :manage, @course%>
-<%= link_to 'Neuer Studiengang', new_course_path, class: 'btn btn-success' %>
+  <%= link_to 'Neuer Studiengang', new_course_path, class: 'btn btn-success' %>
 <%end%>
 <%= params[:semesters] %>
+</div>

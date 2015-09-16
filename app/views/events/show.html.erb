@@ -47,7 +47,25 @@
 
 </div>
 <br/>
-  
+<div class="container_events">
+ <strong class="left-side" style="font-size: 1.15vw;">Rating &nbsp</strong>
+<!-- Displays the single stars for Average Rating -->
+<div style="display:inline-block">
+ <% query = "SELECT (avg(attend) + avg(tough) + avg(effort) + avg(share) + avg(material)) / 5 FROM ratings WHERE attend != 0 AND tough != 0 AND effort != 0 AND share != 0 AND material != 0 AND event_id = " + @event.id.to_s + ";" %>
+ <% records_result = ActiveRecord::Base.connection.execute(query) %>
+ <% result = records_result.getvalue(0, 0) %>
+  <% (1..5).each do |i| %>
+    <%if i <= (result.to_f + 0.5) %>
+      <li class="rating_avg" ></li>
+    <% else %>
+      <li class="rating_rest" ></li>
+    <% end %>
+  <% end %>
+  </div>
+  <%= link_to 'Detailsbewertung ansehen', rating_path(@event.ratings.find_or_create_by(user_id: current_user.id)), class: 'btn btn-default right_side' %>
+</div>
+<br/>
+<div class="container_events" style="background-color: rgba(1,1,1,0)">  
   <!-- if logged in, show the Button to mark an event-->
   <% if logged_in? %>
     <% unless @event.users.find_by(id: current_user.id) %>
@@ -63,11 +81,12 @@
     <%end %>
 
     <% if can? :edit, Event %>
-  <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
-<%end%>
+      <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
+    <%end%>
   <% end %>
   <!-- back button incorrect, should lead to event page ??? -->
 <%= link_to 'Zurück zu den Veranstaltungen', :events, class: 'btn btn-default' %>
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -150,20 +169,5 @@
 
   </div>
 </div>
-<br/>
-<br/>
- <strong>Rating</strong>
-<!-- Displays the single stars for Average Rating -->
- <% query = "SELECT (avg(attend) + avg(tough) + avg(effort) + avg(share) + avg(material)) / 5 FROM ratings WHERE attend != 0 AND tough != 0 AND effort != 0 AND share != 0 AND material != 0 AND event_id = " + @event.id.to_s + ";" %>
- <% records_result = ActiveRecord::Base.connection.execute(query) %>
- <% result = records_result.getvalue(0, 0) %>
-  <% (1..5).each do |i| %>
-    <%if i <= (result.to_f + 0.5) %>
-      <li class="rating_avg" ></li>
-    <% else %>
-      <li class="rating_rest" ></li>
-    <% end %>
-  <% end %>
-</p>
 
 <%= link_to 'Detailbewertung ansehen', rating_path(@event.ratings.find_or_create_by(user_id: current_user.id)), class: 'btn btn-default' %>
