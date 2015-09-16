@@ -17,6 +17,7 @@ class SemesterController < ApplicationController
   		@userevents << array
   	end
 
-  	@userevents.sort_by! {|t| [t[2], t[1], t[0]]}
+    @userevents.sort_by!{|t| [t[0]]}.reverse!
+    @userevents.sort_by!{|t| [t[2], t[1]]}.reverse!
   end
 end
