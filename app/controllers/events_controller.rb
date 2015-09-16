@@ -63,10 +63,6 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
-  # GET /events/1/edit
-  def edit
-  end
-
   # POST /events
   # POST /events.json
   def create
@@ -77,7 +73,9 @@ class EventsController < ApplicationController
         schedules = event_params[:schedules]
         event_params[:schedules].each do |sched|
           if @event.cycle == "Nicht regelmäßig"
-            Schedule.create!(date: sched, event_id: @event.id)
+            if sched != ""
+              Schedule.create!(date: sched, event_id: @event.id)
+            end
           end
         end
         format.html { redirect_to @event, notice: 'Veranstaltung wurde erfolgreich erstellt.' }

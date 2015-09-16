@@ -21,10 +21,6 @@ class ProfilesController < ApplicationController
     @profile = Profile.new
   end
 
-  # GET /profiles/1/edit
-  def edit
-  end
-
   # POST /profiles
   # POST /profiles.json
   def create
@@ -44,49 +40,53 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
-    @profile.user = User.update(@profile.user.id, profile_params[:user_attributes]) # updates the user by updating the given params
-    if !current_user.nil?
-      if current_user.role == "admin" || current_user.id == @profile.user.id 
-        valid = true
-        params[:profile][:id].each do |i|
-          unless i.blank? or i.nil?
-            if params[('semester' + i.to_s).to_sym].nil?
-              valid = false
+    if profile_params[:user_attributes][:password] == profile_params[:user_attributes][:password_confirmation] || profile_params[:user_attributes][:password] == nil
+      @profile.user = User.update(@profile.user.id, profile_params[:user_attributes]) # updates the user by updating the given params
+      if !current_user.nil?
+        if current_user.role == "admin" || current_user.id == @profile.user.id 
+          valid = true
+          params[:profile][:id].each do |i|
+            unless i.blank? or i.nil?
+              if params[('semester' + i.to_s).to_sym].nil?
+                valid = false
+              end
             end
           end
-        end
-        # Passed events are delivered in the join table events_users, while the profil is updated.
-        params[:profile][:id].each do |i| 
-          unless i.blank? or i.nil?
-            event = Event.find(i)
-            if valid
-              if !event.users.find_by(id: current_user.id)
-                event.users << current_user 
-                cu = event.events_users.find_by(user_id: current_user.id)
-                cu.semester = params[('semester' + i.to_s).to_sym]
-                cu.save!
+          # Passed events are delivered in the join table events_users, while the profil is updated.
+          params[:profile][:id].each do |i| 
+            unless i.blank? or i.nil?
+              event = Event.find(i)
+              if valid
+                if !event.users.find_by(id: current_user.id)
+                  event.users << current_user 
+                  cu = event.events_users.find_by(user_id: current_user.id)
+                  cu.semester = params[('semester' + i.to_s).to_sym]
+                  cu.save!
+                else 
+                  event.users.delete(current_user.id)
+                  event.users << current_user 
+                  cu = event.events_users.find_by(user_id: current_user.id)
+                  cu.semester = params[('semester' + i.to_s).to_sym]
+                  cu.save!
+                end  
               else 
-                event.users.delete(current_user.id)
-                event.users << current_user 
-                cu = event.events_users.find_by(user_id: current_user.id)
-                cu.semester = params[('semester' + i.to_s).to_sym]
-                cu.save!
-              end  
-            else 
-              redirect_to :back, alert: "Zu jeder bestandenen Veranstaltung muss das Semester angegeben werden!" and return
+                redirect_to :back, alert: "Zu jeder bestandenen Veranstaltung muss das Semester angegeben werden!" and return
+              end
             end
           end
-        end
-        if @profile.update(profile_params.except(:user_attributes))
-          redirect_to "/profiles/#{@profile.id}", notice: "Profil erfolgreich bearbeitet!" and return
+          if @profile.update(profile_params.except(:user_attributes))
+            redirect_to "/profiles/#{@profile.id}", notice: "Profil erfolgreich bearbeitet!" and return
+          else
+            redirect_to '/profiles/#{@profile.id}/edit', alert: "Fehler. Bitte nochmal versuchen." and return
+          end
         else
-          redirect_to '/profiles/#{@profile.id}/edit', alert: "Fehler. Bitte nochmal versuchen." and return
+          redirect_to :back, alert: "Keine Rechte." and return
         end
-      else
-        redirect_to :back, alert: "Keine Rechte." and return
+      else 
+        redirect_to :back, alert: "Nicht eingeloggt." and return
       end
-    else 
-      redirect_to :back, alert: "Nicht eingeloggt." and return
+    else
+      redirect_to :back, alert: "Passwörter stimmen nicht überein." and return
     end
   end
       
@@ -108,6 +108,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:family_name, :name, :birth_date, :bio, :user_id, user_attributes: [:role, :course_id, :id])
+      params.require(:profile).permit(:family_name, :name, :birth_date, :bio, :user_id, user_attributes: [:role, :course_id, :id, :password, :password_confirmation, :crypted_password])
     end
 end

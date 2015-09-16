@@ -70,17 +70,10 @@ skip_authorization_check
     </div>
  </header>
 <div class="content">
-<!-- allows alerts and notice -->
-<!-- <div>
-  <p id="notice"><%= flash[:notice] %></p>
-  <p id="alert"><%= flash[:alert] %></p>
- 
-</div> -->
 <div class="notification_container">
   <%= render partial: "/layouts/flash", flash: flash %>
 </div>
 <%= yield %>
-<!-- </center> -->
 </div>
 
 </body>
