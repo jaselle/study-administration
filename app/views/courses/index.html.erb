@@ -83,7 +83,7 @@
       <% end %>
     </ol>
 <%end%>
-
+<% if can? :manage, @course%>
 <%= link_to 'Neuer Studiengang', new_course_path, class: 'btn btn-success' %>
-
+<%end%>
 <%= params[:semesters] %>

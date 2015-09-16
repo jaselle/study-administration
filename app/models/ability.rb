@@ -17,10 +17,15 @@ class Ability
          cannot :destroy, User, :id=> user.id
         elsif user.role=="student"
          can :create, User
+         can :update, Event
          can :update , :all
          can :read, :all
+         cannot :read, Profile
+         can :read, Profile, :id => user.profile.id
          can :destroy, User, :id => user.id
          cannot :update, User, :id => user.id
+         cannot :edit, :all
+         can :edit, Profile, :id => user.profile.id
         else
          can :create, User
         end

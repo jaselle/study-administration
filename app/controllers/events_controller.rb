@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   
-  load_and_authorize_resource
+
 
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
@@ -9,6 +9,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    authorize! :index, @events
     if !current_user || current_user.role == 'admin'
       @events = Event.all
     else
@@ -54,18 +55,21 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    authorize! :show, @events
     @id = params[:id]
     puts 1
   end
 
   # GET /events/new
   def new
+    authorize! :new, @events
     @event = Event.new
   end
 
   # POST /events
   # POST /events.json
   def create
+    authorize! :create, @events
     @event = Event.new(event_params.except!("schedules"))
     
     respond_to do |format|
@@ -90,6 +94,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    authorize! :update, @events
     respond_to do |format|
       schedules = event_params[:schedules]
       # delete old schedules to avoid duplicates
@@ -111,6 +116,7 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+    authorize! :destroy, @events
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Veranstaltung wurde erfolgreich gelöscht.' }
