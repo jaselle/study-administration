@@ -11,18 +11,9 @@ class BlocksController < ApplicationController
     end
   end
 
-  # GET /blocks/1
-  # GET /blocks/1.json
-  def show
-  end
-
   # GET /blocks/new
   def new
     @block = Block.new
-  end
-
-  # GET /blocks/1/edit
-  def edit
   end
 
   # POST /blocks

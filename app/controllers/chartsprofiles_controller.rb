@@ -18,7 +18,6 @@ class ChartsprofilesController < ApplicationController
     return split    
   end
 
-
   def encrypt(semester)
     if(semester%10 == 0)
       data =  "Sommersemester " + (semester/10).to_s

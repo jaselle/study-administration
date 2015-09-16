@@ -1,20 +1,16 @@
 <% if notice || alert %>
   <div class="flash-message <%= notice ? "notice" : ""%><%= alert ? "error" : ""%>">
-<!--     <div class="container container_12 clearfix">
-      <div class="grid_12"> -->
-        <% if notice %>
-          <p><%= notice %></p>
-        <% elsif alert %>
-          <p><%= alert %></p>
-        <% end %>
-      <!-- </div>
-    </div> -->
+    <% if notice %>
+      <p><%= notice %></p>
+    <% elsif alert %>
+      <p><%= alert %></p>
+    <% end %>
   </div>
 <% end %>
 <% if my_flash %>
-<div class="flash-message my_flash">
-<p><%= my_flash %></p>
-<div class="cat"/>
-</div>
+  <div class="flash-message my_flash">
+  <p><%= my_flash %></p>
+  <div class="cat"/>
+  </div>
 <% end %>
 

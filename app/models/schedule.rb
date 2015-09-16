@@ -1,13 +1,12 @@
 class Schedule < ActiveRecord::Base
   belongs_to :event
   validates_uniqueness_of :event_id, :scope => [:date]
-
+  validates :date, presence: true, allow_blank: false
   validate :validation_method
 
   #schedulaes are only for events with irregular cycle
   def validation_method
-   	unless Event.find_by_id_and_cycle(self.event_id, "Nicht regelmäßig")
-  		puts "ERROR"
+  unless :cycle != "Nicht regelmäßig"
   		errors.add(:cycle, "invalid")
   	end	
   end
