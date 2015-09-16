@@ -98,5 +98,6 @@
 </table>
 
 <br>
-
-<%= link_to 'Neuer Block', new_block_path, class: "btn btn-success" %>
+<%if can? :create, @block%>
+   <%= link_to 'Neuer Block', new_block_path, class: "btn btn-success" %>
+<%end%>
