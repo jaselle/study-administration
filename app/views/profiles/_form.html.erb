@@ -38,7 +38,6 @@
       <%= ff.collection_select :course_id, Course.order(:name), :id, :name_with_degree, {prompt: ""},{class: "form-control our_profile_fields"} %>
     </div>
 
-    <% if can? :edit, @user%>
       <div class="field">
         <%= ff.label :password , 'Neues Passwort wählen' %><br />
         <%= ff.password_field :password %>
@@ -48,13 +47,15 @@
         <%= ff.label :password_confirmation, 'Neues Passwort bestätigen'%><br />
         <%= ff.password_field :password_confirmation %>
       </div>  
-    <%end%>
-    <% if current_user != nil && current_user.role == "admin" %>
-      <div class="field">
-      <%= ff.label :role, "Status", :class => "our_form_fields"%><br/> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}, {prompt: ""},{class: "form-control our_profile_fields"}) %> 
-      </div>
-    <% end %> 
-  <% end %>
+ 
+   <%if can? :destroy, @profile%>
+    <% if current_user != nil && current_user.role == "admin"%>
+        <div class="field">
+        <%= ff.label :role, "Status", :class => "our_form_fields"%><br/> <%= ff.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize}, {prompt: ""},{class: "form-control our_profile_fields"}) %> 
+        </div>
+      <% end %> 
+    <% end %>
+  <%end%>
 
   <div class="field">
     <%= f.label :bio, "Notizen:" , :class => "our_form_fields"%><br/>
