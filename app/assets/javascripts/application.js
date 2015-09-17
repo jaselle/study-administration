@@ -16,6 +16,7 @@
 //= require highcharts
 //= require highcharts/highcharts-more
 //= require profiles
+//= require rating
 //= require_tree .
 
 
