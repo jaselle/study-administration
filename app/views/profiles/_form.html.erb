@@ -77,7 +77,7 @@
           <ol>
             <li class="profile" >
               <table>       
-                <%= f.collection_check_boxes(:id, Event.order(:title), :id, :title) do |b| %>
+                <%= collection_check_boxes(:event, :event_ids, Event.order(:title), :id, :title) do |b| %>
                   <% doneEv = false %>
                   <% bevent = Event.find(b.value) %>
                   <tr>
